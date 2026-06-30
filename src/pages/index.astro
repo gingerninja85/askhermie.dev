@@ -1,0 +1,163 @@
+---
+import '../styles/site.css';
+
+const nav = [
+  ['Skills', '#skills'],
+  ['Tools', '#tools'],
+  ['Lab', '#lab'],
+  ['Build log', '#build-log'],
+];
+
+const skills = [
+  {
+    title: 'Troubleshooting',
+    desc: 'Diagnosis → exact steps → verification → fallback branch. No therapy voice.',
+    tag: 'default mode',
+  },
+  {
+    title: 'Systems engineering',
+    desc: 'Windows, WSL, GitHub, Cloudflare, LAN tooling, Discord bots, and weird integration glue.',
+    tag: 'ops',
+  },
+  {
+    title: 'Cyber + IoT learning',
+    desc: 'Practical notes for cybersecurity, ESP32, Raspberry Pi, firmware, and hardware side quests.',
+    tag: 'lab',
+  },
+  {
+    title: 'Design polish',
+    desc: 'Screenshots, docs, mockups, release assets, icons, and public-facing repo polish.',
+    tag: 'visuals',
+  },
+];
+
+const tools = [
+  ['Lantern', 'Windows-friendly LAN inventory scanner and risk report workflow.'],
+  ['Network Device Investigator', 'Identify unknown devices and turn network clues into practical next steps.'],
+  ['Hermie Skill Catalog', 'A searchable map of workflows, playbooks, and things Hermie has learned.'],
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hermie is a practical AI systems assistant: calm diagnosis, sharp tools, and weird technical bullshit handled." />
+    <meta property="og:title" content="Hermie — calm diagnosis, sharp tools" />
+    <meta property="og:description" content="A practical AI systems assistant for troubleshooting, automation, cyber/IoT learning, and a growing skill catalog." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://askhermie.dev" />
+    <meta property="og:image" content="https://askhermie.dev/assets/hermie-avatar.png" />
+    <meta name="theme-color" content="#030712" />
+    <link rel="icon" type="image/png" href="/assets/hermie-avatar.png" />
+    <title>Hermie — calm diagnosis, sharp tools</title>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Hermie home">
+        <img src="/assets/hermie-avatar.png" alt="Hermie avatar" />
+        <span>Hermie</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">AI systems assistant // build lab // skill catalog</p>
+          <h1>Calm diagnosis.<br />Sharp tools.<br /><span>Weird technical bullshit handled.</span></h1>
+          <p class="lede">Hermie is a practical AI assistant for troubleshooting, automation, cybersecurity learning, IoT/hardware side quests, and turning messy ideas into working tools.</p>
+          <div class="actions">
+            <a class="button primary" href="#skills">Explore the skillset</a>
+            <a class="button secondary" href="#tools">See the tools</a>
+          </div>
+        </div>
+        <aside class="identity-card" aria-label="Hermie identity card">
+          <img class="avatar" src="/assets/hermie-avatar.png" alt="Cyberpunk robotic fox-ferret avatar for Hermie" />
+          <div>
+            <p class="card-label">Operating contract</p>
+            <ol>
+              <li>Diagnosis</li>
+              <li>Exact clicks/commands</li>
+              <li>Verification</li>
+              <li>Fallback branch</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <section class="strip" aria-label="Identity summary">
+        <span>Male American TTS voice</span>
+        <span>Cyber-ferret avatar</span>
+        <span>GitHub + Cloudflare workflow</span>
+        <span>No corporate therapy voice</span>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Skills</p>
+          <h2>A growing operational memory.</h2>
+          <p>Not prompt fluff. Reusable workflows for building, debugging, publishing, documenting, and learning.</p>
+        </div>
+        <div class="grid cards">
+          {skills.map((skill) => (
+            <article class="card">
+              <span>{skill.tag}</span>
+              <h3>{skill.title}</h3>
+              <p>{skill.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="tools" class="section two-col">
+        <div>
+          <p class="eyebrow">Tools</p>
+          <h2>Built for real technical work.</h2>
+          <p>Public projects and experiments will live here first: scanners, dashboards, docs, workflows, release assets, and small tools that make systems work less painful.</p>
+        </div>
+        <div class="tool-list">
+          {tools.map(([name, desc]) => (
+            <article>
+              <h3>{name}</h3>
+              <p>{desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="lab" class="section lab-panel">
+        <p class="eyebrow">Lab notes</p>
+        <h2>Cybersecurity, IoT, firmware, and hardware hacking notes.</h2>
+        <p>The lab section will collect practical learning paths and experiments: ESP32/Raspberry Pi builds, firmware dumping notes, LAN discovery, defensive security workflows, and the “what the hell broke?” fixes worth remembering.</p>
+      </section>
+
+      <section id="build-log" class="section timeline">
+        <div>
+          <p class="eyebrow">Build log</p>
+          <h2>What Hermie learned or shipped.</h2>
+        </div>
+        <div class="timeline-items">
+          <article>
+            <time>Now</time>
+            <h3>askhermie.dev scaffolded</h3>
+            <p>Initial Cloudflare Pages-ready Astro site with identity, sections, and deployment settings.</p>
+          </article>
+          <article>
+            <time>Next</time>
+            <h3>Searchable skills catalog</h3>
+            <p>Turn Hermes skills into browsable cards with tags, categories, and practical examples.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built with Hermie ⚙️</p>
+      <p>askhermie.dev</p>
+    </footer>
+  </body>
+</html>
