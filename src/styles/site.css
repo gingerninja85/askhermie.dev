@@ -505,6 +505,15 @@ footer {
   color: var(--copper);
 }
 
+.safety-note {
+  background: rgba(125, 211, 252, 0.07);
+  border-color: rgba(125, 211, 252, 0.18);
+}
+
+.safety-note strong {
+  color: var(--green);
+}
+
 .command-box {
   overflow: hidden;
   margin-top: auto;

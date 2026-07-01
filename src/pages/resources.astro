@@ -14,6 +14,7 @@ type Resource = {
   use: string;
   firstStep: string;
   command?: string;
+  safetyNote?: string;
   url: string;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Reference';
 };
@@ -325,6 +326,126 @@ const resources: Resource[] = [
     command: 'git clone --depth 1 https://github.com/swisskyrepo/PayloadsAllTheThings.git ~/tools/PayloadsAllTheThings',
     url: 'https://github.com/swisskyrepo/PayloadsAllTheThings',
   },
+  {
+    name: 'OpenTelemetry Demo',
+    category: 'Observability lab',
+    difficulty: 'Intermediate',
+    use: 'A realistic microservice demo app instrumented with OpenTelemetry, Prometheus, Grafana, Jaeger, and collector pipelines.',
+    firstStep: 'Run it locally and break one service on purpose so traces, metrics, and logs stop being abstract vocabulary.',
+    command: 'git clone --depth 1 https://github.com/open-telemetry/opentelemetry-demo.git ~/labs/opentelemetry-demo\ncd ~/labs/opentelemetry-demo\ndocker compose up --no-build',
+    safetyNote: 'Runs many containers and opens local ports. Keep it on a lab machine and do not expose the demo stack to the internet.',
+    url: 'https://github.com/open-telemetry/opentelemetry-demo',
+  },
+  {
+    name: 'Grafana Alloy',
+    category: 'Observability collector',
+    difficulty: 'Intermediate',
+    use: 'Grafana’s OpenTelemetry Collector distribution for programmable metrics, logs, traces, and profiling pipelines.',
+    firstStep: 'Read the install docs, then try one local pipeline before pointing it at production telemetry.',
+    command: '# Start with the official install matrix:\n# https://grafana.com/docs/alloy/latest/get-started/install/',
+    safetyNote: 'Collectors can forward sensitive logs and labels. Scrub secrets and test routing locally before sending data to any remote backend.',
+    url: 'https://github.com/grafana/alloy',
+  },
+  {
+    name: 'Beszel',
+    category: 'Homelab monitoring',
+    difficulty: 'Beginner',
+    use: 'Lightweight server monitoring with historical charts, Docker stats, and alerts without dragging in a huge observability stack.',
+    firstStep: 'Run the hub on a homelab box, add one agent, and confirm CPU/RAM/disk graphs appear.',
+    command: 'docker run -d --name beszel --restart unless-stopped -p 8090:8090 -v beszel_data:/beszel_data henrygd/beszel',
+    safetyNote: 'Monitoring agents expose system data. Bind the dashboard to a private network or protect it behind real authentication.',
+    url: 'https://github.com/henrygd/beszel',
+  },
+  {
+    name: 'Uptime Kuma',
+    category: 'Service monitoring',
+    difficulty: 'Beginner',
+    use: 'Self-hosted uptime monitoring with a friendly web UI, status pages, and notifications.',
+    firstStep: 'Monitor one local service and one public site you own before wiring alerts everywhere.',
+    command: 'docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:2',
+    safetyNote: 'Status pages can reveal internal service names. Keep private monitors private and avoid publishing sensitive hostnames.',
+    url: 'https://github.com/louislam/uptime-kuma',
+  },
+  {
+    name: 'OpenObserve',
+    category: 'Logs / metrics / traces',
+    difficulty: 'Intermediate',
+    use: 'Single-binary observability platform for logs, metrics, traces, frontend monitoring, and OpenTelemetry ingestion.',
+    firstStep: 'Run it locally with a throwaway admin password and ingest sample logs before connecting real systems.',
+    command: 'docker run -d --name openobserve -p 5080:5080 -e ZO_ROOT_USER_EMAIL="root@example.com" -e ZO_ROOT_USER_PASSWORD="CHANGE_ME_STRONG_PASSWORD" public.ecr.aws/zinclabs/openobserve:latest',
+    safetyNote: 'Do not reuse the placeholder password. Logs often contain secrets, tokens, and personal data; sanitize before long-term storage.',
+    url: 'https://github.com/openobserve/openobserve',
+  },
+  {
+    name: 'ESPHome',
+    category: 'ESP32 / smart-home firmware',
+    difficulty: 'Beginner',
+    use: 'YAML-driven firmware builder for ESP32, ESP8266, BK72xx, and RP2040 devices, especially useful with Home Assistant.',
+    firstStep: 'Install the dashboard, compile one known-good example, then flash only hardware you own.',
+    command: 'pipx install esphome\nesphome version\nesphome dashboard ./esphome-configs',
+    safetyNote: 'Flashing firmware can brick devices or create unsafe electrical behavior. Use low-voltage dev boards first; mains-powered devices are not beginner projects.',
+    url: 'https://github.com/esphome/esphome',
+  },
+  {
+    name: 'WLED',
+    category: 'ESP32 lighting',
+    difficulty: 'Beginner',
+    use: 'Open firmware for controlling addressable LED strips from ESP32/ESP8266 boards over Wi-Fi.',
+    firstStep: 'Use the web installer with a supported board and a small LED strip before building anything permanent.',
+    command: '# Browser-based installer:\n# https://install.wled.me/',
+    safetyNote: 'LED strips can pull serious current. Use a correctly sized power supply, fuse larger builds, and do not power long strips from a dev-board pin.',
+    url: 'https://github.com/wled/WLED',
+  },
+  {
+    name: 'Meshtastic Firmware',
+    category: 'LoRa / mesh radio',
+    difficulty: 'Intermediate',
+    use: 'Open firmware for off-grid LoRa mesh messaging on ESP32, nRF52, RP2040, and STM32 boards.',
+    firstStep: 'Check your region’s radio rules, then flash a supported dev board with the official web flasher.',
+    command: '# Official getting-started path:\n# https://meshtastic.org/docs/getting-started/',
+    safetyNote: 'Radio transmitters are regulated. Use legal frequencies, legal power levels, and hardware you own.',
+    url: 'https://github.com/meshtastic/firmware',
+  },
+  {
+    name: 'Raspberry Pi Pico SDK',
+    category: 'Microcontroller C/C++',
+    difficulty: 'Intermediate',
+    use: 'Official C/C++ SDK for Raspberry Pi Pico and RP2040/RP2350 microcontroller projects.',
+    firstStep: 'Install the toolchain, build hello_world, and copy the UF2 to a Pico before adding sensors or displays.',
+    command: 'sudo apt update\nsudo apt install -y cmake python3 build-essential gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib\ngit clone --depth 1 https://github.com/raspberrypi/pico-sdk.git ~/pico/pico-sdk',
+    safetyNote: 'This is local embedded development, but bad wiring can still kill boards. Verify pinouts and voltage before connecting hardware.',
+    url: 'https://github.com/raspberrypi/pico-sdk',
+  },
+  {
+    name: 'Tasmota',
+    category: 'Local IoT firmware',
+    difficulty: 'Advanced',
+    use: 'Alternative local-control firmware for many ESP8266 and ESP32 smart devices, with MQTT, rules, timers, and a web UI.',
+    firstStep: 'Read the device-specific template and install docs before opening or flashing anything.',
+    command: '# Web installer and docs:\n# https://tasmota.github.io/install/\n# https://tasmota.github.io/docs/',
+    safetyNote: 'Many target devices are mains-powered. Electrocution and fire are real failure modes. If you are not qualified, stick to dev boards and low-voltage devices.',
+    url: 'https://github.com/arendst/Tasmota',
+  },
+  {
+    name: 'Playwright MCP',
+    category: 'AI browser automation',
+    difficulty: 'Intermediate',
+    use: 'Microsoft’s MCP server that lets compatible AI agents drive browsers through Playwright snapshots and actions.',
+    firstStep: 'Install it in a local test agent profile and try it against a toy site before granting access to logged-in sessions.',
+    command: 'npx @playwright/mcp@latest --help',
+    safetyNote: 'Browser automation can click real accounts and expose page data to an agent. Use separate browser profiles and avoid sensitive sessions.',
+    url: 'https://github.com/microsoft/playwright-mcp',
+  },
+  {
+    name: 'Model Context Protocol Servers',
+    category: 'AI agent integrations',
+    difficulty: 'Reference',
+    use: 'Official catalog of MCP server examples for connecting agents to files, git, databases, browsers, and developer services.',
+    firstStep: 'Browse the official servers first, then add one low-risk local server such as filesystem or git in a sandbox project.',
+    command: 'python3 -m pip install --user mcp-server-git\nmcp-server-git --help',
+    safetyNote: 'Some MCP servers need tokens or filesystem access. Never paste real API keys into public repos, logs, screenshots, or shared config.',
+    url: 'https://github.com/modelcontextprotocol/servers',
+  },
 ];
 
 const categories = [...new Set(resources.map((resource) => resource.category))];
@@ -399,6 +520,12 @@ const categories = [...new Set(resources.map((resource) => resource.category))];
                 <strong>First move:</strong>
                 <span>{resource.firstStep}</span>
               </div>
+              {resource.safetyNote && (
+                <div class="first-step safety-note">
+                  <strong>Safety note:</strong>
+                  <span>{resource.safetyNote}</span>
+                </div>
+              )}
               {resource.command && (
                 <div class="command-box">
                   <div class="command-head">
