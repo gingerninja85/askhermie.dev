@@ -86,7 +86,7 @@ const resources: Resource[] = [
     category: 'Local AI UI',
     difficulty: 'Intermediate',
     use: 'Self-hosted AI chat UI that can sit in front of local or remote model backends.',
-    firstStep: 'Only install after Ollama or another backend works. Otherwise you debug two things at once, which is dumb.',
+    firstStep: 'Only install after Ollama or another backend works. Otherwise you end up debugging two things at once.',
     exampleUse: 'Give a household or lab machine a friendly local chat interface backed by Ollama models.',
     command: 'docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main',
     url: 'https://github.com/open-webui/open-webui',
@@ -115,7 +115,7 @@ const resources: Resource[] = [
     name: 'tldr-pages',
     category: 'Command help',
     difficulty: 'Beginner',
-    use: 'Short practical command examples. Good when man pages are too much bullshit.',
+    use: 'Short practical command examples. Good when man pages are too much detail.',
     firstStep: 'Install it and try tldr against commands you already use.',
     exampleUse: 'Quickly remember the right tar, ssh, docker, or rsync flags without reading a full manual page.',
     command: 'npm install -g tldr\ntldr tar\ntldr ssh',
@@ -237,7 +237,7 @@ const resources: Resource[] = [
     difficulty: 'Intermediate',
     use: 'GUI reverse-engineering platform powered by Rizin. Friendlier than raw CLI reversing.',
     firstStep: 'Use Cutter when you want a GUI path into reversing before deep CLI work.',
-    exampleUse: 'Explore a binary with a GUI when raw radare2 feels like staring into a cursed cave.',
+    exampleUse: 'Explore a binary with a GUI when raw radare2 feels difficult to approach.',
     command: '# Easiest path: download AppImage/installer from releases:\n# https://github.com/rizinorg/cutter/releases',
     url: 'https://github.com/rizinorg/cutter',
   },
@@ -266,7 +266,7 @@ const resources: Resource[] = [
     category: 'Maker learning',
     difficulty: 'Beginner',
     use: 'Practical electronics, microcontroller, sensor, and maker tutorials.',
-    firstStep: 'Pick one small hardware project and finish it before buying a drawer full of cursed modules.',
+    firstStep: 'Pick one small hardware project and finish it before buying a drawer full of random modules.',
     exampleUse: 'Follow a wiring tutorial for a sensor/display module and finish one physical project end-to-end.',
     command: '# No install. Open tutorials:\n# https://learn.adafruit.com/',
     url: 'https://learn.adafruit.com/',
@@ -580,7 +580,7 @@ const resourceGroups = groupMeta.map((group) => ({
               <li>Useful with Hermes</li>
               <li>Useful for real systems work</li>
               <li>Simple first step</li>
-              <li>No random fluff</li>
+              <li>No random filler</li>
             </ol>
           </div>
         </aside>
