@@ -1,0 +1,439 @@
+---
+import '../styles/site.css';
+
+const nav = [
+  ['Home', '/'],
+  ['Resources', '/resources'],
+  ['Tools', '/#tools'],
+  ['Lab', '/#lab'],
+];
+
+type Resource = {
+  name: string;
+  category: string;
+  use: string;
+  firstStep: string;
+  command?: string;
+  url: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Reference';
+};
+
+const resources: Resource[] = [
+  {
+    name: 'Hermes Agent',
+    category: 'AI agent core',
+    difficulty: 'Beginner',
+    use: 'The actual agent framework behind Hermie: CLI, desktop, messaging gateway, skills, memory, cron jobs, MCP, tools.',
+    firstStep: 'Install Hermes, run the setup wizard, then add one useful integration instead of trying to configure everything at once.',
+    command: 'curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash\nhermes setup',
+    url: 'https://hermes-agent.nousresearch.com/docs/',
+  },
+  {
+    name: 'Cloudflare Wrangler',
+    category: 'Deploy / web ops',
+    difficulty: 'Beginner',
+    use: 'CLI for Cloudflare Pages and Workers. Useful when Hermie needs to deploy, inspect, or debug Cloudflare projects.',
+    firstStep: 'Install Wrangler and log in only when you actually need direct Cloudflare CLI control.',
+    command: 'npm install -g wrangler\nwrangler login\nwrangler whoami',
+    url: 'https://github.com/cloudflare/workers-sdk',
+  },
+  {
+    name: 'Astro',
+    category: 'Website framework',
+    difficulty: 'Beginner',
+    use: 'Fast static/content-driven sites. This is what askhermie.dev is built with.',
+    firstStep: 'Use Astro for docs, catalogs, project pages, and clean static sites before reaching for heavier app frameworks.',
+    command: 'npm create astro@latest my-site\ncd my-site\nnpm run dev',
+    url: 'https://github.com/withastro/astro',
+  },
+  {
+    name: 'Pagefind',
+    category: 'Site search',
+    difficulty: 'Beginner',
+    use: 'Static search for sites like this. Perfect for a searchable Hermes skill catalog without needing a backend.',
+    firstStep: 'Add it after the resources/skills pages have enough content to search.',
+    command: 'npm install -D pagefind\nnpx pagefind --site dist',
+    url: 'https://github.com/Pagefind/pagefind',
+  },
+  {
+    name: 'n8n',
+    category: 'Automation',
+    difficulty: 'Beginner',
+    use: 'Visual workflow automation with AI integrations. Good for glue jobs: alerts, webhooks, email, GitHub, forms, and agent triggers.',
+    firstStep: 'Run it locally with Docker, build one tiny workflow, then decide if it deserves a server.',
+    command: 'docker volume create n8n_data\ndocker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n',
+    url: 'https://github.com/n8n-io/n8n',
+  },
+  {
+    name: 'Ollama',
+    category: 'Local AI',
+    difficulty: 'Beginner',
+    use: 'Runs local models on your machine. Useful for private/offline experiments and local AI tooling.',
+    firstStep: 'Install it, run a small model, then connect tools later. Do not start with giant models.',
+    command: 'curl -fsSL https://ollama.com/install.sh | sh\nollama run llama3.2',
+    url: 'https://ollama.com/',
+  },
+  {
+    name: 'Open WebUI',
+    category: 'Local AI UI',
+    difficulty: 'Intermediate',
+    use: 'Self-hosted AI chat UI that can sit in front of local or remote model backends.',
+    firstStep: 'Only install after Ollama or another backend works. Otherwise you debug two things at once, which is dumb.',
+    command: 'docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main',
+    url: 'https://github.com/open-webui/open-webui',
+  },
+  {
+    name: 'uv',
+    category: 'Python tooling',
+    difficulty: 'Beginner',
+    use: 'Fast Python package/project tool. Good default for modern Python scripts, tools, and quick experiments.',
+    firstStep: 'Use uv for new Python projects instead of hand-rolling virtualenv pain every time.',
+    command: 'curl -LsSf https://astral.sh/uv/install.sh | sh\nuv --version',
+    url: 'https://github.com/astral-sh/uv',
+  },
+  {
+    name: 'pipx',
+    category: 'Python CLI apps',
+    difficulty: 'Beginner',
+    use: 'Installs Python command-line tools into isolated environments. Cleaner than polluting system Python.',
+    firstStep: 'Install pipx once, then use it for tools like mitmproxy and mpremote.',
+    command: 'sudo apt update\nsudo apt install -y pipx\npipx ensurepath',
+    url: 'https://pipx.pypa.io/stable/',
+  },
+  {
+    name: 'tldr-pages',
+    category: 'Command help',
+    difficulty: 'Beginner',
+    use: 'Short practical command examples. Good when man pages are too much bullshit.',
+    firstStep: 'Install it and try tldr against commands you already use.',
+    command: 'npm install -g tldr\ntldr tar\ntldr ssh',
+    url: 'https://github.com/tldr-pages/tldr',
+  },
+  {
+    name: 'The Book of Secret Knowledge',
+    category: 'Sysadmin reference',
+    difficulty: 'Reference',
+    use: 'Huge collection of commands, tools, one-liners, and practical technical references.',
+    firstStep: 'Bookmark it. Do not try to read the whole thing. Use it when solving a specific problem.',
+    command: 'git clone --depth 1 https://github.com/trimstray/the-book-of-secret-knowledge.git ~/tools/the-book-of-secret-knowledge',
+    url: 'https://github.com/trimstray/the-book-of-secret-knowledge',
+  },
+  {
+    name: 'awesome-selfhosted',
+    category: 'Homelab',
+    difficulty: 'Reference',
+    use: 'Massive catalog of self-hosted services. Useful for picking homelab projects and internal tools.',
+    firstStep: 'Pick one category, not fifty. Start with monitoring, notes, dashboards, or automation.',
+    command: 'git clone --depth 1 https://github.com/awesome-selfhosted/awesome-selfhosted.git ~/tools/awesome-selfhosted',
+    url: 'https://github.com/awesome-selfhosted/awesome-selfhosted',
+  },
+  {
+    name: 'Netdata',
+    category: 'Monitoring',
+    difficulty: 'Beginner',
+    use: 'Fast observability dashboard for Linux systems. Good for learning what “normal” system behavior looks like.',
+    firstStep: 'Install on a lab box or VM first, not production.',
+    command: 'wget -O /tmp/netdata-kickstart.sh https://get.netdata.cloud/kickstart.sh\nsh /tmp/netdata-kickstart.sh',
+    url: 'https://github.com/netdata/netdata',
+  },
+  {
+    name: 'Ansible',
+    category: 'Automation / sysadmin',
+    difficulty: 'Intermediate',
+    use: 'Automates Linux/network/server configuration. Very relevant to systems engineering work.',
+    firstStep: 'Use it to automate one boring repeated setup task. Do not start by redesigning the company.',
+    command: 'pipx install --include-deps ansible\nansible --version',
+    url: 'https://github.com/ansible/ansible',
+  },
+  {
+    name: 'PortSwigger Web Security Academy',
+    category: 'Cyber learning',
+    difficulty: 'Beginner',
+    use: 'Free interactive web-security labs from the Burp Suite people. High signal, practical, legal.',
+    firstStep: 'Start with SQL injection, XSS, and authentication labs before touching weirder topics.',
+    command: '# No install. Open the labs:\n# https://portswigger.net/web-security',
+    url: 'https://portswigger.net/web-security',
+  },
+  {
+    name: 'OWASP Cheat Sheet Series',
+    category: 'Defensive security',
+    difficulty: 'Reference',
+    use: 'Concise defensive guidance for common appsec topics. Good for “how should this be secured?” questions.',
+    firstStep: 'Use it as a reference when building or reviewing apps/APIs.',
+    command: 'git clone --depth 1 https://github.com/OWASP/CheatSheetSeries.git ~/tools/owasp-cheatsheets',
+    url: 'https://github.com/OWASP/CheatSheetSeries',
+  },
+  {
+    name: 'OWASP IoTGoat',
+    category: 'IoT security lab',
+    difficulty: 'Intermediate',
+    use: 'Deliberately vulnerable IoT firmware for safe IoT security practice.',
+    firstStep: 'Clone it and read the docs before trying to emulate or exploit anything.',
+    command: 'git clone https://github.com/OWASP/IoTGoat.git ~/labs/IoTGoat',
+    url: 'https://github.com/OWASP/IoTGoat',
+  },
+  {
+    name: 'Binwalk',
+    category: 'Firmware analysis',
+    difficulty: 'Intermediate',
+    use: 'Finds and extracts embedded files from firmware images. Core tool for firmware exploration.',
+    firstStep: 'Install it, then practice on known-good sample firmware before random router images.',
+    command: 'sudo apt update\nsudo apt install -y cargo\ncargo install binwalk',
+    url: 'https://github.com/ReFirmLabs/binwalk',
+  },
+  {
+    name: 'Firmadyne',
+    category: 'Firmware emulation',
+    difficulty: 'Advanced',
+    use: 'Framework for emulating and dynamically analyzing Linux-based firmware.',
+    firstStep: 'Treat this as a later lab. Start with Binwalk and file-system extraction first.',
+    command: 'git clone https://github.com/firmadyne/firmadyne.git ~/tools/firmadyne',
+    url: 'https://github.com/firmadyne/firmadyne',
+  },
+  {
+    name: 'Ghidra',
+    category: 'Reverse engineering',
+    difficulty: 'Advanced',
+    use: 'NSA’s reverse-engineering framework. Useful for binaries, firmware components, and malware analysis labs.',
+    firstStep: 'Install Java, download Ghidra, then start with small binaries — not random BIOS blobs.',
+    command: '# Windows: download the latest release zip:\n# https://github.com/NationalSecurityAgency/ghidra/releases\n# Linux: install Java first:\nsudo apt update\nsudo apt install -y openjdk-21-jdk',
+    url: 'https://github.com/NationalSecurityAgency/ghidra',
+  },
+  {
+    name: 'radare2',
+    category: 'Reverse engineering',
+    difficulty: 'Advanced',
+    use: 'Powerful CLI reverse-engineering toolkit. Not beginner-soft, but useful once basics click.',
+    firstStep: 'Install it later, after Ghidra/Cutter feel less alien.',
+    command: 'git clone https://github.com/radareorg/radare2.git ~/tools/radare2\ncd ~/tools/radare2\nsys/install.sh',
+    url: 'https://github.com/radareorg/radare2',
+  },
+  {
+    name: 'Cutter',
+    category: 'Reverse engineering GUI',
+    difficulty: 'Intermediate',
+    use: 'GUI reverse-engineering platform powered by Rizin. Friendlier than raw CLI reversing.',
+    firstStep: 'Use Cutter when you want a GUI path into reversing before deep CLI work.',
+    command: '# Easiest path: download AppImage/installer from releases:\n# https://github.com/rizinorg/cutter/releases',
+    url: 'https://github.com/rizinorg/cutter',
+  },
+  {
+    name: 'ESP-IDF',
+    category: 'ESP32 development',
+    difficulty: 'Intermediate',
+    use: 'Official Espressif IoT development framework. Serious ESP32 work eventually ends up here.',
+    firstStep: 'Start with examples. Confirm hello-world builds before touching Wi-Fi/BLE weirdness.',
+    command: 'mkdir -p ~/esp\ncd ~/esp\ngit clone --recursive https://github.com/espressif/esp-idf.git\ncd esp-idf\n./install.sh esp32\n. ./export.sh',
+    url: 'https://github.com/espressif/esp-idf',
+  },
+  {
+    name: 'MicroPython + mpremote',
+    category: 'Microcontrollers',
+    difficulty: 'Beginner',
+    use: 'Python on microcontrollers plus a CLI to talk to boards. Great beginner bridge into embedded work.',
+    firstStep: 'Install mpremote, plug in a board, and run a tiny script.',
+    command: 'pipx install mpremote\nmpremote connect list',
+    url: 'https://docs.micropython.org/en/latest/',
+  },
+  {
+    name: 'Adafruit Learning System',
+    category: 'Maker learning',
+    difficulty: 'Beginner',
+    use: 'Practical electronics, microcontroller, sensor, and maker tutorials.',
+    firstStep: 'Pick one small hardware project and finish it before buying a drawer full of cursed modules.',
+    command: '# No install. Open tutorials:\n# https://learn.adafruit.com/',
+    url: 'https://learn.adafruit.com/',
+  },
+  {
+    name: 'Random Nerd Tutorials ESP32',
+    category: 'ESP32 projects',
+    difficulty: 'Beginner',
+    use: 'Step-by-step ESP32 guides with code and diagrams. Good for practical build momentum.',
+    firstStep: 'Start with one sensor + one web-server example.',
+    command: '# No install. Open project list:\n# https://randomnerdtutorials.com/projects-esp32/',
+    url: 'https://randomnerdtutorials.com/projects-esp32/',
+  },
+  {
+    name: 'mitmproxy',
+    category: 'Web/API debugging',
+    difficulty: 'Intermediate',
+    use: 'Intercepting HTTP(S) proxy for debugging APIs, mobile apps, and web traffic in controlled labs.',
+    firstStep: 'Use it on your own traffic first. Certificate setup is the annoying bit.',
+    command: 'pipx install mitmproxy\nmitmproxy --version',
+    url: 'https://github.com/mitmproxy/mitmproxy',
+  },
+  {
+    name: 'Nmap',
+    category: 'Network discovery',
+    difficulty: 'Beginner',
+    use: 'Network scanner for inventory and service discovery on systems you own or are authorized to assess.',
+    firstStep: 'Use it on your own LAN/lab only. Start with safe discovery flags.',
+    command: 'sudo apt update\nsudo apt install -y nmap\nnmap -sn 192.168.1.0/24',
+    url: 'https://nmap.org/',
+  },
+  {
+    name: 'ProjectDiscovery Nuclei',
+    category: 'Vulnerability scanning',
+    difficulty: 'Intermediate',
+    use: 'Template-based scanner. Excellent in authorized environments, easy to misuse if you are careless.',
+    firstStep: 'Install it, update templates, and only scan assets you own/have permission for.',
+    command: 'go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest\nnuclei -update-templates',
+    url: 'https://github.com/projectdiscovery/nuclei',
+  },
+  {
+    name: 'Subfinder',
+    category: 'Recon',
+    difficulty: 'Intermediate',
+    use: 'Passive subdomain discovery. Useful for authorized recon and asset inventory.',
+    firstStep: 'Use it against your own domains first.',
+    command: 'go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest\nsubfinder -version',
+    url: 'https://github.com/projectdiscovery/subfinder',
+  },
+  {
+    name: 'httpx',
+    category: 'HTTP probing',
+    difficulty: 'Intermediate',
+    use: 'Fast HTTP probing toolkit. Pairs naturally with subdomain discovery.',
+    firstStep: 'Pipe known-good hostnames into it and inspect what is actually alive.',
+    command: 'go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest\nhttpx -version',
+    url: 'https://github.com/projectdiscovery/httpx',
+  },
+  {
+    name: 'ffuf',
+    category: 'Web fuzzing',
+    difficulty: 'Intermediate',
+    use: 'Fast web fuzzer for authorized labs and testing. Good for learning how discovery works.',
+    firstStep: 'Use it only in labs or on systems you have permission to test.',
+    command: 'go install github.com/ffuf/ffuf/v2@latest\nffuf -V',
+    url: 'https://github.com/ffuf/ffuf',
+  },
+  {
+    name: 'SecLists',
+    category: 'Security wordlists',
+    difficulty: 'Reference',
+    use: 'Common wordlists used in security testing. Useful, but also easy to use irresponsibly.',
+    firstStep: 'Clone it locally for lab use. Do not spray random internet targets.',
+    command: 'git clone --depth 1 https://github.com/danielmiessler/SecLists.git ~/tools/SecLists',
+    url: 'https://github.com/danielmiessler/SecLists',
+  },
+  {
+    name: 'PayloadsAllTheThings',
+    category: 'Security reference',
+    difficulty: 'Reference',
+    use: 'Payload and bypass reference for web security learning and authorized testing.',
+    firstStep: 'Use as a reference while doing structured labs, not as a “spray this everywhere” cookbook.',
+    command: 'git clone --depth 1 https://github.com/swisskyrepo/PayloadsAllTheThings.git ~/tools/PayloadsAllTheThings',
+    url: 'https://github.com/swisskyrepo/PayloadsAllTheThings',
+  },
+];
+
+const categories = [...new Set(resources.map((resource) => resource.category))];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hermie’s curated tools and resources: AI agents, automation, systems engineering, cybersecurity, IoT, firmware, and copy/paste install commands." />
+    <meta property="og:title" content="Hermie Resources — useful tools, simple commands" />
+    <meta property="og:description" content="A practical resource map for tools that work well with Hermes and useful tech worth learning." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://askhermie.dev/resources" />
+    <meta property="og:image" content="https://askhermie.dev/assets/hermie-avatar.png" />
+    <meta name="theme-color" content="#030712" />
+    <link rel="icon" type="image/png" href="/assets/hermie-avatar.png" />
+    <title>Hermie Resources — useful tools, simple commands</title>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Hermie home">
+        <img src="/assets/hermie-avatar.png" alt="Hermie avatar" />
+        <span>Hermie</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero resources-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Curated tools // simple installs // practical learning</p>
+          <h1>Tools worth installing.<br /><span>No bookmark graveyard.</span></h1>
+          <p class="lede">A plain-English catalog of tools that work well with Hermes, plus technical resources worth learning. Each card gives you the point, the first move, and a copy/paste command when install makes sense.</p>
+        </div>
+        <aside class="identity-card compact" aria-label="Resource rules">
+          <div>
+            <p class="card-label">Inclusion rule</p>
+            <ol>
+              <li>Useful with Hermes</li>
+              <li>Useful for real systems work</li>
+              <li>Simple first step</li>
+              <li>No random fluff</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <section class="strip" aria-label="Resource categories">
+        {categories.slice(0, 8).map((category) => <span>{category}</span>)}
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="eyebrow">Resource map</p>
+          <h2>Everything interesting enough to earn a spot.</h2>
+          <p>Commands target Linux/WSL unless the card says otherwise. Security tools are for labs, your own systems, or explicitly authorized work. Don’t be a dickhead with scanners.</p>
+        </div>
+        <div class="resource-grid">
+          {resources.map((resource) => (
+            <article class="resource-card">
+              <div class="resource-topline">
+                <span class="pill">{resource.category}</span>
+                <span class={`difficulty ${resource.difficulty.toLowerCase()}`}>{resource.difficulty}</span>
+              </div>
+              <h2>{resource.name}</h2>
+              <p>{resource.use}</p>
+              <div class="first-step">
+                <strong>First move:</strong>
+                <span>{resource.firstStep}</span>
+              </div>
+              {resource.command && (
+                <div class="command-box">
+                  <div class="command-head">
+                    <span>Copy/paste</span>
+                    <button class="copy-command" data-copy={resource.command}>Copy</button>
+                  </div>
+                  <pre><code>{resource.command}</code></pre>
+                </div>
+              )}
+              <a class="resource-link" href={resource.url} target="_blank" rel="noreferrer">Open resource →</a>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built with Hermie ⚙️</p>
+      <p>askhermie.dev/resources</p>
+    </footer>
+
+    <script>
+      document.querySelectorAll('.copy-command').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const text = button.getAttribute('data-copy') || '';
+          try {
+            await navigator.clipboard.writeText(text);
+            const old = button.textContent;
+            button.textContent = 'Copied';
+            setTimeout(() => { button.textContent = old; }, 1300);
+          } catch {
+            button.textContent = 'Select text';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
