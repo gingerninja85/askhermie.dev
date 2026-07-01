@@ -456,6 +456,7 @@ footer {
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: 18px;
 }
 
@@ -681,4 +682,100 @@ footer {
     align-items: flex-start;
     flex-direction: column-reverse;
   }
+}
+
+.example-use {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(34, 211, 238, 0.075);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  color: var(--muted);
+}
+
+.example-use strong {
+  color: var(--cyan);
+}
+
+.about-hero {
+  min-height: 72vh;
+}
+
+.about-card .avatar {
+  max-width: 280px;
+}
+
+.about-section {
+  padding-top: 96px;
+}
+
+.about-copy {
+  max-width: 860px;
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.72);
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.22);
+}
+
+.about-copy p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 1.08rem;
+}
+
+.about-principles .card {
+  min-height: 210px;
+}
+
+.about-timeline {
+  display: grid;
+  gap: 16px;
+  max-width: 920px;
+}
+
+.about-timeline article {
+  position: relative;
+  padding: 24px 24px 24px 58px;
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.about-timeline article::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 29px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--cyan);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.55);
+}
+
+.about-timeline h3 {
+  margin-bottom: 6px;
+}
+
+.about-timeline p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.about-goals {
+  margin-bottom: 100px;
+}
+
+.about-goals ul {
+  margin: 24px 0 0;
+  padding-left: 22px;
+  color: #dbeafe;
+}
+
+.about-goals li + li {
+  margin-top: 10px;
 }
