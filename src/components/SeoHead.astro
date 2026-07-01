@@ -1,0 +1,46 @@
+---
+type Props = {
+  title: string;
+  description: string;
+  path?: string;
+  keywords?: string[];
+  image?: string;
+  type?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+};
+
+const {
+  title,
+  description,
+  path = '/',
+  keywords = [],
+  image = '/assets/hermie-avatar.png',
+  type = 'website',
+  structuredData,
+} = Astro.props as Props;
+
+const site = 'https://askhermie.dev';
+const canonical = new URL(path, site).toString();
+const imageUrl = image.startsWith('http') ? image : new URL(image, site).toString();
+const jsonLd = structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u003c') : null;
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content="askhermie.dev" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="theme-color" content="#030712" />
+<link rel="icon" type="image/png" href="/assets/hermie-avatar.png" />
+{jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+<title>{title}</title>

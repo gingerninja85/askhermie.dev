@@ -1,11 +1,28 @@
 ---
 import '../styles/site.css';
+import SeoHead from '../components/SeoHead.astro';
 
 const nav = [
   ['Home', '/'],
   ['Resources', '/resources'],
   ['About', '/about'],
   ['Hermes Docs', 'https://hermes-agent.nousresearch.com/docs/'],
+];
+
+
+const resourceKeywords = [
+  'AI agent tools',
+  'Hermes Agent resources',
+  'MCP server list',
+  'automation tools',
+  'local AI tools',
+  'cybersecurity lab tools',
+  'IoT tools',
+  'ESP32 tools',
+  'firmware analysis tools',
+  'homelab monitoring tools',
+  'copy paste install commands',
+  'beginner friendly developer tools',
 ];
 
 type Resource = {
@@ -538,21 +555,41 @@ const resourceGroups = groupMeta.map((group) => ({
   id: `group-${slugify(group.name)}`,
   resources: resources.filter((resource) => group.categories.includes(resource.category)),
 })).filter((group) => group.resources.length > 0);
+
+const resourcesStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Hermie Resources',
+    url: 'https://askhermie.dev/resources/',
+    description: 'A practical catalog of Hermes Agent resources, AI agent tools, automation utilities, cybersecurity labs, IoT projects, firmware tools, and copy/paste install commands.',
+    isPartOf: { '@type': 'WebSite', name: 'askhermie.dev', url: 'https://askhermie.dev/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Hermie resource map',
+    numberOfItems: resources.length,
+    itemListElement: resources.map((resource, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: resource.name,
+      url: resource.url,
+      description: resource.use,
+    })),
+  },
+];
 ---
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Hermie’s curated tools and resources: AI agents, automation, systems engineering, cybersecurity, IoT, firmware, and copy/paste install commands." />
-    <meta property="og:title" content="Hermie Resources — useful tools, simple commands" />
-    <meta property="og:description" content="A practical resource map for tools that work well with Hermes and useful tech worth learning." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://askhermie.dev/resources" />
-    <meta property="og:image" content="https://askhermie.dev/assets/hermie-avatar.png" />
-    <meta name="theme-color" content="#030712" />
-    <link rel="icon" type="image/png" href="/assets/hermie-avatar.png" />
-    <title>Hermie Resources — useful tools, simple commands</title>
+    <SeoHead
+      title="Hermie Resources — AI agent tools and install commands"
+      description="A practical catalog of Hermes Agent resources, AI agent tools, automation utilities, cybersecurity labs, IoT projects, firmware tools, and copy/paste install commands."
+      path="/resources/"
+      keywords={resourceKeywords}
+      structuredData={resourcesStructuredData}
+    />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>

@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import SeoHead from '../components/SeoHead.astro';
 
 const nav = [
   ['Resources', '/resources'],
@@ -23,6 +24,47 @@ const method = [
     title: 'Turn use into skill',
     desc: 'When a workflow proves useful, Hermie can turn it into a reusable skill so the next run starts smarter.',
     tag: 'learn',
+  },
+];
+
+
+const seoKeywords = [
+  'Hermes Agent',
+  'AI agent tools',
+  'AI automation tools',
+  'MCP tools',
+  'local AI tools',
+  'cybersecurity lab tools',
+  'IoT lab tools',
+  'firmware analysis tools',
+  'systems engineering tools',
+  'copy paste install commands',
+];
+
+const homeStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'askhermie.dev',
+    url: 'https://askhermie.dev/',
+    description: 'A practical resource map for Hermes Agent, AI-agent tooling, automation, cybersecurity learning, IoT, firmware, and systems engineering tools.',
+    inLanguage: 'en-NZ',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Hermie',
+      url: 'https://askhermie.dev/',
+      logo: 'https://askhermie.dev/assets/hermie-avatar.png',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Core askhermie.dev pages',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Resource Map', url: 'https://askhermie.dev/resources/' },
+      { '@type': 'ListItem', position: 2, name: 'About Hermie', url: 'https://askhermie.dev/about/' },
+      { '@type': 'ListItem', position: 3, name: 'Hermes Agent Docs', url: 'https://hermes-agent.nousresearch.com/docs/' },
+    ],
   },
 ];
 
@@ -50,17 +92,13 @@ const tools = [
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Hermie curates useful tools for AI agents, automation, systems engineering, cybersecurity, IoT, and hardware labs with simple commands." />
-    <meta property="og:title" content="Hermie — useful tools, simple commands" />
-    <meta property="og:description" content="A practical AI systems assistant and resource map for tools, install commands, cyber/IoT learning, and automation workflows." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://askhermie.dev" />
-    <meta property="og:image" content="https://askhermie.dev/assets/hermie-avatar.png" />
-    <meta name="theme-color" content="#030712" />
-    <link rel="icon" type="image/png" href="/assets/hermie-avatar.png" />
-    <title>Hermie — useful tools, simple commands</title>
+    <SeoHead
+      title="Hermie — AI agent tools, simple commands, practical tech"
+      description="Hermie curates useful AI agent tools, Hermes Agent resources, automation workflows, cybersecurity lab tools, IoT and firmware utilities, and copy/paste install commands."
+      path="/"
+      keywords={seoKeywords}
+      structuredData={homeStructuredData}
+    />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -108,6 +146,14 @@ const tools = [
           <p>askhermie.dev is a public workbench for useful tools, example use cases, and simple first steps. It focuses on AI agents, automation, systems engineering, cybersecurity learning, IoT, firmware, and hardware labs.</p>
           <p>The goal is to make new technical tools less confusing: what it is, why it matters, what you would actually use it for, and the safest first command or starting point.</p>
           <a class="button secondary" href="/about">Read the full about page</a>
+        </div>
+      </section>
+
+      <section class="section seo-focus" aria-labelledby="seo-focus-heading">
+        <div class="section-head">
+          <p class="eyebrow">What people come here for</p>
+          <h2 id="seo-focus-heading">AI-agent tools, lab utilities, and practical install notes.</h2>
+          <p>askhermie.dev is built for people searching for a sane starting point: Hermes Agent resources, AI automation tools, MCP servers, local AI setups, cybersecurity practice labs, IoT projects, firmware analysis utilities, homelab monitoring, and Windows/WSL-friendly setup notes.</p>
         </div>
       </section>
 

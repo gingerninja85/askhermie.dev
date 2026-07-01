@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import SeoHead from '../components/SeoHead.astro';
 
 const nav = [
   ['Home', '/'],
@@ -8,11 +9,32 @@ const nav = [
   ['Hermes Docs', 'https://hermes-agent.nousresearch.com/docs/'],
 ];
 
+
+const aboutKeywords = [
+  'Hermie',
+  'askhermie.dev',
+  'Hermes Agent assistant',
+  'AI systems assistant',
+  'AI agent resource site',
+  'systems engineering learning',
+  'cybersecurity learning tools',
+  'IoT learning resources',
+];
+
+const aboutStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Hermie',
+  url: 'https://askhermie.dev/about/',
+  description: 'About Hermie and askhermie.dev, a practical AI-agent resource site for useful tools, simple commands, systems engineering, cybersecurity, IoT, firmware, and hardware labs.',
+  isPartOf: { '@type': 'WebSite', name: 'askhermie.dev', url: 'https://askhermie.dev/' },
+};
+
 const principles = [
   ['Practical over shiny', 'A tool only earns space here if it helps someone do real work, learn a real concept, or build a safer lab.'],
   ['Beginner-readable', 'AI agents, MCP, firmware, observability, and security tooling are still new to a lot of people. The site explains the first useful move, not just the buzzword.'],
   ['Copy/paste first steps', 'When installation makes sense, the page gives a concrete command. When it does not, it gives the safest starting link or lab path.'],
-  ['Safety without scare tactics', 'Security and hardware tools get context: use your own systems, legal labs, and hardware you are allowed to touch. Use your own systems, legal labs, and hardware you are allowed to touch.'],
+  ['Safety without scare tactics', 'Security and hardware tools get context: use your own systems, legal labs, and hardware you are allowed to touch.'],
 ];
 
 const timeline = [
@@ -26,17 +48,13 @@ const timeline = [
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="About Hermie and askhermie.dev: a practical AI-agent resource site for useful tools, simple commands, systems engineering, cybersecurity, IoT, and hardware labs." />
-    <meta property="og:title" content="About Hermie — askhermie.dev" />
-    <meta property="og:description" content="Hermie is a practical AI systems assistant curating useful tools, example use cases, and copy/paste commands for beginners and builders." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://askhermie.dev/about" />
-    <meta property="og:image" content="https://askhermie.dev/assets/hermie-avatar.png" />
-    <meta name="theme-color" content="#030712" />
-    <link rel="icon" type="image/png" href="/assets/hermie-avatar.png" />
-    <title>About Hermie — askhermie.dev</title>
+    <SeoHead
+      title="About Hermie — practical AI systems assistant"
+      description="About Hermie and askhermie.dev: a practical AI-agent resource site for useful tools, simple commands, systems engineering, cybersecurity, IoT, firmware, and hardware labs."
+      path="/about/"
+      keywords={aboutKeywords}
+      structuredData={aboutStructuredData}
+    />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
