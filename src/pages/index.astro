@@ -93,8 +93,8 @@ const tools = [
 <html lang="en">
   <head>
     <SeoHead
-      title="Hermie — AI agent tools, simple commands, practical tech"
-      description="Hermie curates useful AI agent tools, Hermes Agent resources, automation workflows, cybersecurity lab tools, IoT and firmware utilities, and copy/paste install commands."
+      title="What is Hermes? AI that can use tools and do tasks"
+      description="Plain-English guide to Hermes Agent: what it is, what it can do, and why it is different from just chatting with ChatGPT, Claude, or Gemini."
       path="/"
       keywords={seoKeywords}
       structuredData={homeStructuredData}
@@ -113,38 +113,51 @@ const tools = [
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero hermes-explainer-hero">
         <div class="hero-copy">
-          <p class="eyebrow">AI systems assistant // tool scout // practical lab</p>
-          <h1>Useful tools.<br />Simple commands.<br /><span>Practical tech made clearer.</span></h1>
-          <p class="lede">Hermie finds tools that work well with AI agents, automation, systems engineering, cybersecurity, IoT, and hardware labs — then turns them into plain-English notes and copy/paste first steps.</p>
+          <p class="eyebrow">Hermes Agent // plain English</p>
+          <h1>Hermes is AI that can do the job.</h1>
+          <p class="lede"><strong>ChatGPT, Claude, and Gemini mostly answer questions.</strong> Hermes can use tools: read files, run commands, open browsers, remember useful context, follow workflows, schedule jobs, and help control real apps or systems when you allow it.</p>
+          <p class="simple-line">Think of it like this: normal chatbots are clever advisers. Hermes is a workbench assistant that can help carry out the job.</p>
           <div class="actions">
-            <a class="button primary" href="/resources">Open the resource map</a>
-            <a class="button secondary" href="https://github.com/gingerninja85/askhermie.dev">View the GitHub repo</a>
+            <a class="button primary" href="https://hermes-agent.nousresearch.com/docs/">Read Hermes docs</a>
+            <a class="button secondary" href="/resources">Browse useful tools</a>
           </div>
         </div>
-        <aside class="identity-card" aria-label="Hermie identity card">
-          <img class="avatar" src="/assets/hermie-avatar.png" alt="Cyberpunk robotic fox-ferret avatar for Hermie" />
-          <div>
-            <p class="card-label">Operating contract</p>
-            <ol>
-              <li>Diagnosis</li>
-              <li>Exact clicks/commands</li>
-              <li>Verification</li>
-              <li>Fallback branch</li>
-            </ol>
+        <aside class="identity-card comparison-card" aria-label="Why Hermes is different from normal chatbots">
+          <p class="card-label">The simple difference</p>
+          <div class="compare-row muted-row">
+            <span>Normal chatbot</span>
+            <strong>Talks about the task</strong>
+            <p>Good for explanations, drafts, and advice.</p>
           </div>
+          <div class="compare-row active-row">
+            <span>Hermes Agent</span>
+            <strong>Can help do the task</strong>
+            <p>Uses approved tools, files, browser, terminal, memory, skills, messaging, and scheduled automation.</p>
+          </div>
+          <p class="tiny-note">You stay in control: Hermes asks before risky actions and works best when pointed at your own files, accounts, labs, or systems.</p>
         </aside>
       </section>
 
-      <section class="section about-preview" aria-labelledby="about-preview-heading">
+      <section class="section about-preview hermes-basics" aria-labelledby="about-preview-heading">
         <div>
-          <p class="eyebrow">About Hermie</p>
-          <h2 id="about-preview-heading">A practical AI systems assistant and tool map.</h2>
+          <p class="eyebrow">What can it do?</p>
+          <h2 id="about-preview-heading">A simple map of Hermes.</h2>
         </div>
-        <div class="about-preview-copy">
-          <p>askhermie.dev is a public workbench for useful tools, example use cases, and simple first steps. It focuses on AI agents, automation, systems engineering, cybersecurity learning, IoT, firmware, and hardware labs.</p>
-          <p>The goal is to make new technical tools less confusing: what it is, why it matters, what you would actually use it for, and the safest first command or starting point.</p>
+        <div class="basics-grid">
+          <article>
+            <strong>It can work with your computer.</strong>
+            <p>Read project files, run tests, inspect logs, use a browser, edit code, and verify the result instead of only giving instructions.</p>
+          </article>
+          <article>
+            <strong>It can remember useful context.</strong>
+            <p>Hermes can keep preferences, environment notes, and reusable skills so you do not have to explain the same workflow every time.</p>
+          </article>
+          <article>
+            <strong>It can run outside one chat tab.</strong>
+            <p>Use Hermes from a terminal, desktop app, Telegram, Discord, email, cron jobs, webhooks, and other connected surfaces.</p>
+          </article>
           <a class="button secondary" href="/about">Read the full about page</a>
         </div>
       </section>
