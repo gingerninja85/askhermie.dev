@@ -433,7 +433,39 @@ footer {
 
 @media (max-width: 560px) {
   main, .site-header, footer { width: min(100% - 28px, 1180px); }
-  h1 { font-size: 3.35rem; }
+
+  .site-header {
+    gap: 16px;
+    padding: 18px 0 8px;
+  }
+
+  nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  nav a {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(15, 23, 42, 0.42);
+    font-size: 0.82rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 34px 0 52px;
+    gap: 30px;
+  }
+
+  h1 { font-size: clamp(3rem, 15vw, 3.35rem); }
   .grid.cards, .strip { grid-template-columns: 1fr; }
   .identity-card { padding: 18px; border-radius: 24px; }
   .avatar { border-radius: 24px; }
