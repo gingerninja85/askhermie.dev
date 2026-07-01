@@ -448,7 +448,16 @@ const resources: Resource[] = [
   },
 ];
 
-const categories = [...new Set(resources.map((resource) => resource.category))];
+const slugify = (value: string) => value
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/(^-|-$)/g, '');
+
+const categories = [...new Set(resources.map((resource) => resource.category))].map((category) => ({
+  name: category,
+  id: `category-${slugify(category)}`,
+  resources: resources.filter((resource) => resource.category === category),
+}));
 ---
 <!doctype html>
 <html lang="en">
@@ -497,8 +506,8 @@ const categories = [...new Set(resources.map((resource) => resource.category))];
         </aside>
       </section>
 
-      <section class="strip" aria-label="Resource categories">
-        {categories.slice(0, 8).map((category) => <span>{category}</span>)}
+      <section class="strip category-strip" aria-label="Resource categories">
+        {categories.map((category) => <a href={`#${category.id}`}>{category.name}</a>)}
       </section>
 
       <section class="section">
@@ -507,36 +516,46 @@ const categories = [...new Set(resources.map((resource) => resource.category))];
           <h2>Everything interesting enough to earn a spot.</h2>
           <p>Commands target Linux/WSL unless the card says otherwise. Security tools are for labs, your own systems, or explicitly authorized work. Don’t be a dickhead with scanners.</p>
         </div>
-        <div class="resource-grid">
-          {resources.map((resource) => (
-            <article class="resource-card">
-              <div class="resource-topline">
-                <span class="pill">{resource.category}</span>
-                <span class={`difficulty ${resource.difficulty.toLowerCase()}`}>{resource.difficulty}</span>
+        <div class="category-resource-list">
+          {categories.map((category) => (
+            <section class="category-section" id={category.id} aria-labelledby={`${category.id}-heading`}>
+              <div class="category-heading">
+                <p class="eyebrow">{category.resources.length} {category.resources.length === 1 ? 'resource' : 'resources'}</p>
+                <h3 id={`${category.id}-heading`}>{category.name}</h3>
               </div>
-              <h2>{resource.name}</h2>
-              <p>{resource.use}</p>
-              <div class="first-step">
-                <strong>First move:</strong>
-                <span>{resource.firstStep}</span>
+              <div class="resource-grid">
+                {category.resources.map((resource) => (
+                  <article class="resource-card" id={`resource-${slugify(resource.name)}`}>
+                    <div class="resource-topline">
+                      <span class="pill">{resource.category}</span>
+                      <span class={`difficulty ${resource.difficulty.toLowerCase()}`}>{resource.difficulty}</span>
+                    </div>
+                    <h2>{resource.name}</h2>
+                    <p>{resource.use}</p>
+                    <div class="first-step">
+                      <strong>First move:</strong>
+                      <span>{resource.firstStep}</span>
+                    </div>
+                    {resource.safetyNote && (
+                      <div class="first-step safety-note">
+                        <strong>Safety note:</strong>
+                        <span>{resource.safetyNote}</span>
+                      </div>
+                    )}
+                    {resource.command && (
+                      <div class="command-box">
+                        <div class="command-head">
+                          <span>Copy/paste</span>
+                          <button class="copy-command" data-copy={resource.command}>Copy</button>
+                        </div>
+                        <pre><code>{resource.command}</code></pre>
+                      </div>
+                    )}
+                    <a class="resource-link" href={resource.url} target="_blank" rel="noreferrer">Open resource →</a>
+                  </article>
+                ))}
               </div>
-              {resource.safetyNote && (
-                <div class="first-step safety-note">
-                  <strong>Safety note:</strong>
-                  <span>{resource.safetyNote}</span>
-                </div>
-              )}
-              {resource.command && (
-                <div class="command-box">
-                  <div class="command-head">
-                    <span>Copy/paste</span>
-                    <button class="copy-command" data-copy={resource.command}>Copy</button>
-                  </div>
-                  <pre><code>{resource.command}</code></pre>
-                </div>
-              )}
-              <a class="resource-link" href={resource.url} target="_blank" rel="noreferrer">Open resource →</a>
-            </article>
+            </section>
           ))}
         </div>
       </section>
