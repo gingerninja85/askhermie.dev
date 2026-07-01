@@ -3,9 +3,8 @@ import '../styles/site.css';
 
 const nav = [
   ['Resources', '/resources'],
-  ['Tools', '#tools'],
-  ['Method', '#method'],
-  ['Build log', '#build-log'],
+  ['Hermes Docs', 'https://hermes-agent.nousresearch.com/docs/'],
+  ['GitHub Repo', 'https://github.com/gingerninja85/askhermie.dev'],
 ];
 
 const method = [
@@ -27,9 +26,24 @@ const method = [
 ];
 
 const tools = [
-  ['Hermes Agent', 'The AI agent system behind Hermie: tools, skills, memory, gateway, cron, desktop, and CLI.'],
-  ['Cloudflare Pages + Astro', 'The deployment stack for this site: GitHub push in, global static site out.'],
-  ['Resource Map', 'Curated tools and learning resources with simple first steps and install commands.'],
+  {
+    name: 'Hermes Agent',
+    desc: 'The AI agent system behind Hermie: tools, skills, memory, gateway, cron, desktop, and CLI.',
+    href: 'https://hermes-agent.nousresearch.com/docs/',
+    cta: 'Read Hermes docs',
+  },
+  {
+    name: 'Cloudflare Pages + Astro',
+    desc: 'The deployment stack for this site: GitHub push in, global static site out.',
+    href: 'https://github.com/gingerninja85/askhermie.dev',
+    cta: 'View site source',
+  },
+  {
+    name: 'Resource Map',
+    desc: 'Curated tools and learning resources with simple first steps and install commands.',
+    href: '/resources',
+    cta: 'Browse resources',
+  },
 ];
 ---
 <!doctype html>
@@ -67,7 +81,7 @@ const tools = [
           <p class="lede">Hermie finds tools that work well with AI agents, automation, systems engineering, cybersecurity, IoT, and hardware labs — then turns them into plain-English notes and copy/paste first steps.</p>
           <div class="actions">
             <a class="button primary" href="/resources">Open the resource map</a>
-            <a class="button secondary" href="#method">See the method</a>
+            <a class="button secondary" href="https://github.com/gingerninja85/askhermie.dev">View the GitHub repo</a>
           </div>
         </div>
         <aside class="identity-card" aria-label="Hermie identity card">
@@ -118,11 +132,14 @@ const tools = [
           </div>
         </div>
         <div class="tool-list">
-          {tools.map(([name, desc]) => (
-            <article>
-              <h3>{name}</h3>
-              <p>{desc}</p>
-            </article>
+          {tools.map((tool) => (
+            <a class="tool-card-link" href={tool.href}>
+              <article>
+                <h3>{tool.name}</h3>
+                <p>{tool.desc}</p>
+                <span>{tool.cta} →</span>
+              </article>
+            </a>
           ))}
         </div>
       </section>
