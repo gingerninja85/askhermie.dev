@@ -14,6 +14,17 @@
   --copper: #ee8441;
   --green: #7dd3fc;
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --text-xs: 0.76rem;
+  --text-sm: 0.9rem;
+  --text-base: 1rem;
+  --text-lede: clamp(1.06rem, 1.25vw, 1.22rem);
+  --h1-size: clamp(3rem, 6.2vw, 5.65rem);
+  --h2-size: clamp(1.9rem, 3.05vw, 3.25rem);
+  --h3-size: clamp(1.08rem, 1.15vw, 1.22rem);
+  --display-line: 0.98;
+  --heading-line: 1.06;
+  --display-track: -0.055em;
+  --heading-track: -0.038em;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -127,12 +138,16 @@ main {
 
 h1, h2, h3, p { margin-top: 0; }
 
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 h1 {
-  max-width: 930px;
+  max-width: 900px;
   margin-bottom: 24px;
-  font-size: clamp(3.8rem, 9vw, 7.6rem);
-  line-height: 0.91;
-  letter-spacing: -0.08em;
+  font-size: var(--h1-size);
+  line-height: var(--display-line);
+  letter-spacing: var(--display-track);
 }
 
 h1 span {
@@ -143,20 +158,27 @@ h1 span {
 }
 
 h2 {
-  font-size: clamp(2.2rem, 4vw, 4.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.055em;
+  font-size: var(--h2-size);
+  line-height: var(--heading-line);
+  letter-spacing: var(--heading-track);
 }
 
 h3 {
-  font-size: 1.15rem;
+  font-size: var(--h3-size);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
   margin-bottom: 9px;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .lede {
   max-width: 690px;
   color: #cbd5e1;
-  font-size: clamp(1.08rem, 2vw, 1.35rem);
+  font-size: var(--text-lede);
+  line-height: 1.58;
 }
 
 .actions {
@@ -270,7 +292,7 @@ ol li + li { margin-top: 8px; }
 }
 
 .section {
-  padding: 110px 0 0;
+  padding: clamp(72px, 9vw, 104px) 0 0;
 }
 
 .section-head {
@@ -465,7 +487,11 @@ footer {
     gap: 30px;
   }
 
-  h1 { font-size: clamp(3rem, 15vw, 3.35rem); }
+  h1 {
+    font-size: clamp(2.55rem, 11.5vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
   .grid.cards, .strip { grid-template-columns: 1fr; }
   .identity-card { padding: 18px; border-radius: 24px; }
   .avatar { border-radius: 24px; }
@@ -528,9 +554,9 @@ footer {
 
 .category-heading h3 {
   margin: 0;
-  font-size: clamp(1.65rem, 3vw, 2.55rem);
-  line-height: 1;
-  letter-spacing: -0.045em;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
 }
 
 .resource-card {
@@ -587,7 +613,9 @@ footer {
 
 .resource-card h2 {
   margin: 0;
-  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  font-size: clamp(1.25rem, 1.65vw, 1.55rem);
+  line-height: 1.14;
+  letter-spacing: -0.022em;
 }
 
 .resource-card p {
@@ -829,7 +857,9 @@ footer {
 
 .about-preview h2 {
   margin-bottom: 0;
-  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-size: clamp(1.8rem, 2.75vw, 2.9rem);
+  line-height: var(--heading-line);
+  letter-spacing: var(--heading-track);
 }
 
 .about-preview-copy {
@@ -905,9 +935,9 @@ footer {
   display: block;
   margin-bottom: 6px;
   color: var(--text);
-  font-size: clamp(1.35rem, 3vw, 2rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.028em;
 }
 
 .compare-row p,
@@ -968,9 +998,9 @@ footer {
   }
 
   .hermes-explainer-hero h1 {
-    font-size: clamp(2.55rem, 12.2vw, 3.05rem);
-    line-height: 0.96;
-    letter-spacing: -0.065em;
+    font-size: clamp(2.45rem, 10.5vw, 3.15rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
     margin-bottom: 18px;
   }
 
