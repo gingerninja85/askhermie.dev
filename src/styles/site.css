@@ -400,10 +400,11 @@ ol li + li { margin-top: 8px; }
 
 
 .lab-panel {
+  margin-top: clamp(26px, 4.5vw, 54px);
   padding: clamp(30px, 6vw, 66px);
   background:
-    linear-gradient(135deg, rgba(34, 211, 238, 0.11), transparent 45%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.84));
+    linear-gradient(135deg, rgba(34, 211, 238, 0.09), transparent 45%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.82));
 }
 
 .lab-panel p:last-child {
