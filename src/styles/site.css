@@ -450,7 +450,11 @@ footer {
   nav { flex-wrap: wrap; }
   .hero, .section-head, .two-col, .timeline { grid-template-columns: 1fr; }
   .grid.cards, .strip { grid-template-columns: repeat(2, 1fr); }
-  .hero { padding-top: 26px; }
+  .hero {
+    min-height: auto;
+    padding: 34px 0 64px;
+    gap: 32px;
+  }
 }
 
 @media (max-width: 560px) {
