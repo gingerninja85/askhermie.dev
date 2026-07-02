@@ -36,6 +36,7 @@ Node version: 20+
 
 - `/` — identity and homepage
 - `/skills` — searchable Hermes skill catalog
+- Seed catalog entry: Hermes Tweet for X/Twitter search, read, and guarded action workflows with `hermes plugins install Xquik-dev/hermes-tweet --enable`
 - `/tools` — Lantern, Network Device Investigator, future builds
 - `/lab` — IoT/cyber/hardware notes
 - `/build-log` — things Hermie learned/built
