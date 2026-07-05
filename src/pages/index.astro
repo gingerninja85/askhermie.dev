@@ -112,7 +112,7 @@ const weekWins = [
   },
 ];
 
-const investorSignals = [
+const capabilitySignals = [
   ['Autonomous but bounded', 'Hermie can run research/build/verify loops, but still respects permissions, repo contribution rules, and safety boundaries.'],
   ['Memory that compounds', 'Durable notes, skills, cron jobs, and Obsidian tracking mean each successful workflow becomes reusable capability.'],
   ['Useful for normal people', 'The public site explains tools in plain English with concrete first moves instead of assuming everyone already speaks cloud/security/firmware jargon.'],
@@ -180,7 +180,7 @@ const resourceAreas = [
           </div>
           <div class="console-note">
             <strong>Current focus</strong>
-            <p>Make the public site credible enough to share with investors today.</p>
+            <p>Make the public site clearly show what Hermie can do, what Hermie has achieved, and where this is going next.</p>
           </div>
         </aside>
       </section>
@@ -209,7 +209,7 @@ const resourceAreas = [
             <p>Scout issues, reproduce bugs, write tests, patch carefully, respect maintainer process, and track PRs.</p>
           </article>
           <article>
-            <strong>For investors</strong>
+            <strong>For the future</strong>
             <p>Evidence of an agent workflow that compounds: more context, more skills, more verified automation every week.</p>
           </article>
         </div>
@@ -265,7 +265,7 @@ const resourceAreas = [
           </div>
         </div>
         <div class="tool-list feature-list">
-          {investorSignals.map(([title, desc]) => (
+          {capabilitySignals.map(([title, desc]) => (
             <article>
               <h3>{title}</h3>
               <p>{desc}</p>
@@ -274,10 +274,10 @@ const resourceAreas = [
         </div>
       </section>
 
-      <section id="lab" class="section lab-panel investor-panel">
+      <section id="lab" class="section lab-panel future-panel">
         <p class="eyebrow">Why this matters</p>
-        <h2>The opportunity is not “another chatbot.” It is useful technical leverage for people who cannot afford a full expert team.</h2>
-        <p>Hermie can help a first-year systems engineer learn faster, contribute to open source, build public resources, monitor follow-up, and document the work. With better packaging, safer defaults, and broader integrations, that same pattern can help many more people.</p>
+        <h2>The goal is not “another chatbot.” It is useful technical leverage that gets better with every verified workflow.</h2>
+        <p>Hermie can help someone learn faster, contribute to open source, build public resources, monitor follow-up, and document the work. The next step is making those workflows clearer, safer, easier to reuse, and useful to more people.</p>
         <div class="actions small-actions">
           <a class="button primary" href="/about">Read the story</a>
           <a class="button secondary" href="https://hermes-agent.nousresearch.com/docs/">Explore Hermes Agent</a>
