@@ -9,29 +9,12 @@ const nav = [
   ['GitHub Repo', 'https://github.com/gingerninja85/askhermie.dev'],
 ];
 
-const method = [
-  {
-    title: 'Find useful tools',
-    desc: 'Search the internet and GitHub for tools that actually work with Hermes, systems engineering, AI, cyber, IoT, and hardware labs.',
-    tag: 'discover',
-  },
-  {
-    title: 'Make them usable',
-    desc: 'No vague “check this out” summaries. Each resource gets a plain-English purpose and a copy/paste first command when possible.',
-    tag: 'simplify',
-  },
-  {
-    title: 'Turn use into skill',
-    desc: 'When a workflow proves useful, Hermie can turn it into a reusable skill so the next run starts smarter.',
-    tag: 'learn',
-  },
-];
-
-
 const seoKeywords = [
   'Hermes Agent',
   'AI agent tools',
   'AI automation tools',
+  'autonomous AI agent',
+  'AI systems assistant',
   'MCP tools',
   'local AI tools',
   'cybersecurity lab tools',
@@ -47,7 +30,7 @@ const homeStructuredData = [
     '@type': 'WebSite',
     name: 'askhermie.dev',
     url: 'https://askhermie.dev/',
-    description: 'A practical resource map for useful AI-agent tools, automation, cybersecurity learning, IoT, firmware, and systems engineering, with plain-English notes and first commands.',
+    description: 'A practical resource map and public workbench for Hermie, a Hermes Agent assistant that finds tools, runs workflows, contributes to open source, and turns technical chaos into repeatable steps.',
     inLanguage: 'en-NZ',
     publisher: {
       '@type': 'Organization',
@@ -68,33 +51,90 @@ const homeStructuredData = [
   },
 ];
 
-const tools = [
+const proofStats = [
+  ['4', 'open-source PRs / branches shipped or prepared'],
+  ['84', 'curated tools with plain-English first steps'],
+  ['7', 'recurring autonomous workflows running'],
+  ['10/10', 'verified targeted tests on recent bugfix work'],
+];
+
+const operatingLoop = [
   {
-    name: 'Hermes Agent',
-    desc: 'The AI agent system behind Hermie: tools, skills, memory, gateway, cron, desktop, and CLI.',
-    href: 'https://hermes-agent.nousresearch.com/docs/',
-    cta: 'Read Hermes docs',
+    title: 'Scout',
+    desc: 'Browse GitHub, docs, issues, and technical resources. Filter for work that is useful, legal, reproducible, and worth a human’s time.',
+    tag: '01',
   },
   {
-    name: 'Cloudflare Pages + Astro',
-    desc: 'The deployment stack for this site: GitHub push in, global static site out.',
-    href: 'https://github.com/gingerninja85/askhermie.dev',
-    cta: 'View site source',
+    title: 'Reproduce',
+    desc: 'Clone repos, build sandboxes, run tests, confirm failures, and avoid guessing. If the environment is broken, fix the environment first.',
+    tag: '02',
   },
   {
-    name: 'Resource Map',
-    desc: 'Curated tools and learning resources with simple first steps and install commands.',
-    href: '/resources',
-    cta: 'Browse resources',
+    title: 'Patch',
+    desc: 'Make the smallest useful change: code, docs, tests, workflows, dashboards, or resource notes. Real output beats confident prose.',
+    tag: '03',
   },
+  {
+    title: 'Publish',
+    desc: 'Push verified changes, track PRs, document decisions in Obsidian, and turn repeatable wins into reusable Hermes skills.',
+    tag: '04',
+  },
+];
+
+const weekWins = [
+  {
+    project: 'RimSort',
+    href: 'https://github.com/RimSort/RimSort/pull/2286',
+    status: 'PR open / mergeable',
+    title: 'Fixed stale mod-divider state when importing XML lists',
+    detail: 'Wrote a focused regression test, patched the import path, verified the local suite, opened PR #2286, and added it to automated PR monitoring.',
+  },
+  {
+    project: 'WinUtil',
+    href: 'https://github.com/ChrisTitusTech/winutil/pull/4813',
+    status: 'PR open / CI passing',
+    title: 'Added safe TrustedInstaller diagnostics for Windows Update repair',
+    detail: 'Built a read-only preflight check, added Pester tests, passed compile/lint/checks, opened PR #4813, and linked it carefully to the relevant issue.',
+  },
+  {
+    project: 'home-llm',
+    href: 'https://github.com/acon96/home-llm/compare/develop...gingerninja85:fix/remember-assistant-replies',
+    status: 'branch pushed / PR blocked by permissions',
+    title: 'Fixed remembered conversations dropping assistant replies',
+    detail: 'Confirmed RED, patched the message-history persistence bug, fixed helper compatibility, and verified 10 targeted tests passing locally.',
+  },
+  {
+    project: 'Box3D',
+    href: 'https://github.com/erincatto/box3d',
+    status: 'triaged / local patch prepared',
+    title: 'Respected maintainer process while preparing a verified cleanup patch',
+    detail: 'Built the C project locally, identified stale issues, found small leftover Box2D naming/docs cleanup, verified the full suite, and documented next public step.',
+  },
+];
+
+const investorSignals = [
+  ['Autonomous but bounded', 'Hermie can run research/build/verify loops, but still respects permissions, repo contribution rules, and safety boundaries.'],
+  ['Memory that compounds', 'Durable notes, skills, cron jobs, and Obsidian tracking mean each successful workflow becomes reusable capability.'],
+  ['Useful for normal people', 'The public site explains tools in plain English with concrete first moves instead of assuming everyone already speaks cloud/security/firmware jargon.'],
+];
+
+const resourceAreas = [
+  'AI agents',
+  'automation',
+  'local AI',
+  'systems engineering',
+  'cybersecurity labs',
+  'IoT + firmware',
+  'homelab monitoring',
+  'developer workflows',
 ];
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <SeoHead
-      title="askhermie.dev — useful AI and tech tools in plain English"
-      description="Find practical AI-agent, automation, cybersecurity, IoT, firmware, and systems tools with plain-English notes and copy/paste first commands."
+      title="askhermie.dev — Hermie’s public AI-agent workbench"
+      description="Hermie is a Hermes Agent assistant that finds useful tools, fixes real technical problems, contributes to open source, and turns confusing workflows into repeatable steps."
       path="/"
       keywords={seoKeywords}
       image="/assets/askhermie-og.png"
@@ -103,10 +143,10 @@ const tools = [
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
-    <header class="site-header">
+    <header class="site-header nav-glass">
       <a class="brand" href="/" aria-label="Hermie home">
         <img src="/assets/hermie-avatar.png" alt="Byte Badger mascot avatar for Hermie" />
-        <span>Hermie</span>
+        <span>askhermie.dev</span>
       </a>
       <nav aria-label="Primary navigation">
         {nav.map(([label, href]) => <a href={href}>{label}</a>)}
@@ -114,65 +154,76 @@ const tools = [
     </header>
 
     <main>
-      <section class="hero hermes-explainer-hero">
+      <section class="hero homepage-hero" aria-labelledby="hero-heading">
         <div class="hero-copy">
-          <p class="eyebrow">Useful tech // plain English</p>
-          <h1>Useful AI and tech tools, explained.</h1>
-          <p class="lede"><strong>askhermie.dev is a practical resource map.</strong> It points you at tools for AI agents, automation, cybersecurity labs, IoT, firmware, hardware hacking, and systems engineering — then explains what each tool is for and how to start.</p>
-          <p class="simple-line">Hermie is the Hermes Agent assistant behind the site: AI that can use approved tools, run commands, browse, remember workflows, and help turn confusing technical work into repeatable steps.</p>
-          <div class="actions">
-            <a class="button primary" href="/resources">Browse useful tools</a>
-            <a class="button secondary" href="https://hermes-agent.nousresearch.com/docs/">What is Hermes?</a>
+          <p class="eyebrow">Hermie // public AI-agent workbench</p>
+          <h1 id="hero-heading">A useful agent should do the work, not just describe it.</h1>
+          <p class="lede"><strong>askhermie.dev is the public face of Hermie:</strong> a Hermes Agent assistant that researches tools, runs builds, fixes bugs, writes notes, tracks follow-up, and turns technical chaos into repeatable workflows.</p>
+          <p class="simple-line">This site shows the practical layer: useful tools, verified workflows, open-source contributions, and plain-English guidance for people learning AI agents, systems engineering, cybersecurity, IoT, firmware, and hardware labs.</p>
+          <div class="actions hero-actions">
+            <a class="button primary" href="/resources">Browse the tool map</a>
+            <a class="button secondary" href="#proof-of-work">See this week’s work</a>
           </div>
         </div>
-        <aside class="identity-card comparison-card" aria-label="What askhermie.dev gives you">
-          <p class="card-label">What you get here</p>
-          <div class="compare-row active-row">
-            <span>Resource map</span>
-            <strong>Tools worth trying</strong>
-            <p>Short notes, source links, example uses, and copy/paste first commands when installation makes sense.</p>
+
+        <aside class="identity-card command-card" aria-label="Hermie operating console">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <strong>hermie mission-control</strong>
           </div>
-          <div class="compare-row muted-row">
-            <span>Hermes explainer</span>
-            <strong>Why AI agents matter</strong>
-            <p>Plain-English guides to how Hermes differs from normal chatbots like ChatGPT, Claude, or Gemini.</p>
+          <div class="terminal-lines">
+            <p><span>$</span> scout repos --find useful-fixes</p>
+            <p><span>✓</span> RimSort PR opened and verified</p>
+            <p><span>✓</span> WinUtil PR opened, CI passing</p>
+            <p><span>✓</span> home-llm RED → GREEN locally</p>
+            <p><span>✓</span> askhermie.dev resource map live</p>
           </div>
-          <p class="tiny-note">Best for beginners, curious builders, and systems/cyber/IoT learners who want practical starting points instead of random link dumps.</p>
+          <div class="console-note">
+            <strong>Current focus</strong>
+            <p>Make the public site credible enough to share with investors today.</p>
+          </div>
         </aside>
       </section>
 
-      <section class="section about-preview hermes-basics" aria-labelledby="about-preview-heading">
+      <section class="proof-strip" aria-label="Current proof metrics">
+        {proofStats.map(([value, label]) => (
+          <article>
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </article>
+        ))}
+      </section>
+
+      <section class="section about-preview mission-panel" aria-labelledby="mission-heading">
         <div>
-          <p class="eyebrow">How to use it</p>
-          <h2 id="about-preview-heading">Pick a topic, copy the first step, build confidence.</h2>
+          <p class="eyebrow">What Hermie is becoming</p>
+          <h2 id="mission-heading">A technical co-worker with memory, tools, and follow-through.</h2>
         </div>
-        <div class="basics-grid">
+        <div class="basics-grid mission-grid">
           <article>
-            <strong>Find the right tool.</strong>
-            <p>Browse practical resources for AI agents, automation, systems work, cybersecurity labs, IoT projects, firmware, and hardware learning.</p>
+            <strong>For builders</strong>
+            <p>Find the right tool, understand the first move, and get a reproducible command instead of vague advice.</p>
           </article>
           <article>
-            <strong>Understand why it matters.</strong>
-            <p>Each entry uses plain English: what the tool does, what you would actually use it for, and what to watch out for.</p>
+            <strong>For open source</strong>
+            <p>Scout issues, reproduce bugs, write tests, patch carefully, respect maintainer process, and track PRs.</p>
           </article>
           <article>
-            <strong>Start with one command.</strong>
-            <p>Where possible, resources include a copy/paste first command or a safe starting link so you can try the tool instead of just reading about it.</p>
+            <strong>For investors</strong>
+            <p>Evidence of an agent workflow that compounds: more context, more skills, more verified automation every week.</p>
           </article>
-          <a class="button secondary" href="/resources">Open the resource map</a>
         </div>
       </section>
 
-
-      <section id="method" class="section">
+      <section id="how-it-works" class="section">
         <div class="section-head">
-          <p class="eyebrow">Method</p>
-          <h2>Find useful tech, then make it less annoying.</h2>
-          <p>The job is not to collect links. The job is to turn useful tools into simple first steps that a normal technical human can actually follow.</p>
+          <p class="eyebrow">Operating loop</p>
+          <h2>How the work gets done.</h2>
+          <p>Hermie is useful because the loop is grounded: inspect the real source, run the real command, verify the real output, then remember the useful procedure.</p>
         </div>
-        <div class="grid cards">
-          {method.map((item) => (
-            <article class="card">
+        <div class="grid cards loop-grid">
+          {operatingLoop.map((item) => (
+            <article class="card loop-card">
               <span>{item.tag}</span>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
@@ -181,50 +232,55 @@ const tools = [
         </div>
       </section>
 
-      <section id="tools" class="section two-col">
-        <div>
-          <p class="eyebrow">Tools</p>
-          <h2>Built around practical use, not hype.</h2>
-          <p>The resource map focuses on tools that either integrate with Hermes directly or help with real technical work: deployment, automation, AI, systems, cyber, IoT, firmware, and lab learning.</p>
-          <div class="actions small-actions">
-            <a class="button primary" href="/resources">Browse resources</a>
-          </div>
+      <section id="proof-of-work" class="section proof-section">
+        <div class="section-head">
+          <p class="eyebrow">Proof of work</p>
+          <h2>What Hermie accomplished this week.</h2>
+          <p>This is the bit worth showing off: not a mock demo, not a scripted chatbot trick — actual repo triage, tests, patches, PRs, monitoring, and documentation.</p>
         </div>
-        <div class="tool-list">
-          {tools.map((tool) => (
-            <a class="tool-card-link" href={tool.href}>
-              <article>
-                <h3>{tool.name}</h3>
-                <p>{tool.desc}</p>
-                <span>{tool.cta} →</span>
-              </article>
+        <div class="proof-list">
+          {weekWins.map((win) => (
+            <a class="proof-card" href={win.href} target="_blank" rel="noreferrer">
+              <div class="proof-meta">
+                <span>{win.project}</span>
+                <em>{win.status}</em>
+              </div>
+              <h3>{win.title}</h3>
+              <p>{win.detail}</p>
             </a>
           ))}
         </div>
       </section>
 
-      <section id="lab" class="section lab-panel">
-        <p class="eyebrow">Lab direction</p>
-        <h2>AI, automation, cybersecurity, IoT, firmware, and systems engineering.</h2>
-        <p>This site is becoming a practical map for what Hermie can use, what is worth learning, and how to start without drowning in setup complexity. The first resource page is live-ready: tools, install commands, and simple first moves.</p>
+      <section id="resources-preview" class="section two-col resource-preview">
+        <div>
+          <p class="eyebrow">Resource map</p>
+          <h2>Tools worth trying, explained for humans.</h2>
+          <p>The resource page is now the site’s practical core: a searchable/filterable catalog of tools that work with Hermes or help with real technical learning.</p>
+          <div class="tag-cloud" aria-label="Resource focus areas">
+            {resourceAreas.map((area) => <span>{area}</span>)}
+          </div>
+          <div class="actions small-actions">
+            <a class="button primary" href="/resources">Open resources</a>
+          </div>
+        </div>
+        <div class="tool-list feature-list">
+          {investorSignals.map(([title, desc]) => (
+            <article>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section id="build-log" class="section timeline">
-        <div>
-          <p class="eyebrow">Build log</p>
-          <h2>What Hermie learned or shipped.</h2>
-        </div>
-        <div class="timeline-items">
-          <article>
-            <time>Now</time>
-            <h3>Resource map added</h3>
-            <p>Curated tools and learning resources with copy/paste install commands and plain-English first steps.</p>
-          </article>
-          <article>
-            <time>Next</time>
-            <h3>Search and filters</h3>
-            <p>Add Pagefind search plus category filters so the catalog is useful once it grows.</p>
-          </article>
+      <section id="lab" class="section lab-panel investor-panel">
+        <p class="eyebrow">Why this matters</p>
+        <h2>The opportunity is not “another chatbot.” It is useful technical leverage for people who cannot afford a full expert team.</h2>
+        <p>Hermie can help a first-year systems engineer learn faster, contribute to open source, build public resources, monitor follow-up, and document the work. With better packaging, safer defaults, and broader integrations, that same pattern can help many more people.</p>
+        <div class="actions small-actions">
+          <a class="button primary" href="/about">Read the story</a>
+          <a class="button secondary" href="https://hermes-agent.nousresearch.com/docs/">Explore Hermes Agent</a>
         </div>
       </section>
     </main>

@@ -971,8 +971,18 @@ const groupMeta = [
 const resourceGroups = groupMeta.map((group) => ({
   ...group,
   id: `group-${slugify(group.name)}`,
+  slug: slugify(group.name),
   resources: resources.filter((resource) => group.categories.includes(resource.category)),
 })).filter((group) => group.resources.length > 0);
+
+const commandCount = resources.filter((resource) => resource.command).length;
+const safetyCount = resources.filter((resource) => resource.safetyNote).length;
+const resourceStats = [
+  [resources.length.toString(), 'curated resources'],
+  [resourceGroups.length.toString(), 'resource groups'],
+  [commandCount.toString(), 'copy/paste starts'],
+  [safetyCount.toString(), 'safety notes'],
+];
 
 const resourcesStructuredData = [
   {
@@ -1028,21 +1038,37 @@ const resourcesStructuredData = [
           <h1>Tools worth installing, not collecting.</h1>
           <p class="lede">A plain-English catalog of tools that work well with Hermes, plus technical resources worth learning. Each card gives you the point, the first move, and a copy/paste command when install makes sense.</p>
         </div>
-        <aside class="identity-card compact" aria-label="Resource rules">
-          <div>
-            <p class="card-label">Inclusion rule</p>
-            <ol>
-              <li>Useful with Hermes</li>
-              <li>Useful for real systems work</li>
-              <li>Simple first step</li>
-              <li>No random filler</li>
-            </ol>
+        <aside class="identity-card compact resource-console" aria-label="Resource rules">
+          <p class="card-label">Catalog rules</p>
+          <ol>
+            <li>Useful with Hermes or real systems work.</li>
+            <li>Plain-English value, not vendor fluff.</li>
+            <li>Concrete first move or install command.</li>
+            <li>Safety context when tools can cause damage.</li>
+          </ol>
+          <div class="mini-stat-grid">
+            {resourceStats.map(([value, label]) => (
+              <div>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </div>
+            ))}
           </div>
         </aside>
       </section>
 
-      <section class="strip category-strip" aria-label="Resource groups">
-        {resourceGroups.map((group) => <a href={`#${group.id}`}>{group.name}</a>)}
+      <section class="resource-control-panel" aria-label="Resource search and filters">
+        <div class="resource-search">
+          <label for="resource-search-input">Search the catalog</label>
+          <input id="resource-search-input" type="search" placeholder="Try: firmware, ESP32, monitoring, MCP, Docker..." autocomplete="off" />
+          <p><span id="resource-count">{resources.length}</span> visible resources. Filter by group or search by name, category, use case, command, or safety note.</p>
+        </div>
+        <div class="filter-chips" role="list" aria-label="Resource groups">
+          <button class="filter-chip active" type="button" data-filter="all">All</button>
+          {resourceGroups.map((group) => (
+            <button class="filter-chip" type="button" data-filter={group.slug}>{group.name}</button>
+          ))}
+        </div>
       </section>
 
       <section class="section">
@@ -1054,7 +1080,7 @@ const resourcesStructuredData = [
         </div>
         <div class="category-resource-list">
           {resourceGroups.map((group) => (
-            <section class="category-section" id={group.id} aria-labelledby={`${group.id}-heading`}>
+            <section class="category-section" id={group.id} data-group={group.slug} aria-labelledby={`${group.id}-heading`}>
               <div class="category-heading">
                 <div>
                   <p class="eyebrow">{group.resources.length} {group.resources.length === 1 ? 'resource' : 'resources'}</p>
@@ -1064,7 +1090,7 @@ const resourcesStructuredData = [
               </div>
               <div class="resource-grid">
                 {group.resources.map((resource) => (
-                  <article class="resource-card" id={`resource-${slugify(resource.name)}`}>
+                  <article class="resource-card" id={`resource-${slugify(resource.name)}`} data-group={group.slug} data-search={`${resource.name} ${resource.category} ${resource.difficulty} ${resource.use} ${resource.firstStep} ${resource.exampleUse} ${resource.command ?? ''} ${resource.safetyNote ?? ''}`.toLowerCase()}>
                     <div class="resource-topline">
                       <span class="pill">{resource.category}</span>
                       <span class={`difficulty ${resource.difficulty.toLowerCase()}`}>{resource.difficulty}</span>
@@ -1113,6 +1139,44 @@ const resourcesStructuredData = [
     </footer>
 
     <script>
+      const cards = Array.from(document.querySelectorAll('.resource-card'));
+      const sections = Array.from(document.querySelectorAll('.category-section'));
+      const chips = Array.from(document.querySelectorAll('.filter-chip'));
+      const search = document.querySelector('#resource-search-input');
+      const count = document.querySelector('#resource-count');
+      let activeFilter = 'all';
+
+      function applyResourceFilters() {
+        const query = (search?.value || '').trim().toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const groupMatch = activeFilter === 'all' || card.dataset.group === activeFilter;
+          const searchMatch = !query || (card.dataset.search || '').includes(query);
+          const visible = groupMatch && searchMatch;
+          card.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+
+        sections.forEach((section) => {
+          const visibleCards = section.querySelectorAll('.resource-card:not([hidden])').length;
+          section.hidden = visibleCards === 0;
+        });
+
+        if (count) count.textContent = String(visibleCount);
+      }
+
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          activeFilter = chip.dataset.filter || 'all';
+          chips.forEach((item) => item.classList.toggle('active', item === chip));
+          applyResourceFilters();
+        });
+      });
+
+      search?.addEventListener('input', applyResourceFilters);
+      applyResourceFilters();
+
       document.querySelectorAll('.copy-command').forEach((button) => {
         button.addEventListener('click', async () => {
           const text = button.getAttribute('data-copy') || '';
