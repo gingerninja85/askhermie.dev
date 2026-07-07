@@ -165,6 +165,33 @@ const visualTokens = [
   ['Glow magenta', '#fb37a5'],
   ['Deep slate', '#0f172a'],
 ];
+
+const commandItems = [
+  {
+    title: 'resources',
+    meta: '84 tool cards',
+    href: '/resources/',
+    keywords: 'tools resources catalog commands ai agents cybersecurity iot firmware',
+  },
+  {
+    title: 'proof',
+    meta: 'verified PRs + tests',
+    href: '#proof-of-work',
+    keywords: 'proof work pull requests tests open source verification',
+  },
+  {
+    title: 'design tokens',
+    meta: 'reusable visual system',
+    href: '#design-direction',
+    keywords: 'design tokens style codex colors spacing visual system',
+  },
+  {
+    title: 'operating loop',
+    meta: 'scout → reproduce → patch → publish',
+    href: '#how-it-works',
+    keywords: 'workflow operating loop process scout reproduce patch publish',
+  },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -244,12 +271,17 @@ const visualTokens = [
         </div>
 
         <div class="design-radar-board" aria-label="Design research board">
-          <div class="palette-shell">
-            <div class="palette-search"><span>⌘K</span> Search tools, proof, workflows…</div>
-            <div class="palette-results">
-              <p><strong>resources</strong><em>84 tool cards</em></p>
-              <p><strong>proof</strong><em>verified PRs + tests</em></p>
-              <p><strong>design tokens</strong><em>reusable visual system</em></p>
+          <div class="palette-shell" data-command-palette>
+            <label class="palette-search" for="design-command-search">
+              <span>⌘K</span>
+              <input id="design-command-search" type="search" placeholder="Search tools, proof, workflows…" autocomplete="off" data-command-search />
+            </label>
+            <div class="palette-results" data-command-results>
+              {commandItems.map((item) => (
+                <a href={item.href} data-command-item data-keywords={`${item.title} ${item.meta} ${item.keywords}`}>
+                  <strong>{item.title}</strong><em>{item.meta}</em>
+                </a>
+              ))}
             </div>
           </div>
           <div class="radar-card-grid">
@@ -378,5 +410,16 @@ const visualTokens = [
       <p>Built with Hermie ⚙️</p>
       <p>askhermie.dev</p>
     </footer>
+    <script>
+      const commandSearch = document.querySelector('[data-command-search]');
+      const commandItems = [...document.querySelectorAll('[data-command-item]')];
+      commandSearch?.addEventListener('input', () => {
+        const query = commandSearch.value.trim().toLowerCase();
+        commandItems.forEach((item) => {
+          const haystack = item.getAttribute('data-keywords')?.toLowerCase() || item.textContent?.toLowerCase() || '';
+          item.hidden = query.length > 0 && !haystack.includes(query);
+        });
+      });
+    </script>
   </body>
 </html>
