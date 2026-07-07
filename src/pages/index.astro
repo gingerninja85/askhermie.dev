@@ -151,6 +151,20 @@ const designLessons = [
     source: 'Interactive catalogs',
   },
 ];
+
+const designRadarCards = [
+  ['Directory UX', 'Searchable, tagged collections that turn inspiration into a map.'],
+  ['Style codex', 'Visible tokens for color, type, spacing, glow, cards, and motion.'],
+  ['Live proof', 'Screenshots, PRs, reports, commands, and verified output over empty claims.'],
+  ['Palette flow', 'Command-palette navigation so the site feels like a working tool.'],
+];
+
+const visualTokens = [
+  ['Signal cyan', '#22d3ee'],
+  ['Byte orange', '#ee8441'],
+  ['Glow magenta', '#fb37a5'],
+  ['Deep slate', '#0f172a'],
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -215,6 +229,39 @@ const designLessons = [
             <span>{label}</span>
           </article>
         ))}
+      </section>
+
+      <section id="design-radar" class="section design-radar" aria-labelledby="design-radar-heading">
+        <div class="design-radar-copy">
+          <p class="eyebrow">Design radar // visibly applied</p>
+          <h2 id="design-radar-heading">The site now uses the design-inspiration research as interface, not just wording.</h2>
+          <p>GitHub’s design-inspiration projects mostly teach structure: curated directories, style codices, theme galleries, and fast search surfaces. This block turns that into visible UI: reference cards, exposed tokens, live-proof layers, and a command-palette feel.</p>
+          <div class="visual-token-row" aria-label="Visual design tokens">
+            {visualTokens.map(([name, color]) => (
+              <span style={`--token:${color}`}><i></i>{name}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="design-radar-board" aria-label="Design research board">
+          <div class="palette-shell">
+            <div class="palette-search"><span>⌘K</span> Search tools, proof, workflows…</div>
+            <div class="palette-results">
+              <p><strong>resources</strong><em>84 tool cards</em></p>
+              <p><strong>proof</strong><em>verified PRs + tests</em></p>
+              <p><strong>design tokens</strong><em>reusable visual system</em></p>
+            </div>
+          </div>
+          <div class="radar-card-grid">
+            {designRadarCards.map(([title, desc]) => (
+              <article>
+                <span></span>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section class="section about-preview mission-panel" aria-labelledby="mission-heading">

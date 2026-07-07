@@ -1600,3 +1600,190 @@ nav a:focus-visible {
     min-height: unset;
   }
 }
+
+/* Visible design-inspiration application */
+.design-radar {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.15fr);
+  gap: 28px;
+  align-items: stretch;
+  overflow: hidden;
+  border-color: rgba(251, 55, 165, 0.22);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(251, 55, 165, 0.20), transparent 30%),
+    radial-gradient(circle at 90% 16%, rgba(34, 211, 238, 0.20), transparent 28%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 0.92));
+}
+
+.design-radar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.055) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(90deg, black, transparent 72%);
+  pointer-events: none;
+}
+
+.design-radar-copy,
+.design-radar-board {
+  position: relative;
+  z-index: 1;
+}
+
+.design-radar h2 {
+  max-width: 780px;
+  font-size: clamp(2.35rem, 5vw, 4.75rem);
+  line-height: 0.91;
+  letter-spacing: -0.075em;
+}
+
+.design-radar-copy > p:not(.eyebrow) {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.visual-token-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.visual-token-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--token), transparent 55%);
+  border-radius: 999px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--token), transparent 88%);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--token), transparent 82%);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.visual-token-row i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--token);
+  box-shadow: 0 0 18px var(--token);
+}
+
+.design-radar-board {
+  display: grid;
+  gap: 16px;
+}
+
+.palette-shell {
+  border: 1px solid rgba(226, 232, 240, 0.16);
+  border-radius: 28px;
+  background: rgba(2, 6, 23, 0.64);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  transform: rotate(-1.2deg);
+}
+
+.palette-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  color: var(--muted);
+  font-weight: 820;
+}
+
+.palette-search span {
+  display: inline-flex;
+  min-width: 46px;
+  justify-content: center;
+  padding: 6px 10px;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  border-radius: 10px;
+  color: var(--cyan);
+  background: rgba(34, 211, 238, 0.08);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.palette-results {
+  padding: 12px;
+}
+
+.palette-results p {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  color: var(--text);
+}
+
+.palette-results p:first-child {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.16), rgba(251, 55, 165, 0.10));
+}
+
+.palette-results em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.84rem;
+}
+
+.radar-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.radar-card-grid article {
+  min-height: 160px;
+  padding: 18px;
+  border: 1px solid rgba(34, 211, 238, 0.16);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(34, 211, 238, 0.09), transparent 55%),
+    rgba(15, 23, 42, 0.72);
+}
+
+.radar-card-grid article span {
+  display: block;
+  width: 42px;
+  height: 4px;
+  margin-bottom: 36px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.45);
+}
+
+.radar-card-grid h3 {
+  margin-bottom: 8px;
+}
+
+.radar-card-grid p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 980px) {
+  .design-radar {
+    grid-template-columns: 1fr;
+  }
+
+  .palette-shell {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .radar-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
