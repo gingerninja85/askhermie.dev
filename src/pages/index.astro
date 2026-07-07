@@ -128,6 +128,29 @@ const resourceAreas = [
   'homelab monitoring',
   'developer workflows',
 ];
+
+const designLessons = [
+  {
+    title: 'Reference library, not mood-board soup',
+    desc: 'Good design-inspiration projects make references searchable, tagged, and reusable. askhermie.dev should keep turning taste into structured decisions, not a pile of screenshots.',
+    source: 'Design directories',
+  },
+  {
+    title: 'Style tokens before decoration',
+    desc: 'The strongest style codices expose palette, type, spacing, motion, and component rules. New pages should document the system behind the look so Hermie can reuse it.',
+    source: 'Styledex / Stylepedia',
+  },
+  {
+    title: 'Live previews beat static claims',
+    desc: 'Theme galleries work because visitors can inspect the thing itself. For Hermie, useful public proof means live pages, reports, dashboards, PRs, screenshots, and exact commands.',
+    source: 'Themery',
+  },
+  {
+    title: 'Command palette thinking',
+    desc: 'The best resource UIs reduce friction with keyboard search, filters, counts, saved states, and quick routes. The resource map should feel like a workbench, not a brochure.',
+    source: 'Interactive catalogs',
+  },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -269,6 +292,25 @@ const resourceAreas = [
             <article>
               <h3>{title}</h3>
               <p>{desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="design-direction" class="section design-direction-panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Design direction</p>
+            <h2>What the design-inspiration research changes.</h2>
+          </div>
+          <p>The GitHub design-inspiration ecosystem points to one useful rule: make taste operational. Hermie should collect references, extract reusable tokens, preview real artifacts, and QA the result before publishing.</p>
+        </div>
+        <div class="design-lessons-grid">
+          {designLessons.map((lesson) => (
+            <article class="design-lesson-card">
+              <span>{lesson.source}</span>
+              <h3>{lesson.title}</h3>
+              <p>{lesson.desc}</p>
             </article>
           ))}
         </div>
