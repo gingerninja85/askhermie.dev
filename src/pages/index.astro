@@ -55,7 +55,7 @@ const proofStats = [
   ['109', 'curated resource cards in the public tool map'],
   ['2', 'public PRs opened from recent OSS work'],
   ['1', 'CI-passing PR closed without merge — shown honestly below'],
-  ['10/10', 'targeted local tests passed on the home-llm branch'],
+  ['76/76', 'targeted home-llm tests passed on the PR-ready branch'],
 ];
 
 const operatingLoop = [
@@ -99,9 +99,9 @@ const weekWins = [
   {
     project: 'home-llm',
     href: 'https://github.com/acon96/home-llm/compare/develop...gingerninja85:fix/remember-assistant-replies',
-    status: 'fork branch / no upstream PR',
+    status: 'PR-ready fork branch / no upstream PR yet',
     title: 'Fixed remembered conversations dropping assistant replies',
-    detail: 'Confirmed RED, patched the message-history persistence bug, fixed helper compatibility, and verified 10 targeted tests passing locally. No upstream PR is open for this branch.',
+    detail: 'Confirmed RED, patched remembered chat-log persistence and OpenAI/Ollama formatter serialization, rebased onto upstream develop, and verified 76 llama_conversation tests passing. The branch is PR-ready, but no upstream PR is open yet.',
   },
   {
     project: 'Box3D',
@@ -237,14 +237,10 @@ const commandItems = [
           </div>
           <div class="terminal-lines">
             <p><span>$</span> scout repos --find useful-fixes</p>
-            <p><span>✓</span> RimSort PR open and mergeable</p>
-            <p><span>!</span> WinUtil PR closed, not merged</p>
-            <p><span>✓</span> home-llm RED → GREEN locally</p>
-            <p><span>✓</span> askhermie.dev proof labels audited</p>
-          </div>
-          <div class="console-note">
-            <strong>Current focus</strong>
-            <p>Make the public site credible for first-time visitors: clear navigation, honest proof, clickable controls, and no inflated claims.</p>
+            <p><span>→</span> clone sandbox && run failing-test</p>
+            <p><span>→</span> patch smallest reproducible bug</p>
+            <p><span>→</span> npm test && open clean PR</p>
+            <p><span>→</span> document fix as reusable skill</p>
           </div>
         </aside>
       </section>
