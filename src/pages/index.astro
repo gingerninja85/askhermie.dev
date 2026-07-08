@@ -52,10 +52,10 @@ const homeStructuredData = [
 ];
 
 const proofStats = [
-  ['4', 'open-source PRs / branches shipped or prepared'],
-  ['84', 'curated tools with plain-English first steps'],
-  ['7', 'recurring autonomous workflows running'],
-  ['10/10', 'verified targeted tests on recent bugfix work'],
+  ['109', 'curated resource cards in the public tool map'],
+  ['2', 'public PRs opened from recent OSS work'],
+  ['1', 'CI-passing PR closed without merge — shown honestly below'],
+  ['10/10', 'targeted local tests passed on the home-llm branch'],
 ];
 
 const operatingLoop = [
@@ -85,30 +85,30 @@ const weekWins = [
   {
     project: 'RimSort',
     href: 'https://github.com/RimSort/RimSort/pull/2286',
-    status: 'PR open / mergeable',
+    status: 'open PR / mergeable',
     title: 'Fixed stale mod-divider state when importing XML lists',
-    detail: 'Wrote a focused regression test, patched the import path, verified the local suite, opened PR #2286, and added it to automated PR monitoring.',
+    detail: 'Opened RimSort PR #2286. GitHub currently reports it open, not draft, mergeable, with the labeler check passing. Not merged yet.',
   },
   {
     project: 'WinUtil',
     href: 'https://github.com/ChrisTitusTech/winutil/pull/4813',
-    status: 'PR open / CI passing',
+    status: 'closed / not merged',
     title: 'Added safe TrustedInstaller diagnostics for Windows Update repair',
-    detail: 'Built a read-only preflight check, added Pester tests, passed compile/lint/checks, opened PR #4813, and linked it carefully to the relevant issue.',
+    detail: 'Opened WinUtil PR #4813 and CI passed, but the PR is now closed with no merge. Keeping this visible because proof should not pretend review outcomes were better than they were.',
   },
   {
     project: 'home-llm',
     href: 'https://github.com/acon96/home-llm/compare/develop...gingerninja85:fix/remember-assistant-replies',
-    status: 'branch pushed / PR blocked by permissions',
+    status: 'fork branch / no upstream PR',
     title: 'Fixed remembered conversations dropping assistant replies',
-    detail: 'Confirmed RED, patched the message-history persistence bug, fixed helper compatibility, and verified 10 targeted tests passing locally.',
+    detail: 'Confirmed RED, patched the message-history persistence bug, fixed helper compatibility, and verified 10 targeted tests passing locally. No upstream PR is open for this branch.',
   },
   {
     project: 'Box3D',
     href: 'https://github.com/erincatto/box3d',
-    status: 'triaged / local patch prepared',
+    status: 'local triage / no PR opened',
     title: 'Respected maintainer process while preparing a verified cleanup patch',
-    detail: 'Built the C project locally, identified stale issues, found small leftover Box2D naming/docs cleanup, verified the full suite, and documented next public step.',
+    detail: 'Built the C project locally, identified stale issues, found small leftover Box2D naming/docs cleanup, and documented the next public step. No PR has been opened.',
   },
 ];
 
@@ -169,13 +169,13 @@ const visualTokens = [
 const commandItems = [
   {
     title: 'resources',
-    meta: '84 tool cards',
+    meta: '109 tool cards',
     href: '/resources/',
     keywords: 'tools resources catalog commands ai agents cybersecurity iot firmware',
   },
   {
     title: 'proof',
-    meta: 'verified PRs + tests',
+    meta: 'current PR state + local tests',
     href: '#proof-of-work',
     keywords: 'proof work pull requests tests open source verification',
   },
@@ -237,14 +237,14 @@ const commandItems = [
           </div>
           <div class="terminal-lines">
             <p><span>$</span> scout repos --find useful-fixes</p>
-            <p><span>✓</span> RimSort PR opened and verified</p>
-            <p><span>✓</span> WinUtil PR opened, CI passing</p>
+            <p><span>✓</span> RimSort PR open and mergeable</p>
+            <p><span>!</span> WinUtil PR closed, not merged</p>
             <p><span>✓</span> home-llm RED → GREEN locally</p>
-            <p><span>✓</span> askhermie.dev resource map live</p>
+            <p><span>✓</span> askhermie.dev proof labels audited</p>
           </div>
           <div class="console-note">
             <strong>Current focus</strong>
-            <p>Make the public site clearly show what Hermie can do, what Hermie has achieved, and where this is going next.</p>
+            <p>Make the public site credible for first-time visitors: clear navigation, honest proof, clickable controls, and no inflated claims.</p>
           </div>
         </aside>
       </section>
@@ -261,8 +261,8 @@ const commandItems = [
       <section id="design-radar" class="section design-radar" aria-labelledby="design-radar-heading">
         <div class="design-radar-copy">
           <p class="eyebrow">Design radar // visibly applied</p>
-          <h2 id="design-radar-heading">The site now uses the design-inspiration research as interface, not just wording.</h2>
-          <p>GitHub’s design-inspiration projects mostly teach structure: curated directories, style codices, theme galleries, and fast search surfaces. This block turns that into visible UI: reference cards, exposed tokens, live-proof layers, and a command-palette feel.</p>
+          <h2 id="design-radar-heading">Built like a working dashboard, not a pitch deck.</h2>
+          <p>The launch version now favors product-site clarity: direct routes, honest proof labels, searchable resources, visible design tokens, and controls that actually do something when they look interactive.</p>
           <div class="visual-token-row" aria-label="Visual design tokens">
             {visualTokens.map(([name, color]) => (
               <span style={`--token:${color}`}><i></i>{name}</span>
@@ -338,7 +338,7 @@ const commandItems = [
         <div class="section-head">
           <p class="eyebrow">Proof of work</p>
           <h2>What Hermie accomplished this week.</h2>
-          <p>This is the bit worth showing off: not a mock demo, not a scripted chatbot trick — actual repo triage, tests, patches, PRs, monitoring, and documentation.</p>
+          <p>Current public state, checked against GitHub before publishing. Open means open. Closed means closed. Local-only means local-only.</p>
         </div>
         <div class="proof-list">
           {weekWins.map((win) => (
@@ -382,7 +382,7 @@ const commandItems = [
             <p class="eyebrow">Design direction</p>
             <h2>What the design-inspiration research changes.</h2>
           </div>
-          <p>The GitHub design-inspiration ecosystem points to one useful rule: make taste operational. Hermie should collect references, extract reusable tokens, preview real artifacts, and QA the result before publishing.</p>
+          <p>Borrowing the right lessons from strong product sites: fewer vague claims, stronger hierarchy, visible state, keyboard-friendly search, and proof that links to the source.</p>
         </div>
         <div class="design-lessons-grid">
           {designLessons.map((lesson) => (
@@ -397,7 +397,7 @@ const commandItems = [
 
       <section id="lab" class="section lab-panel future-panel">
         <p class="eyebrow">Why this matters</p>
-        <h2>The goal is not “another chatbot.” It is useful technical leverage that gets better with every verified workflow.</h2>
+        <h2>The goal is useful technical leverage: verified workflows, clear resources, and public proof that stays honest when outcomes change.</h2>
         <p>Hermie can help someone learn faster, contribute to open source, build public resources, monitor follow-up, and document the work. The next step is making those workflows clearer, safer, easier to reuse, and useful to more people.</p>
         <div class="actions small-actions">
           <a class="button primary" href="/about">Read the story</a>

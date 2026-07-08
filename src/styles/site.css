@@ -1321,12 +1321,8 @@ nav a:focus-visible {
 }
 
 .feature-list article::after {
-  content: '→';
-  position: absolute;
-  right: 22px;
-  top: 20px;
-  color: rgba(34, 211, 238, 0.5);
-  font-size: 1.2rem;
+  content: '';
+  display: none;
 }
 
 .future-panel {
