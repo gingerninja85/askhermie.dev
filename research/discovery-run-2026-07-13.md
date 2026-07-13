@@ -8,7 +8,7 @@ Daily autonomous askhermie.dev discovery loop: Hermes/AI-agent tooling, automati
 
 | Candidate | URL | Decision | Reason / safety screen |
 |---|---|---|---|
-| Loop Engineering | https://github.com/cobusgreyling/loop-engineering | Accepted | Active MIT repo with practical AI-agent loop design patterns and small npm CLIs. No offensive-primary purpose found. Published with disposable-branch, no-secrets-in-prompts, and human-review warnings. |
+| Loop Engineering | https://github.com/cobusgreyling/loop-engineering | Already present / inspected | Active MIT repo with practical AI-agent loop design patterns and small npm CLIs. Safety screen stayed acceptable, but the resource was already present in the catalog, so no duplicate card was kept. |
 | cost-xray | https://github.com/tigerless-labs/cost-xray | Accepted | Active MIT local-only AI agent traffic/cost inspection tool. Sensitive because it captures prompt/API traffic, but useful for agent cost transparency. Published with capture-data privacy warnings and conservative clone/read-first command instead of pipe-to-shell install. |
 | brain0 | https://github.com/Brain0-ai/brain0 | Accepted | Active Apache-2.0 offline-by-default provenance layer for AI-written code. Benign governance/review fit. Published with metadata/privacy/retention warnings. |
 | Grid | https://github.com/autonomous-ai/autonomous-grid | Accepted | Active MIT local AI orchestration layer for pooling existing inference servers behind one endpoint. Published with localhost-first, internal-endpoint, and API-key protection warnings. |
@@ -26,9 +26,8 @@ Daily autonomous askhermie.dev discovery loop: Hermes/AI-agent tooling, automati
 
 ## Published changes
 
-Added 9 resource cards to `src/pages/resources.astro`:
+Added 8 new resource cards to `src/pages/resources.astro`:
 
-- Loop Engineering
 - cost-xray
 - brain0
 - Grid
@@ -37,6 +36,8 @@ Added 9 resource cards to `src/pages/resources.astro`:
 - Picture Frame
 - ESP32 CYD Aquarium
 - HEARD
+
+Re-inspected Loop Engineering and left the existing card in place instead of publishing a duplicate.
 
 Updated reader-intent category arrays so new AI-agent, local-AI, ESP32, Raspberry Pi, and e-ink cards render under existing grouped sections.
 

@@ -1754,17 +1754,6 @@ const resources: Resource[] = [
     url: 'https://github.com/gogs/gogs',
   },
   {
-    name: 'Loop Engineering',
-    category: 'AI agent loop design',
-    difficulty: 'Intermediate',
-    use: 'Practical patterns and small CLI tools for designing repeatable AI-coding-agent loops instead of one-off prompts.',
-    firstStep: 'Browse the showcase, then run the audit tool against one throwaway agent workflow before changing team process.',
-    exampleUse: 'Turn a vague “ask an agent to fix bugs” process into a repeatable loop with inputs, review checkpoints, cost checks, and completion criteria.',
-    command: 'npx @cobusgreyling/loop-audit --help\nnpx @cobusgreyling/loop-init --help\nnpx @cobusgreyling/loop-cost --help',
-    safetyNote: 'Loop templates can cause agents to run commands or edit files more systematically. Use disposable branches, keep secrets out of prompts, and require human review before merging generated changes.',
-    url: 'https://github.com/cobusgreyling/loop-engineering',
-  },
-  {
     name: 'cost-xray',
     category: 'AI agent token analytics',
     difficulty: 'Advanced',
