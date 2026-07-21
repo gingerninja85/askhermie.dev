@@ -1,6 +1,7 @@
 ---
 import '../styles/site.css';
 import SeoHead from '../components/SeoHead.astro';
+import ResourceExplorer from '../components/ResourceExplorer.svelte';
 
 const nav = [
   ['Home', '/'],
@@ -67,6 +68,127 @@ const resources: Resource[] = [
     exampleUse: 'Build a fast docs/catalog site like askhermie.dev where most content is static but still polished and easy to maintain.',
     command: 'npm create astro@latest my-site\ncd my-site\nnpm run dev',
     url: 'https://github.com/withastro/astro',
+  },
+  {
+    name: 'Svelte',
+    category: 'Website framework',
+    difficulty: 'Beginner',
+    use: 'Compiler-based UI framework for adding fast interactive components without turning a static site into a bloated app.',
+    firstStep: 'Use it as Astro islands first: add one interactive component, prove it works, then decide whether SvelteKit is worth a full migration.',
+    exampleUse: 'Power askhermie.dev resource search, command palettes, copy buttons, filters, and dashboard widgets while Astro keeps static SEO pages simple.',
+    command: 'npx astro add svelte\n# or manually:\nnpm install @astrojs/svelte svelte',
+    safetyNote: 'Install from the official Astro/Svelte packages, review generated changes, and avoid pasting private tokens into demo components.',
+    url: 'https://svelte.dev/',
+  },
+  {
+    name: 'SvelteKit',
+    category: 'SvelteKit SEO tooling',
+    difficulty: 'Intermediate',
+    use: 'Full app framework for Svelte when routing, loading, server endpoints, forms, or app-like behavior become central.',
+    firstStep: 'Do not migrate by default. Try Svelte inside Astro first; choose SvelteKit only if the whole site becomes an app/workbench.',
+    exampleUse: 'Build a static-generated agent dashboard or documentation workbench with richer client interactions and file-based routes.',
+    command: 'npm create svelte@latest askhermie-sveltekit\ncd askhermie-sveltekit\nnpm install\nnpm run dev',
+    safetyNote: 'Treat new app templates as code: inspect dependencies, keep secrets in environment variables, and do not commit generated local config.',
+    url: 'https://svelte.dev/docs/kit/introduction',
+  },
+  {
+    name: 'SigNoz',
+    category: 'Observability',
+    difficulty: 'Intermediate',
+    use: 'OpenTelemetry-native observability stack that brings traces, metrics, logs, dashboards, and alerts into one self-hostable place.',
+    firstStep: 'Try the local Docker install on a non-production machine, then send one sample app trace before wiring in real services.',
+    exampleUse: 'Debug a slow API by correlating request traces, error logs, and latency graphs instead of guessing from raw log files.',
+    command: 'git clone -b main https://github.com/SigNoz/signoz.git ~/tools/signoz\ncd ~/tools/signoz/deploy/docker\ndocker compose up -d',
+    safetyNote: 'Run it on systems you control and lock down dashboards before exposing them; observability data can contain sensitive URLs, headers, and logs.',
+    url: 'https://github.com/SigNoz/signoz',
+  },
+  {
+    name: 'Vector',
+    category: 'Observability pipeline',
+    difficulty: 'Intermediate',
+    use: 'High-performance pipeline for collecting, transforming, and routing logs and metrics between systems.',
+    firstStep: 'Read the quickstart and run Vector with a tiny local config before pointing it at real production logs.',
+    exampleUse: 'Collect Docker logs, redact noisy fields, and send the cleaned stream to a local observability stack for a homelab service.',
+    command: 'docker run --rm timberio/vector:latest --version\n# Quickstart/docs: https://vector.dev/docs/setup/quickstart/',
+    safetyNote: 'Log pipelines can leak secrets if misconfigured; test redaction locally and avoid shipping private logs to third-party sinks by default.',
+    url: 'https://github.com/vectordotdev/vector',
+  },
+  {
+    name: 'Jaeger',
+    category: 'Distributed tracing',
+    difficulty: 'Intermediate',
+    use: 'CNCF distributed tracing platform for seeing how requests move through services.',
+    firstStep: 'Run the all-in-one container and open the UI before instrumenting an application.',
+    exampleUse: 'Trace a request across a frontend, API, worker, and database call to find which hop actually adds latency.',
+    command: 'docker run --rm --name jaeger -p 16686:16686 -p 4317:4317 -p 4318:4318 jaegertracing/jaeger:latest',
+    safetyNote: 'Use it in labs or owned environments; traces can include service names, URLs, and identifiers that should not be exposed publicly.',
+    url: 'https://github.com/jaegertracing/jaeger',
+  },
+  {
+    name: 'CodeBurn',
+    category: 'AI agent cost tracking',
+    difficulty: 'Beginner',
+    use: 'Local-first dashboard for understanding token usage and estimated cost across AI coding tools and agents.',
+    firstStep: 'Run the read-only terminal dashboard and inspect one project before enabling any desktop or web surface.',
+    exampleUse: 'Find which coding agent sessions are burning the most tokens so you can switch routine work to cheaper models.',
+    command: 'npx codeburn\n# Optional local web UI:\nnpx codeburn web',
+    safetyNote: 'It reads local AI session files; review what those files contain and avoid sharing exported reports if prompts include private code or secrets.',
+    url: 'https://github.com/getagentseal/codeburn',
+  },
+  {
+    name: 'MCP Client for Ollama',
+    category: 'Local AI / MCP',
+    difficulty: 'Intermediate',
+    use: 'Terminal client that lets local Ollama models interact with MCP servers, tools, prompts, and resources.',
+    firstStep: 'Start with one harmless MCP server and a small local model; confirm tool calls are visible and manually approved.',
+    exampleUse: 'Test a new filesystem or notes MCP server locally before connecting it to a more powerful hosted model.',
+    command: 'pipx install mcp-client-for-ollama\nollmcp --help',
+    safetyNote: 'MCP tools can touch files and services; only connect trusted servers and avoid granting broad write access during experiments.',
+    url: 'https://github.com/jonigl/mcp-client-for-ollama',
+  },
+  {
+    name: 'ESP32 MPY-Jama',
+    category: 'ESP32 / MicroPython',
+    difficulty: 'Beginner',
+    use: 'Cross-platform mini IDE, file manager, REPL, and dashboard for ESP32 boards running MicroPython.',
+    firstStep: 'Use it with a spare ESP32 development board and a simple blink script before touching sensors or actuators.',
+    exampleUse: 'Upload MicroPython files, watch serial output, and inspect board status while building a small home sensor prototype.',
+    command: '# Download the current release for your OS:\n# https://github.com/jczic/ESP32-MPY-Jama/releases',
+    safetyNote: 'Only flash and control boards you own; disconnect motors, relays, or high-current loads while testing beginner scripts.',
+    url: 'https://github.com/jczic/ESP32-MPY-Jama',
+  },
+  {
+    name: 'ESP32 CSI Tool',
+    category: 'Wireless sensing lab',
+    difficulty: 'Advanced',
+    use: 'Research tool for collecting ESP32 Wi-Fi Channel State Information for sensing and localization experiments.',
+    firstStep: 'Read the project website and reproduce a two-board lab in your own RF environment before collecting real data.',
+    exampleUse: 'Measure how CSI changes when a person moves through a room, then analyze the data in Python as a signal-processing exercise.',
+    command: 'git clone https://github.com/StevenMHernandez/ESP32-CSI-Tool.git ~/labs/esp32-csi-tool\n# Follow the repo docs with ESP-IDF v4.3.',
+    safetyNote: 'Use only your own ESP32 boards and networks; do not use passive collection to monitor people or networks without clear consent.',
+    url: 'https://github.com/StevenMHernandez/ESP32-CSI-Tool',
+  },
+  {
+    name: 'Dashy',
+    category: 'Homelab dashboard',
+    difficulty: 'Beginner',
+    use: 'Self-hosted dashboard for organizing homelab links, widgets, status checks, and shortcuts.',
+    firstStep: 'Run the demo container locally and add two internal links before exposing anything beyond localhost.',
+    exampleUse: 'Build a single homepage for Home Assistant, Uptime Kuma, NAS admin, and documentation links on a private LAN.',
+    command: 'docker run -d -p 8080:8080 --name dashy --restart=unless-stopped lissy93/dashy:latest',
+    safetyNote: 'Do not publish admin dashboards to the internet without authentication, HTTPS, and access controls; dashboard links reveal internal services.',
+    url: 'https://github.com/lissy93/dashy',
+  },
+  {
+    name: 'Tugtainer',
+    category: 'Docker maintenance',
+    difficulty: 'Intermediate',
+    use: 'Self-hosted web UI for checking and optionally updating Docker containers across one or more hosts.',
+    firstStep: 'Use check-only mode first, keep automatic updates disabled, and verify backups before allowing it to update containers.',
+    exampleUse: 'Get notified that homelab containers have newer images, then manually update low-risk services after reading release notes.',
+    command: 'docker volume create tugtainer_data\ndocker run -d -p 9412:80 --name=tugtainer --restart=unless-stopped -e AGENT_SECRET="CHANGE_ME_LOCAL_SECRET" -v tugtainer_data:/tugtainer -v /var/run/docker.sock:/var/run/docker.sock:ro ghcr.io/quenary/tugtainer:1',
+    safetyNote: 'Docker socket access is powerful. Use a strong local secret, avoid public exposure, and do not enable unattended updates for stateful services.',
+    url: 'https://github.com/Quenary/tugtainer',
   },
   {
     name: 'Pagefind',
@@ -2237,7 +2359,7 @@ const groupMeta = [
   {
     name: 'Hermes + AI agents',
     blurb: 'Start here if you want tools that pair directly with Hermes, local AI, MCP, browser automation, or automation glue.',
-    categories: ['AI agent core', 'Automation', 'Local AI', 'Local AI UI', 'AI browser automation', 'AI agent integrations', 'AI agent context control', 'Data-agent context', 'AI agent security', 'AI agent framework', 'AI observability', 'LLM observability', 'AI workflow automation', 'AI agent run inspection', 'AI agent governance', 'AI coding agent', 'AI agent merge gate', 'AI agent memory', 'AI workflow language', 'AI agent token analytics', 'AI agent provenance', 'Local AI orchestration', 'Durable TypeScript workflows', 'AI document tooling', 'AI supply-chain scanning', 'AI evals and observability', 'Offline developer docs', 'LLM observability tutorial', 'AI codebase maps', 'API agent integration', 'AI media tooling', 'AI code intelligence', 'AI agent loop design', 'Office MCP automation', 'AI agent orchestrator', 'AI gateway', 'MCP gateway', 'MCP registry', 'MCP platform', 'MCP testing', 'MCP bridge', 'AI agent capability manager', 'AI data catalog', 'Mobile app automation', 'Financial data MCP', 'Web data crawler'],
+    categories: ['AI agent core', 'Automation', 'Local AI', 'Local AI UI', 'Local AI / MCP', 'AI browser automation', 'AI agent integrations', 'AI agent context control', 'Data-agent context', 'AI agent security', 'AI agent framework', 'AI observability', 'LLM observability', 'AI workflow automation', 'AI agent run inspection', 'AI agent governance', 'AI coding agent', 'AI agent cost tracking', 'AI agent merge gate', 'AI agent memory', 'AI workflow language', 'AI agent token analytics', 'AI agent provenance', 'Local AI orchestration', 'Durable TypeScript workflows', 'AI document tooling', 'AI supply-chain scanning', 'AI evals and observability', 'Offline developer docs', 'LLM observability tutorial', 'AI codebase maps', 'API agent integration', 'AI media tooling', 'AI code intelligence', 'AI agent loop design', 'Office MCP automation', 'AI agent orchestrator', 'AI gateway', 'MCP gateway', 'MCP registry', 'MCP platform', 'MCP testing', 'MCP bridge', 'AI agent capability manager', 'AI data catalog', 'Mobile app automation', 'Financial data MCP', 'Web data crawler'],
   },
   {
     name: 'Build + publish websites',
@@ -2247,7 +2369,7 @@ const groupMeta = [
   {
     name: 'CLI + systems engineering',
     blurb: 'Everyday tools for Python, terminals, automation, homelabs, monitoring, and keeping machines understandable.',
-    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes UI', 'Build automation', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management'],
+    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes UI', 'Build automation', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management'],
   },
   {
     name: 'Cybersecurity learning',
@@ -2262,7 +2384,7 @@ const groupMeta = [
   {
     name: 'IoT + hardware labs',
     blurb: 'ESP32, Raspberry Pi, microcontrollers, smart-home firmware, lighting, LoRa, and maker learning.',
-    categories: ['ESP32 development', 'Microcontrollers', 'Maker learning', 'ESP32 projects', 'ESP32 / smart-home firmware', 'ESP32 lighting', 'ESP32 desk project', 'LoRa / mesh radio', 'Microcontroller C/C++', 'Local IoT firmware', 'Embedded development', 'Microcontroller Go', 'Arduino tooling', 'Hardware signal analysis', 'ESP32 live reload', 'Board emulator', 'ESP browser flashing', 'Offline learning server', 'IoT payload decoding', 'Home automation', 'ESP firmware flashing', 'Raspberry Pi hardware racks', 'Raspberry Pi photo frame', 'E-ink desk dashboard', 'Browser chip flashing', 'ESPHome visual builder', 'Retro hardware emulator', 'ESPHome display designer', 'Raspberry Pi health sensor bridge', 'Embedded tooling map', 'Home Assistant GPIO integration', 'Smart mirror platform'],
+    categories: ['ESP32 development', 'ESP32 / MicroPython', 'Microcontrollers', 'Maker learning', 'ESP32 projects', 'ESP32 / smart-home firmware', 'ESP32 lighting', 'ESP32 desk project', 'Wireless sensing lab', 'LoRa / mesh radio', 'Microcontroller C/C++', 'Local IoT firmware', 'Embedded development', 'Microcontroller Go', 'Arduino tooling', 'Hardware signal analysis', 'ESP32 live reload', 'Board emulator', 'ESP browser flashing', 'Offline learning server', 'IoT payload decoding', 'Home automation', 'ESP firmware flashing', 'Raspberry Pi hardware racks', 'Raspberry Pi photo frame', 'E-ink desk dashboard', 'Browser chip flashing', 'ESPHome visual builder', 'Retro hardware emulator', 'ESPHome display designer', 'Raspberry Pi health sensor bridge', 'Embedded tooling map', 'Home Assistant GPIO integration', 'Smart mirror platform'],
   },
 ];
 
@@ -2355,139 +2477,12 @@ const resourcesStructuredData = [
         </aside>
       </section>
 
-      <section class="resource-control-panel" aria-label="Resource search and filters">
-        <div class="resource-search">
-          <label for="resource-search-input">Search the catalog</label>
-          <input id="resource-search-input" type="search" placeholder="Try: firmware, ESP32, monitoring, MCP, Docker..." autocomplete="off" />
-          <p><span id="resource-count">{resources.length}</span> visible resources. Filter by group or search by name, category, use case, command, or safety note.</p>
-        </div>
-        <div class="filter-chips" role="list" aria-label="Resource groups">
-          <button class="filter-chip active" type="button" data-filter="all">All</button>
-          {resourceGroups.map((group) => (
-            <button class="filter-chip" type="button" data-filter={group.slug}>{group.name}</button>
-          ))}
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <p class="eyebrow">Resource map</p>
-          <h2>Everything interesting enough to earn a spot.</h2>
-          <p>Commands target Linux/WSL unless the card says otherwise. Security tools are for labs, your own systems, or explicitly authorized work. “Open resource” buttons leave this site.</p>
-          <p class="external-link-note">External link note: every <strong>Open resource</strong> button opens the original project/docs site in a new tab.</p>
-        </div>
-        <div class="category-resource-list">
-          {resourceGroups.map((group) => (
-            <section class="category-section" id={group.id} data-group={group.slug} aria-labelledby={`${group.id}-heading`}>
-              <div class="category-heading">
-                <div>
-                  <p class="eyebrow">{group.resources.length} {group.resources.length === 1 ? 'resource' : 'resources'}</p>
-                  <h3 id={`${group.id}-heading`}>{group.name}</h3>
-                </div>
-                <p>{group.blurb}</p>
-              </div>
-              <div class="resource-grid">
-                {group.resources.map((resource) => (
-                  <article class="resource-card" id={`resource-${slugify(resource.name)}`} data-group={group.slug} data-search={`${resource.name} ${resource.category} ${resource.difficulty} ${resource.use} ${resource.firstStep} ${resource.exampleUse} ${resource.command ?? ''} ${resource.safetyNote ?? ''}`.toLowerCase()}>
-                    <div class="resource-topline">
-                      <span class="pill">{resource.category}</span>
-                      <span class={`difficulty ${resource.difficulty.toLowerCase()}`}>{resource.difficulty}</span>
-                    </div>
-                    <h2>{resource.name}</h2>
-                    <p>{resource.use}</p>
-                    <div class="first-step">
-                      <strong>First move:</strong>
-                      <span>{resource.firstStep}</span>
-                    </div>
-                    <div class="example-use">
-                      <strong>Example use case:</strong>
-                      <span>{resource.exampleUse}</span>
-                    </div>
-                    {resource.safetyNote && (
-                      <div class="first-step safety-note">
-                        <strong>Safety note:</strong>
-                        <span>{resource.safetyNote}</span>
-                      </div>
-                    )}
-                    {resource.command && (
-                      <div class="command-box">
-                        <div class="command-head">
-                          <span>Copy/paste</span>
-                          <button class="copy-command" data-copy={resource.command}>Copy</button>
-                        </div>
-                        <pre><code>{resource.command}</code></pre>
-                      </div>
-                    )}
-                    <a class="resource-link" href={resource.url} target="_blank" rel="noreferrer" aria-label={`${resource.name} external link`}>
-                      <span>Open resource</span>
-                      <em>External link</em>
-                    </a>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      </section>
+      <ResourceExplorer client:load resources={resources} resourceGroups={resourceGroups} />
     </main>
 
     <footer>
       <p>Built with Hermie ⚙️</p>
       <p>askhermie.dev/resources</p>
     </footer>
-
-    <script>
-      const cards = Array.from(document.querySelectorAll('.resource-card'));
-      const sections = Array.from(document.querySelectorAll('.category-section'));
-      const chips = Array.from(document.querySelectorAll('.filter-chip'));
-      const search = document.querySelector('#resource-search-input');
-      const count = document.querySelector('#resource-count');
-      let activeFilter = 'all';
-
-      function applyResourceFilters() {
-        const query = (search?.value || '').trim().toLowerCase();
-        let visibleCount = 0;
-
-        cards.forEach((card) => {
-          const groupMatch = activeFilter === 'all' || card.dataset.group === activeFilter;
-          const searchMatch = !query || (card.dataset.search || '').includes(query);
-          const visible = groupMatch && searchMatch;
-          card.hidden = !visible;
-          if (visible) visibleCount += 1;
-        });
-
-        sections.forEach((section) => {
-          const visibleCards = section.querySelectorAll('.resource-card:not([hidden])').length;
-          section.hidden = visibleCards === 0;
-        });
-
-        if (count) count.textContent = String(visibleCount);
-      }
-
-      chips.forEach((chip) => {
-        chip.addEventListener('click', () => {
-          activeFilter = chip.dataset.filter || 'all';
-          chips.forEach((item) => item.classList.toggle('active', item === chip));
-          applyResourceFilters();
-        });
-      });
-
-      search?.addEventListener('input', applyResourceFilters);
-      applyResourceFilters();
-
-      document.querySelectorAll('.copy-command').forEach((button) => {
-        button.addEventListener('click', async () => {
-          const text = button.getAttribute('data-copy') || '';
-          try {
-            await navigator.clipboard.writeText(text);
-            const old = button.textContent;
-            button.textContent = 'Copied';
-            setTimeout(() => { button.textContent = old; }, 1300);
-          } catch {
-            button.textContent = 'Select text';
-          }
-        });
-      });
-    </script>
   </body>
 </html>

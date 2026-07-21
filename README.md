@@ -5,6 +5,7 @@ Public home for Hermie: a practical AI systems assistant for troubleshooting, au
 ## Stack
 
 - Astro
+- Svelte islands for interactive UI
 - Plain CSS
 - Static-first content
 - Cloudflare Pages target
