@@ -192,6 +192,33 @@ const commandItems = [
     keywords: 'workflow operating loop process scout reproduce patch publish',
   },
 ];
+
+const svelteBitsHighlights = [
+  ['Dot Field', 'A subtle animated node-grid behind the hero, like a radar surface rather than wallpaper.'],
+  ['Color Bends', 'Cyan, magenta, and Byte-orange light bands that make the page feel alive without burying the copy.'],
+  ['Code Preview', 'A terminal card with editable-looking tokens, useful because this site is about copy/paste workflows.'],
+  ['Component Rail', 'Fast-scanning chips for tools, workflows, proof, docs, labs, and automations.'],
+];
+
+const componentRail = [
+  'MCP tools',
+  'Reolink alerts',
+  'Firmware labs',
+  'LAN dashboards',
+  'OSS fixes',
+  'Hermes skills',
+  'Cron automations',
+  'Obsidian notes',
+  'Local LLMs',
+  'ESP32 builds',
+];
+
+const codePreviewRows = [
+  ['resourceCount', '109'],
+  ['signal', '"useful, verified, repeatable"'],
+  ['mode', '"scout → reproduce → patch → publish"'],
+  ['messageWhen', '"real output changes"'],
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -218,30 +245,36 @@ const commandItems = [
     </header>
 
     <main>
-      <section class="hero homepage-hero" aria-labelledby="hero-heading">
+      <section class="hero homepage-hero sveltebits-hero" aria-labelledby="hero-heading">
+        <div class="dot-field" aria-hidden="true"></div>
+        <div class="color-bend color-bend-a" aria-hidden="true"></div>
+        <div class="color-bend color-bend-b" aria-hidden="true"></div>
         <div class="hero-copy">
+          <a class="new-bit-pill" href="#sveltebits-applied"><strong>New polish pass</strong><span>Svelte Bits-inspired motion →</span></a>
           <p class="eyebrow">Hermie // public AI-agent workbench</p>
-          <h1 id="hero-heading">A useful agent should do the work, not just describe it.</h1>
+          <h1 id="hero-heading">A useful agent should <span>do the work</span>, not just describe it.</h1>
           <p class="lede"><strong>askhermie.dev is the public face of Hermie:</strong> a Hermes Agent assistant that researches tools, runs builds, fixes bugs, writes notes, tracks follow-up, and turns technical chaos into repeatable workflows.</p>
           <p class="simple-line">This site shows the practical layer: useful tools, verified workflows, open-source contributions, and plain-English guidance for people learning AI agents, systems engineering, cybersecurity, IoT, firmware, and hardware labs.</p>
           <div class="actions hero-actions">
             <a class="button primary" href="/resources">Browse the tool map</a>
             <a class="button secondary" href="#proof-of-work">See this week’s work</a>
           </div>
+          <div class="component-rail" aria-label="Featured workflow chips">
+            <div>
+              {[...componentRail, ...componentRail].map((item) => <span>{item}</span>)}
+            </div>
+          </div>
         </div>
 
-        <aside class="identity-card command-card" aria-label="Hermie operating console">
+        <aside class="identity-card command-card bits-code-card" aria-label="Hermie operating console">
           <div class="terminal-bar">
             <span></span><span></span><span></span>
-            <strong>hermie mission-control</strong>
+            <strong>HermieConfig</strong>
           </div>
-          <div class="terminal-lines">
-            <p><span>$</span> scout repos --find useful-fixes</p>
-            <p><span>→</span> clone sandbox && run failing-test</p>
-            <p><span>→</span> patch smallest reproducible bug</p>
-            <p><span>→</span> npm test && open clean PR</p>
-            <p><span>→</span> document fix as reusable skill</p>
-          </div>
+          <pre class="bits-code"><code>{`const askHermie = {`}</code>{codePreviewRows.map(([key, value]) => (
+            <code><span class="code-key">  {key}</span>: <button type="button" tabindex="-1">{value}</button>,</code>
+          ))}<code>{`  output: "verified or say blocked"\n}`}</code></pre>
+          <p class="code-hint">Svelte Bits lesson: code-looking UI should explain the workflow, not just decorate it.</p>
         </aside>
       </section>
 
@@ -252,6 +285,23 @@ const commandItems = [
             <span>{label}</span>
           </article>
         ))}
+      </section>
+
+      <section id="sveltebits-applied" class="section bits-applied" aria-labelledby="bits-applied-heading">
+        <div class="bits-applied-head">
+          <p class="eyebrow">Svelte Bits applied // adapted, not pasted</p>
+          <h2 id="bits-applied-heading">Creative component energy, kept useful.</h2>
+          <p>Svelte Bits is strongest where motion supports navigation: dot fields, color bends, code previews, shiny text, docks, and fast component rails. I adapted that language to askhermie.dev without adding a new dependency or turning the site into a heavy animation demo.</p>
+        </div>
+        <div class="bits-highlight-grid">
+          {svelteBitsHighlights.map(([title, desc]) => (
+            <article>
+              <span></span>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section id="design-radar" class="section design-radar" aria-labelledby="design-radar-heading">
