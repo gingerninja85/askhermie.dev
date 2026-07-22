@@ -8,5 +8,8 @@
     "@astrojs/svelte": "^9.0.1",
     "astro": "latest",
     "svelte": "^5.56.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }

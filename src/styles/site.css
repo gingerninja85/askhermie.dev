@@ -2507,7 +2507,7 @@ nav a:focus-visible {
 
   .orbit-chip {
     min-width: auto;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     padding: 7px 9px;
   }
 
@@ -2522,6 +2522,7 @@ nav a:focus-visible {
     max-width: calc(100% - 18px);
     overflow-x: auto;
     justify-content: flex-start;
+    flex-wrap: nowrap;
   }
 
   .hero-dock a {
@@ -2531,5 +2532,107 @@ nav a:focus-visible {
   .magic-bento,
   .component-proof-grid.bits-highlight-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive hardening after viewport audit */
+.hero-copy,
+.orbital-showcase,
+.sveltebits-hero > * {
+  min-width: 0;
+}
+
+.sveltebits-hero .hero-copy,
+.sveltebits-hero .actions,
+.sveltebits-hero .eyebrow {
+  width: 100%;
+  max-width: 100%;
+}
+
+.sveltebits-hero h1,
+.sveltebits-hero .lede,
+.sveltebits-hero .simple-line {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.component-rail {
+  max-width: 100%;
+  contain: paint;
+}
+
+.component-rail > div {
+  min-width: max-content;
+}
+
+.hero-dock {
+  width: max-content;
+  max-width: min(100%, 430px);
+}
+
+.hero-dock a {
+  min-height: 62px;
+}
+
+.resource-link {
+  min-height: 44px;
+  align-items: center;
+}
+
+.resource-link em {
+  font-size: 0.72rem;
+}
+
+.palette-search input {
+  min-height: 44px;
+}
+
+@media (max-width: 980px) {
+  .sveltebits-hero {
+    gap: clamp(26px, 6vw, 44px);
+  }
+
+  .orbital-showcase {
+    width: 100%;
+  }
+
+  .hero-dock {
+    display: flex;
+    width: max-content;
+    max-width: calc(100% - 18px);
+  }
+}
+
+@media (max-width: 560px) {
+  .sveltebits-hero .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .sveltebits-hero .button {
+    width: 100%;
+  }
+
+  .component-rail {
+    width: 100%;
+  }
+
+  .hero-dock {
+    display: flex;
+    width: auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .hero-dock a {
+    flex: 0 0 54px;
+    width: 54px;
+    min-width: 54px;
+    height: 58px;
+  }
+
+  .hero-dock span {
+    font-size: 0.58rem;
   }
 }
