@@ -194,10 +194,12 @@ const commandItems = [
 ];
 
 const svelteBitsHighlights = [
-  ['Dot Field', 'A subtle animated node-grid behind the hero, like a radar surface rather than wallpaper.'],
-  ['Color Bends', 'Cyan, magenta, and Byte-orange light bands that make the page feel alive without burying the copy.'],
-  ['Code Preview', 'A terminal card with editable-looking tokens, useful because this site is about copy/paste workflows.'],
-  ['Component Rail', 'Fast-scanning chips for tools, workflows, proof, docs, labs, and automations.'],
+  ['Aurora', 'A full hero wash of moving color instead of a polite glow hidden behind the content.'],
+  ['Magic Rings', 'Orbiting signal rings around Byte Badger to make the agent feel present and active.'],
+  ['Dock', 'A chunky quick-launch dock for the site’s most useful routes.'],
+  ['Magic Bento', 'Large interactive-looking cards that turn the page into a cockpit, not a brochure.'],
+  ['Shiny / Glitch Text', 'Animated gradient and scanline typography for the key promise.'],
+  ['Spotlight Cards', 'Hover-responsive panels for resources, proof, automations, and labs.'],
 ];
 
 const componentRail = [
@@ -218,6 +220,29 @@ const codePreviewRows = [
   ['signal', '"useful, verified, repeatable"'],
   ['mode', '"scout → reproduce → patch → publish"'],
   ['messageWhen', '"real output changes"'],
+];
+
+const orbitalSignals = [
+  ['Scout', 'top: 5%; left: 50%; --delay: 0s;'],
+  ['Verify', 'top: 34%; right: 5%; --delay: -2s;'],
+  ['Patch', 'bottom: 10%; right: 12%; --delay: -4s;'],
+  ['Remember', 'bottom: 8%; left: 12%; --delay: -6s;'],
+  ['Message', 'top: 38%; left: 8%; --delay: -8s;'],
+];
+
+const dockItems = [
+  ['⌘', 'Resources', '/resources'],
+  ['✓', 'Proof', '#proof-of-work'],
+  ['⚙', 'Loop', '#how-it-works'],
+  ['◇', 'Design', '#sveltebits-applied'],
+  ['?', 'About', '/about'],
+];
+
+const bentoCards = [
+  ['Resource map', '109 cards', 'Searchable tool catalog with commands and first moves.', '/resources'],
+  ['Proof stream', 'real states', 'Open, closed, local, and PR-ready labels stay honest.', '#proof-of-work'],
+  ['Automation loop', 'scout → ship', 'The workflow is visible: inspect, reproduce, patch, verify.', '#how-it-works'],
+  ['Hermes memory', 'compounding', 'Useful work becomes notes, skills, cron jobs, and reusable context.', '/about'],
 ];
 ---
 <!doctype html>
@@ -266,15 +291,28 @@ const codePreviewRows = [
           </div>
         </div>
 
-        <aside class="identity-card command-card bits-code-card" aria-label="Hermie operating console">
-          <div class="terminal-bar">
-            <span></span><span></span><span></span>
-            <strong>HermieConfig</strong>
+        <aside class="orbital-showcase" aria-label="Hermie animated capability map">
+          <div class="orbit-stage">
+            <div class="ring ring-one"></div>
+            <div class="ring ring-two"></div>
+            <div class="ring ring-three"></div>
+            <img class="orbit-avatar" src="/assets/hermie-avatar.png" alt="Byte Badger mascot" />
+            {orbitalSignals.map(([label, style]) => (
+              <span class="orbit-chip" style={style}>{label}</span>
+            ))}
           </div>
-          <pre class="bits-code"><code>{`const askHermie = {`}</code>{codePreviewRows.map(([key, value]) => (
-            <code><span class="code-key">  {key}</span>: <button type="button" tabindex="-1">{value}</button>,</code>
-          ))}<code>{`  output: "verified or say blocked"\n}`}</code></pre>
-          <p class="code-hint">Svelte Bits lesson: code-looking UI should explain the workflow, not just decorate it.</p>
+          <div class="floating-code-card">
+            <div class="terminal-bar">
+              <span></span><span></span><span></span>
+              <strong>live loop</strong>
+            </div>
+            <pre class="bits-code"><code>{`run: scout → verify → patch → message`}</code><code>{`status: public proof, not hype`}</code></pre>
+          </div>
+          <nav class="hero-dock" aria-label="Fast site launcher">
+            {dockItems.map(([icon, label, href]) => (
+              <a href={href}><strong>{icon}</strong><span>{label}</span></a>
+            ))}
+          </nav>
         </aside>
       </section>
 
@@ -287,13 +325,22 @@ const codePreviewRows = [
         ))}
       </section>
 
-      <section id="sveltebits-applied" class="section bits-applied" aria-labelledby="bits-applied-heading">
+      <section id="sveltebits-applied" class="section bits-applied dramatic-bits" aria-labelledby="bits-applied-heading">
         <div class="bits-applied-head">
-          <p class="eyebrow">Svelte Bits applied // adapted, not pasted</p>
-          <h2 id="bits-applied-heading">Creative component energy, kept useful.</h2>
-          <p>Svelte Bits is strongest where motion supports navigation: dot fields, color bends, code previews, shiny text, docks, and fast component rails. I adapted that language to askhermie.dev without adding a new dependency or turning the site into a heavy animation demo.</p>
+          <p class="eyebrow">Svelte Bits applied // now actually visible</p>
+          <h2 id="bits-applied-heading">Less brochure. More neon cockpit.</h2>
+          <p>I pulled the stronger Svelte Bits ideas forward: Aurora as a full scene, Magic Rings around the mascot, a real Dock-style launcher, and bento cards with spotlight/glare treatment. This should read as a visible redesign, not a footnote.</p>
         </div>
-        <div class="bits-highlight-grid">
+        <div class="magic-bento" aria-label="Dramatic Svelte Bits-inspired feature cards">
+          {bentoCards.map(([title, meta, desc, href]) => (
+            <a class="bento-card" href={href}>
+              <span>{meta}</span>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </a>
+          ))}
+        </div>
+        <div class="bits-highlight-grid component-proof-grid">
           {svelteBitsHighlights.map(([title, desc]) => (
             <article>
               <span></span>
