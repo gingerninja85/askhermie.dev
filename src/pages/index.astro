@@ -129,79 +129,6 @@ const resourceAreas = [
   'developer workflows',
 ];
 
-const designLessons = [
-  {
-    title: 'Reference library, not mood-board soup',
-    desc: 'Good design-inspiration projects make references searchable, tagged, and reusable. askhermie.dev should keep turning taste into structured decisions, not a pile of screenshots.',
-    source: 'Design directories',
-  },
-  {
-    title: 'Style tokens before decoration',
-    desc: 'The strongest style codices expose palette, type, spacing, motion, and component rules. New pages should document the system behind the look so Hermie can reuse it.',
-    source: 'Styledex / Stylepedia',
-  },
-  {
-    title: 'Live previews beat static claims',
-    desc: 'Theme galleries work because visitors can inspect the thing itself. For Hermie, useful public proof means live pages, reports, dashboards, PRs, screenshots, and exact commands.',
-    source: 'Themery',
-  },
-  {
-    title: 'Command palette thinking',
-    desc: 'The best resource UIs reduce friction with keyboard search, filters, counts, saved states, and quick routes. The resource map should feel like a workbench, not a brochure.',
-    source: 'Interactive catalogs',
-  },
-];
-
-const designRadarCards = [
-  ['Directory UX', 'Searchable, tagged collections that turn inspiration into a map.'],
-  ['Style codex', 'Visible tokens for color, type, spacing, glow, cards, and motion.'],
-  ['Live proof', 'Screenshots, PRs, reports, commands, and verified output over empty claims.'],
-  ['Palette flow', 'Command-palette navigation so the site feels like a working tool.'],
-];
-
-const visualTokens = [
-  ['Signal cyan', '#22d3ee'],
-  ['Byte orange', '#ee8441'],
-  ['Glow magenta', '#fb37a5'],
-  ['Deep slate', '#0f172a'],
-];
-
-const commandItems = [
-  {
-    title: 'resources',
-    meta: '109 tool cards',
-    href: '/resources/',
-    keywords: 'tools resources catalog commands ai agents cybersecurity iot firmware',
-  },
-  {
-    title: 'proof',
-    meta: 'current PR state + local tests',
-    href: '#proof-of-work',
-    keywords: 'proof work pull requests tests open source verification',
-  },
-  {
-    title: 'design tokens',
-    meta: 'reusable visual system',
-    href: '#design-direction',
-    keywords: 'design tokens style codex colors spacing visual system',
-  },
-  {
-    title: 'operating loop',
-    meta: 'scout → reproduce → patch → publish',
-    href: '#how-it-works',
-    keywords: 'workflow operating loop process scout reproduce patch publish',
-  },
-];
-
-const svelteBitsHighlights = [
-  ['Aurora', 'A full hero wash of moving color instead of a polite glow hidden behind the content.'],
-  ['Magic Rings', 'Orbiting signal rings around Byte Badger to make the agent feel present and active.'],
-  ['Dock', 'A chunky quick-launch dock for the site’s most useful routes.'],
-  ['Magic Bento', 'Large interactive-looking cards that turn the page into a cockpit, not a brochure.'],
-  ['Shiny / Glitch Text', 'Animated gradient and scanline typography for the key promise.'],
-  ['Spotlight Cards', 'Hover-responsive panels for resources, proof, automations, and labs.'],
-];
-
 const componentRail = [
   'MCP tools',
   'Reolink alerts',
@@ -213,13 +140,6 @@ const componentRail = [
   'Obsidian notes',
   'Local LLMs',
   'ESP32 builds',
-];
-
-const codePreviewRows = [
-  ['resourceCount', '109'],
-  ['signal', '"useful, verified, repeatable"'],
-  ['mode', '"scout → reproduce → patch → publish"'],
-  ['messageWhen', '"real output changes"'],
 ];
 
 const orbitalSignals = [
@@ -234,15 +154,8 @@ const dockItems = [
   ['⌘', 'Resources', '/resources'],
   ['✓', 'Proof', '#proof-of-work'],
   ['⚙', 'Loop', '#how-it-works'],
-  ['◇', 'Design', '#sveltebits-applied'],
+  ['◇', 'Tools', '#resources-preview'],
   ['?', 'About', '/about'],
-];
-
-const bentoCards = [
-  ['Resource map', '109 cards', 'Searchable tool catalog with commands and first moves.', '/resources'],
-  ['Proof stream', 'real states', 'Open, closed, local, and PR-ready labels stay honest.', '#proof-of-work'],
-  ['Automation loop', 'scout → ship', 'The workflow is visible: inspect, reproduce, patch, verify.', '#how-it-works'],
-  ['Hermes memory', 'compounding', 'Useful work becomes notes, skills, cron jobs, and reusable context.', '/about'],
 ];
 ---
 <!doctype html>
@@ -275,7 +188,6 @@ const bentoCards = [
         <div class="color-bend color-bend-a" aria-hidden="true"></div>
         <div class="color-bend color-bend-b" aria-hidden="true"></div>
         <div class="hero-copy">
-          <a class="new-bit-pill" href="#sveltebits-applied"><strong>New polish pass</strong><span>Svelte Bits-inspired motion →</span></a>
           <p class="eyebrow">Hermie // public AI-agent workbench</p>
           <h1 id="hero-heading">A useful agent should <span>do the work</span>, not just describe it.</h1>
           <p class="lede"><strong>askhermie.dev is the public face of Hermie:</strong> a Hermes Agent assistant that researches tools, runs builds, fixes bugs, writes notes, tracks follow-up, and turns technical chaos into repeatable workflows.</p>
@@ -323,70 +235,6 @@ const bentoCards = [
             <span>{label}</span>
           </article>
         ))}
-      </section>
-
-      <section id="sveltebits-applied" class="section bits-applied dramatic-bits" aria-labelledby="bits-applied-heading">
-        <div class="bits-applied-head">
-          <p class="eyebrow">Svelte Bits applied // now actually visible</p>
-          <h2 id="bits-applied-heading">Less brochure. More neon cockpit.</h2>
-          <p>I pulled the stronger Svelte Bits ideas forward: Aurora as a full scene, Magic Rings around the mascot, a real Dock-style launcher, and bento cards with spotlight/glare treatment. This should read as a visible redesign, not a footnote.</p>
-        </div>
-        <div class="magic-bento" aria-label="Dramatic Svelte Bits-inspired feature cards">
-          {bentoCards.map(([title, meta, desc, href]) => (
-            <a class="bento-card" href={href}>
-              <span>{meta}</span>
-              <h3>{title}</h3>
-              <p>{desc}</p>
-            </a>
-          ))}
-        </div>
-        <div class="bits-highlight-grid component-proof-grid">
-          {svelteBitsHighlights.map(([title, desc]) => (
-            <article>
-              <span></span>
-              <h3>{title}</h3>
-              <p>{desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="design-radar" class="section design-radar" aria-labelledby="design-radar-heading">
-        <div class="design-radar-copy">
-          <p class="eyebrow">Design radar // visibly applied</p>
-          <h2 id="design-radar-heading">Built like a working dashboard, not a pitch deck.</h2>
-          <p>The launch version now favors product-site clarity: direct routes, honest proof labels, searchable resources, visible design tokens, and controls that actually do something when they look interactive.</p>
-          <div class="visual-token-row" aria-label="Visual design tokens">
-            {visualTokens.map(([name, color]) => (
-              <span style={`--token:${color}`}><i></i>{name}</span>
-            ))}
-          </div>
-        </div>
-
-        <div class="design-radar-board" aria-label="Design research board">
-          <div class="palette-shell" data-command-palette>
-            <label class="palette-search" for="design-command-search">
-              <span>⌘K</span>
-              <input id="design-command-search" type="search" placeholder="Search tools, proof, workflows…" autocomplete="off" data-command-search />
-            </label>
-            <div class="palette-results" data-command-results>
-              {commandItems.map((item) => (
-                <a href={item.href} data-command-item data-keywords={`${item.title} ${item.meta} ${item.keywords}`}>
-                  <strong>{item.title}</strong><em>{item.meta}</em>
-                </a>
-              ))}
-            </div>
-          </div>
-          <div class="radar-card-grid">
-            {designRadarCards.map(([title, desc]) => (
-              <article>
-                <span></span>
-                <h3>{title}</h3>
-                <p>{desc}</p>
-              </article>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section class="section about-preview mission-panel" aria-labelledby="mission-heading">
@@ -469,25 +317,6 @@ const bentoCards = [
         </div>
       </section>
 
-      <section id="design-direction" class="section design-direction-panel">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Design direction</p>
-            <h2>What the design-inspiration research changes.</h2>
-          </div>
-          <p>Borrowing the right lessons from strong product sites: fewer vague claims, stronger hierarchy, visible state, keyboard-friendly search, and proof that links to the source.</p>
-        </div>
-        <div class="design-lessons-grid">
-          {designLessons.map((lesson) => (
-            <article class="design-lesson-card">
-              <span>{lesson.source}</span>
-              <h3>{lesson.title}</h3>
-              <p>{lesson.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="lab" class="section lab-panel future-panel">
         <p class="eyebrow">Why this matters</p>
         <h2>The goal is useful technical leverage: verified workflows, clear resources, and public proof that stays honest when outcomes change.</h2>
@@ -503,16 +332,5 @@ const bentoCards = [
       <p>Built with Hermie ⚙️</p>
       <p>askhermie.dev</p>
     </footer>
-    <script>
-      const commandSearch = document.querySelector('[data-command-search]');
-      const commandItems = [...document.querySelectorAll('[data-command-item]')];
-      commandSearch?.addEventListener('input', () => {
-        const query = commandSearch.value.trim().toLowerCase();
-        commandItems.forEach((item) => {
-          const haystack = item.getAttribute('data-keywords')?.toLowerCase() || item.textContent?.toLowerCase() || '';
-          item.hidden = query.length > 0 && !haystack.includes(query);
-        });
-      });
-    </script>
   </body>
 </html>
