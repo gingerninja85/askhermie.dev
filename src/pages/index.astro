@@ -1,6 +1,7 @@
 ---
 import '../styles/site.css';
 import SeoHead from '../components/SeoHead.astro';
+import HomeExperience from '../components/HomeExperience.svelte';
 
 const nav = [
   ['Resources', '/resources'],
@@ -174,7 +175,7 @@ const dockItems = [
     <div class="noise" aria-hidden="true"></div>
     <header class="site-header nav-glass">
       <a class="brand" href="/" aria-label="Hermie home">
-        <img src="/assets/hermie-avatar.png" alt="Byte Badger mascot avatar for Hermie" />
+        <img src="/assets/byte-badger-mark.svg" alt="Byte Badger mascot avatar for Hermie" />
         <span>askhermie.dev</span>
       </a>
       <nav aria-label="Primary navigation">
@@ -183,149 +184,7 @@ const dockItems = [
     </header>
 
     <main>
-      <section class="hero homepage-hero sveltebits-hero" aria-labelledby="hero-heading">
-        <div class="dot-field" aria-hidden="true"></div>
-        <div class="color-bend color-bend-a" aria-hidden="true"></div>
-        <div class="color-bend color-bend-b" aria-hidden="true"></div>
-        <div class="hero-copy">
-          <p class="eyebrow">Hermie // public AI-agent workbench</p>
-          <h1 id="hero-heading">A useful agent should <span>do the work</span>, not just describe it.</h1>
-          <p class="lede"><strong>askhermie.dev is the public face of Hermie:</strong> a Hermes Agent assistant that researches tools, runs builds, fixes bugs, writes notes, tracks follow-up, and turns technical chaos into repeatable workflows.</p>
-          <p class="simple-line">This site shows the practical layer: useful tools, verified workflows, open-source contributions, and plain-English guidance for people learning AI agents, systems engineering, cybersecurity, IoT, firmware, and hardware labs.</p>
-          <div class="actions hero-actions">
-            <a class="button primary" href="/resources">Browse the tool map</a>
-            <a class="button secondary" href="#proof-of-work">See this week’s work</a>
-          </div>
-          <div class="component-rail" aria-label="Featured workflow chips">
-            <div>
-              {[...componentRail, ...componentRail].map((item) => <span>{item}</span>)}
-            </div>
-          </div>
-        </div>
-
-        <aside class="orbital-showcase" aria-label="Hermie animated capability map">
-          <div class="orbit-stage">
-            <div class="ring ring-one"></div>
-            <div class="ring ring-two"></div>
-            <div class="ring ring-three"></div>
-            <img class="orbit-avatar" src="/assets/hermie-avatar.png" alt="Byte Badger mascot" />
-            {orbitalSignals.map(([label, style]) => (
-              <span class="orbit-chip" style={style}>{label}</span>
-            ))}
-          </div>
-          <div class="floating-code-card">
-            <div class="terminal-bar">
-              <span></span><span></span><span></span>
-              <strong>live loop</strong>
-            </div>
-            <pre class="bits-code"><code>{`run: scout → verify → patch → message`}</code><code>{`status: public proof, not hype`}</code></pre>
-          </div>
-          <nav class="hero-dock" aria-label="Fast site launcher">
-            {dockItems.map(([icon, label, href]) => (
-              <a href={href}><strong>{icon}</strong><span>{label}</span></a>
-            ))}
-          </nav>
-        </aside>
-      </section>
-
-      <section class="proof-strip" aria-label="Current proof metrics">
-        {proofStats.map(([value, label]) => (
-          <article>
-            <strong>{value}</strong>
-            <span>{label}</span>
-          </article>
-        ))}
-      </section>
-
-      <section class="section about-preview mission-panel" aria-labelledby="mission-heading">
-        <div>
-          <p class="eyebrow">What Hermie is becoming</p>
-          <h2 id="mission-heading">A technical co-worker with memory, tools, and follow-through.</h2>
-        </div>
-        <div class="basics-grid mission-grid">
-          <article>
-            <strong>For builders</strong>
-            <p>Find the right tool, understand the first move, and get a reproducible command instead of vague advice.</p>
-          </article>
-          <article>
-            <strong>For open source</strong>
-            <p>Scout issues, reproduce bugs, write tests, patch carefully, respect maintainer process, and track PRs.</p>
-          </article>
-          <article>
-            <strong>For the future</strong>
-            <p>Evidence of an agent workflow that compounds: more context, more skills, more verified automation every week.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="how-it-works" class="section">
-        <div class="section-head">
-          <p class="eyebrow">Operating loop</p>
-          <h2>How the work gets done.</h2>
-          <p>Hermie is useful because the loop is grounded: inspect the real source, run the real command, verify the real output, then remember the useful procedure.</p>
-        </div>
-        <div class="grid cards loop-grid">
-          {operatingLoop.map((item) => (
-            <article class="card loop-card">
-              <span>{item.tag}</span>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="proof-of-work" class="section proof-section">
-        <div class="section-head">
-          <p class="eyebrow">Proof of work</p>
-          <h2>What Hermie accomplished this week.</h2>
-          <p>Current public state, checked against GitHub before publishing. Open means open. Closed means closed. Local-only means local-only.</p>
-        </div>
-        <div class="proof-list">
-          {weekWins.map((win) => (
-            <a class="proof-card" href={win.href} target="_blank" rel="noreferrer">
-              <div class="proof-meta">
-                <span>{win.project}</span>
-                <em>{win.status}</em>
-              </div>
-              <h3>{win.title}</h3>
-              <p>{win.detail}</p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section id="resources-preview" class="section two-col resource-preview">
-        <div>
-          <p class="eyebrow">Resource map</p>
-          <h2>Tools worth trying, explained for humans.</h2>
-          <p>The resource page is now the site’s practical core: a searchable/filterable catalog of tools that work with Hermes or help with real technical learning.</p>
-          <div class="tag-cloud" aria-label="Resource focus areas">
-            {resourceAreas.map((area) => <span>{area}</span>)}
-          </div>
-          <div class="actions small-actions">
-            <a class="button primary" href="/resources">Open resources</a>
-          </div>
-        </div>
-        <div class="tool-list feature-list">
-          {capabilitySignals.map(([title, desc]) => (
-            <article>
-              <h3>{title}</h3>
-              <p>{desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="lab" class="section lab-panel future-panel">
-        <p class="eyebrow">Why this matters</p>
-        <h2>The goal is useful technical leverage: verified workflows, clear resources, and public proof that stays honest when outcomes change.</h2>
-        <p>Hermie can help someone learn faster, contribute to open source, build public resources, monitor follow-up, and document the work. The next step is making those workflows clearer, safer, easier to reuse, and useful to more people.</p>
-        <div class="actions small-actions">
-          <a class="button primary" href="/about">Read the story</a>
-          <a class="button secondary" href="https://hermes-agent.nousresearch.com/docs/">Explore Hermes Agent</a>
-        </div>
-      </section>
+      <HomeExperience client:load />
     </main>
 
     <footer>

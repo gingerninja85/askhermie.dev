@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Byte Badger mark">
+  <defs>
+    <linearGradient id="teal" x1="18" x2="108" y1="18" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="26" x2="105" y1="22" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fb923c"/>
+      <stop offset="1" stop-color="#fb37a5"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <path d="M21 39 12 13l31 15c6-3 13-5 21-5s15 2 21 5l31-15-9 26c9 10 14 23 14 38 0 31-25 47-57 47S7 108 7 77c0-15 5-28 14-38Z" fill="#e5f7ff"/>
+  <path d="M26 42 21 25l20 12c7-5 14-7 23-7s16 2 23 7l20-12-5 17c8 9 12 21 12 34 0 27-22 41-50 41S14 103 14 76c0-13 4-25 12-34Z" fill="url(#teal)" opacity=".2"/>
+  <path d="M34 35c7-5 17-8 30-8s23 3 30 8c-7 22-17 38-30 49C51 73 41 57 34 35Z" fill="#06111f"/>
+  <path d="M48 30c4-2 9-3 16-3s12 1 16 3c-2 20-7 37-16 51-9-14-14-31-16-51Z" fill="#f8fafc"/>
+  <path d="M25 25 44 38 19 47Z" fill="url(#orange)"/>
+  <path d="M103 25 84 38l25 9Z" fill="url(#orange)"/>
+  <circle cx="44" cy="70" r="9" fill="#020617"/>
+  <circle cx="84" cy="70" r="9" fill="#020617"/>
+  <circle cx="47" cy="67" r="3" fill="#67e8f9" filter="url(#glow)"/>
+  <circle cx="87" cy="67" r="3" fill="#67e8f9" filter="url(#glow)"/>
+  <path d="M57 84c0-4 3-7 7-7s7 3 7 7c0 5-7 9-7 9s-7-4-7-9Z" fill="#020617"/>
+  <path d="M46 98c8 7 28 7 36 0" fill="none" stroke="#020617" stroke-width="6" stroke-linecap="round"/>
+  <path d="M19 94c7 17 23 27 45 27s38-10 45-27" fill="none" stroke="url(#orange)" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+</svg>
