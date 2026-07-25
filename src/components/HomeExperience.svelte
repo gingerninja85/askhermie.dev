@@ -86,19 +86,6 @@
     ['Hermes docs', 'https://hermes-agent.nousresearch.com/docs/', 'Official setup and feature docs.'],
     ['GitHub repo', 'https://github.com/gingerninja85/askhermie.dev', 'View the public site source.'],
   ];
-
-  const copiedMessage = 'hermes inspect repo → run tests → patch smallest useful fix → verify live';
-  let copied = $state(false);
-
-  async function copyLoop() {
-    copied = true;
-    setTimeout(() => (copied = false), 1400);
-    try {
-      await navigator.clipboard?.writeText(copiedMessage);
-    } catch {
-      // Visual feedback still confirms the button is live when clipboard access is unavailable.
-    }
-  }
 </script>
 
 <section class="home-lab-hero hero-static-layout" aria-labelledby="hero-heading">
@@ -114,9 +101,6 @@
     <div class="evil-action-row" aria-label="Primary actions">
       <a class="evil-btn evil-btn-command" href="/resources"><span>Browse tool map</span><kbd>⌘ K</kbd></a>
       <a class="evil-btn evil-btn-dither" href="#proof-of-work">Verify proof</a>
-      <button class="evil-btn evil-btn-copy" type="button" on:click={copyLoop} data-copy-loop={copiedMessage} aria-live="polite">
-        {copied ? 'Copied loop' : 'Copy agent loop'}
-      </button>
     </div>
 
     <nav class="workflow-flyouts" aria-label="What Hermie does">
