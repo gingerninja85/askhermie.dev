@@ -3969,6 +3969,62 @@ const resources: Resource[] = [
     url: 'https://github.com/Foamtor/AgentBridge',
   },
 
+  {
+    name: 'Linux Service Center',
+    category: 'Raspberry Pi service dashboard',
+    difficulty: 'Beginner',
+    use: 'Local-first GUI and terminal dashboard for viewing and managing systemd services on Raspberry Pi, Debian, and Ubuntu machines.',
+    firstStep: 'Try the CLI on a spare Pi or lab VM first, and only manage one harmless test service until you trust the sudo behavior.',
+    exampleUse: 'Restart a stuck homelab service, inspect its logs, and confirm CPU/RAM/disk health from one local dashboard instead of memorizing systemctl commands.',
+    command: 'git clone https://github.com/Python-XP1/linux-service-center.git ~/tools/linux-service-center\ncd ~/tools/linux-service-center\npython3 -m venv .venv && . .venv/bin/activate\npip install -r requirements.txt\npython px_service_manager.py',
+    safetyNote: 'Service control can stop networking, storage, or security services. Use it only on systems you own, keep sudo prompts enabled, and avoid production servers.',
+    url: 'https://github.com/Python-XP1/linux-service-center',
+  },
+  {
+    name: 'NasberryPi',
+    category: 'Raspberry Pi NAS management',
+    difficulty: 'Intermediate',
+    use: 'Terminal dashboard for turning a Raspberry Pi plus USB storage into a small Samba NAS with guided storage setup and recovery controls.',
+    firstStep: 'Read the states model, run the installer on a fresh test Pi, and use a blank USB drive before touching any disk with important data.',
+    exampleUse: 'Build a weekend file-share lab where a Pi serves one USB SSD to Windows, macOS, Linux, Android, and iOS clients over your private LAN.',
+    command: 'git clone https://github.com/WastelandSYS/nasberrypi.git ~/tools/nasberrypi\ncd ~/tools/nasberrypi\nchmod +x install.sh uninstall.sh\nsudo ./install.sh\nsudo nasberry doctor',
+    safetyNote: 'Storage and Samba changes can destroy data or expose private files. Test with disposable media, keep backups, and do not expose SMB shares to the internet.',
+    url: 'https://github.com/WastelandSYS/nasberrypi',
+  },
+  {
+    name: 'Blackbox Infrastructure Journal',
+    category: 'Homelab forensic timeline',
+    difficulty: 'Intermediate',
+    use: 'Self-hosted event timeline that correlates Docker, config-file, systemd, uptime, and update events so homelab outages are easier to explain.',
+    firstStep: 'Start with the documentation and a single-node lab stack; watch only non-sensitive paths until you know exactly what events are stored.',
+    exampleUse: 'After a container update breaks a service, check one chronological incident timeline to see the update, config change, restart, and outage together.',
+    command: '# Follow the single-node quickstart and replace all example secrets locally:\n# https://docs.blackboxd.dev/docs/deployment/single-node',
+    safetyNote: 'It records infrastructure events and may read Docker metadata or watched file paths. Keep the UI private, rotate real tokens, and avoid monitoring secret files.',
+    url: 'https://github.com/maxjb-xyz/blackbox',
+  },
+  {
+    name: 'AgentEval',
+    category: 'Agent evaluation / .NET',
+    difficulty: 'Intermediate',
+    use: '.NET toolkit and CLI for evaluating AI agents: tool-call assertions, stochastic tests, memory benchmarks, traces, and defensive red-team checks.',
+    firstStep: 'Install the preview CLI in a throwaway .NET project and run the doctor/list commands before evaluating a real agent.',
+    exampleUse: 'Add a regression test that proves a booking agent searches before it books, calls the expected tools in order, and meets a minimum success rate across repeated runs.',
+    command: 'dotnet tool install --global AgentEval.Cli --prerelease\nagenteval doctor\nagenteval bench --list',
+    safetyNote: 'The project labels itself preview software. Do not use it as the only gate for production or safety-critical agents, and keep benchmark inputs free of private data.',
+    url: 'https://github.com/AgentEvalHQ/AgentEval',
+  },
+  {
+    name: 'Haystack',
+    category: 'RAG orchestration',
+    difficulty: 'Intermediate',
+    use: 'Open-source Python framework for building explicit RAG, search, and agent pipelines with modular retrieval, routing, memory, and generation components.',
+    firstStep: 'Install it in a fresh virtual environment and complete the quick-start RAG tutorial with public sample documents first.',
+    exampleUse: 'Build a support-docs assistant where Hermie can inspect each retrieval, reranking, prompt, and model step instead of debugging a black-box chatbot.',
+    command: 'python3 -m venv .venv && . .venv/bin/activate\npip install haystack-ai',
+    safetyNote: 'RAG pipelines can leak source documents through prompts and logs. Start with public data, keep API keys in environment variables, and review telemetry settings.',
+    url: 'https://github.com/deepset-ai/haystack',
+  },
+
 ];
 
 const slugify = (value: string) => value
@@ -3980,7 +4036,7 @@ const groupMeta = [
   {
     name: 'Hermes + AI agents',
     blurb: 'Start here if you want tools that pair directly with Hermes, local AI, MCP, browser automation, or automation glue.',
-    categories: ['AI agent core', 'Automation', 'Local AI', 'Local AI UI', 'Local AI / MCP', 'AI observability / MCP', 'MCP server framework', 'AI agent memory / MCP', 'AI agent knowledge management', 'AI browser automation', 'AI agent integrations', 'AI agent context control', 'Data-agent context', 'AI codebase context', 'AI agent security', 'Agent safety / AI security', 'AI notes / MCP', 'AI agent terminal context', 'AI agent framework', 'AI observability', 'LLM observability', 'MCP observability', 'AI workflow automation', 'AI agent run inspection', 'AI agent governance', 'AI agent sandboxing', 'AI coding agent', 'AI agent cost tracking', 'AI agent merge gate', 'AI agent memory', 'AI workflow language', 'AI agent token analytics', 'AI agent provenance', 'AI agent filesystem', 'Local AI orchestration', 'Durable TypeScript workflows', 'AI document tooling', 'AI supply-chain scanning', 'AI evals and observability', 'Offline developer docs', 'LLM observability tutorial', 'AI codebase maps', 'API agent integration', 'AI media tooling', 'AI code intelligence', 'AI agent loop design', 'Office MCP automation', 'AI agent orchestrator', 'Go AI agent framework', 'AI gateway', 'AI agent gateway', 'MCP gateway', 'MCP registry', 'MCP platform', 'MCP testing', 'MCP education', 'MCP bridge', 'Local agent tool gateway', 'AI agent capability manager', 'AI data catalog', 'Mobile app automation', 'Financial data MCP', 'Web data crawler', 'Self-hosted media AI', 'Edge AI deployment'],
+    categories: ['AI agent core', 'Automation', 'Local AI', 'Local AI UI', 'Local AI / MCP', 'AI observability / MCP', 'MCP server framework', 'AI agent memory / MCP', 'AI agent knowledge management', 'AI browser automation', 'AI agent integrations', 'AI agent context control', 'Data-agent context', 'AI codebase context', 'AI agent security', 'Agent safety / AI security', 'AI notes / MCP', 'AI agent terminal context', 'AI agent framework', 'AI observability', 'LLM observability', 'MCP observability', 'AI workflow automation', 'AI agent run inspection', 'AI agent governance', 'AI agent sandboxing', 'AI coding agent', 'AI agent cost tracking', 'AI agent merge gate', 'AI agent memory', 'AI workflow language', 'AI agent token analytics', 'AI agent provenance', 'AI agent filesystem', 'Local AI orchestration', 'Durable TypeScript workflows', 'AI document tooling', 'AI supply-chain scanning', 'AI evals and observability', 'Agent evaluation / .NET', 'RAG orchestration', 'Offline developer docs', 'LLM observability tutorial', 'AI codebase maps', 'API agent integration', 'AI media tooling', 'AI code intelligence', 'AI agent loop design', 'Office MCP automation', 'AI agent orchestrator', 'Go AI agent framework', 'AI gateway', 'AI agent gateway', 'MCP gateway', 'MCP registry', 'MCP platform', 'MCP testing', 'MCP education', 'MCP bridge', 'Local agent tool gateway', 'AI agent capability manager', 'AI data catalog', 'Mobile app automation', 'Financial data MCP', 'Web data crawler', 'Self-hosted media AI', 'Edge AI deployment'],
   },
   {
     name: 'Build + publish websites',
@@ -3990,7 +4046,7 @@ const groupMeta = [
   {
     name: 'CLI + systems engineering',
     blurb: 'Everyday tools for Python, terminals, automation, homelabs, monitoring, and keeping machines understandable.',
-    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'System metrics exporter', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes UI', 'Build automation', 'Build performance', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management', 'Homelab network CLI', 'Homelab DNS automation', 'Local media automation'],
+    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'System metrics exporter', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes UI', 'Build automation', 'Build performance', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management', 'Homelab network CLI', 'Homelab DNS automation', 'Local media automation', 'Raspberry Pi service dashboard', 'Raspberry Pi NAS management', 'Homelab forensic timeline'],
   },
   {
     name: 'Cybersecurity learning',
