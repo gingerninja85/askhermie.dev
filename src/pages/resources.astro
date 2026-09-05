@@ -5224,6 +5224,50 @@ const resources: Resource[] = [
     safetyNote: 'Network discovery can be noisy and legally sensitive. Use it only on networks you own or administer, and do not scan neighbors, workplaces, or public networks without written permission.',
     url: 'https://github.com/netalertx/netalertx',
   },
+  {
+    name: 'Platypush',
+    category: 'Home automation',
+    difficulty: 'Intermediate',
+    use: 'Python automation platform for tying together MQTT, sensors, Bluetooth, media, dashboards, webhooks, and smart-home integrations.',
+    firstStep: 'Install it in a lab profile, connect one harmless integration, and confirm the dashboard is private before adding real devices.',
+    exampleUse: 'Turn a Raspberry Pi into a local automation hub that listens for an MQTT sensor event and posts a notification without relying on cloud glue.',
+    command: 'python3 -m pip install --user platypush\nplatypush --help',
+    safetyNote: 'Automation hubs can control physical devices and store integration credentials. Start with read-only/test actions, keep config private, and do not expose the dashboard publicly.',
+    url: 'https://github.com/blacklight/platypush',
+  },
+  {
+    name: 'HomeButler',
+    category: 'Homelab change detection',
+    difficulty: 'Intermediate',
+    use: 'Single-binary homelab watcher that compares server state over time and summarizes only meaningful changes for humans or agents.',
+    firstStep: 'Download a release or build from source, run it against one non-critical host, and inspect the generated baseline before wiring it to an agent.',
+    exampleUse: 'Ask what changed on a small server after a weekend: new listening ports, service drift, disk growth, or package changes worth investigating.',
+    command: 'git clone https://github.com/Higangssh/homebutler.git ~/tools/homebutler\ncd ~/tools/homebutler\ngo test ./...\ngo run . --help',
+    safetyNote: 'It inventories host state and can integrate with MCP. Keep baselines private, avoid storing secrets in config, and start read-only.',
+    url: 'https://github.com/Higangssh/homebutler',
+  },
+  {
+    name: 'RuleGo',
+    category: 'Workflow orchestration',
+    difficulty: 'Advanced',
+    use: 'Lightweight Go rule-engine framework for embedding event-driven automation, IoT flows, and component orchestration into services.',
+    firstStep: 'Read the examples and run the tests locally before embedding it in a real service or connecting it to devices.',
+    exampleUse: 'Route MQTT sensor events through validation, enrichment, alerting, and storage components without building a custom workflow engine from scratch.',
+    command: 'git clone https://github.com/rulego/rulego.git ~/tools/rulego\ncd ~/tools/rulego\ngo test ./...',
+    safetyNote: 'Automation engines can trigger real actions. Use test inputs first, keep credentials out of rule files, and add approval gates before controlling devices.',
+    url: 'https://github.com/rulego/rulego',
+  },
+  {
+    name: 'Awesome Embedded Security',
+    category: 'Embedded tooling map',
+    difficulty: 'Reference',
+    use: 'Curated map of embedded-security references, firmware-analysis tools, hardware interfaces, wireless protocols, and training material.',
+    firstStep: 'Use it as a reading map: pick one defensive firmware-analysis tutorial or tool, not the whole list at once.',
+    exampleUse: 'Plan a safe learning path for analyzing firmware from a device you own, starting with extraction concepts and read-only inspection tools.',
+    command: 'git clone https://github.com/hexsecs/awesome-embedded-security.git ~/refs/awesome-embedded-security\ncd ~/refs/awesome-embedded-security',
+    safetyNote: 'This is a broad dual-use reference. Stay on owned devices, defensive labs, and read-only analysis; skip offensive, exploit, or bypass material unless you have explicit authorization.',
+    url: 'https://github.com/hexsecs/awesome-embedded-security',
+  },
 
 ];
 
@@ -5246,7 +5290,7 @@ const groupMeta = [
   {
     name: 'CLI + systems engineering',
     blurb: 'Everyday tools for Python, terminals, automation, homelabs, monitoring, and keeping machines understandable.',
-    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Developer utilities', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'System metrics exporter', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes diagnostics', 'Kubernetes UI', 'Build automation', 'Build performance', 'Performance testing', 'Structured diff tooling', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management', 'Homelab network CLI', 'Homelab network security', 'Homelab DNS automation', 'Local media automation', 'Raspberry Pi service dashboard', 'Raspberry Pi NAS management', 'Homelab forensic timeline'],
+    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Developer utilities', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'System metrics exporter', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes diagnostics', 'Kubernetes UI', 'Build automation', 'Build performance', 'Performance testing', 'Structured diff tooling', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management', 'Homelab network CLI', 'Homelab network security', 'Homelab DNS automation', 'Local media automation', 'Raspberry Pi service dashboard', 'Raspberry Pi NAS management', 'Homelab forensic timeline', 'Homelab change detection'],
   },
   {
     name: 'Cybersecurity learning',
@@ -5261,7 +5305,7 @@ const groupMeta = [
   {
     name: 'IoT + hardware labs',
     blurb: 'ESP32, Raspberry Pi, microcontrollers, smart-home firmware, lighting, LoRa, and maker learning.',
-    categories: ['ESP32 development', 'ESP32 / MicroPython', 'ESP32 / project discovery', 'Microcontrollers', 'Maker learning', 'ESP32 projects', 'ESP32 / smart-home firmware', 'ESP32 lighting', 'ESP32 desk project', 'ESP32 / Arduino debugging', 'Wireless sensing lab', 'LoRa / mesh radio', 'Microcontroller C/C++', 'Local IoT firmware', 'Embedded development', 'Embedded Rust learning', 'Microcontroller Go', 'Arduino tooling', 'Hardware signal analysis', 'Hardware protocol lab', 'ESP32 live reload', 'Board emulator', 'ESP browser flashing', 'Offline learning server', 'IoT payload decoding', 'IoT / MQTT tooling', 'Home automation', 'ESP firmware flashing', 'Raspberry Pi hardware racks', 'Raspberry Pi IP-KVM', 'Raspberry Pi camera', 'Raspberry Pi photo frame', 'Raspberry Pi imaging', 'Raspberry Pi smart display', 'E-ink desk dashboard', 'E-ink dashboard', 'Browser chip flashing', 'ESPHome visual builder', 'Retro hardware emulator', 'ESPHome display designer', 'Raspberry Pi health sensor bridge', 'Raspberry Pi lab hardware', 'Raspberry Pi learning', 'Embedded tooling map', 'Home Assistant GPIO integration', 'Smart mirror platform', 'ESP32 / embedded Rust', 'Raspberry Pi GPIO', 'PCB design MCP'],
+    categories: ['ESP32 development', 'ESP32 / MicroPython', 'ESP32 / project discovery', 'Microcontrollers', 'Maker learning', 'ESP32 projects', 'ESP32 / smart-home firmware', 'ESP32 lighting', 'ESP32 desk project', 'ESP32 / Arduino debugging', 'Wireless sensing lab', 'LoRa / mesh radio', 'Microcontroller C/C++', 'Local IoT firmware', 'Embedded development', 'Embedded Rust learning', 'Microcontroller Go', 'Arduino tooling', 'Hardware signal analysis', 'Hardware protocol lab', 'ESP32 live reload', 'Board emulator', 'ESP browser flashing', 'Offline learning server', 'IoT payload decoding', 'IoT / MQTT tooling', 'Home automation', 'ESP firmware flashing', 'Raspberry Pi hardware racks', 'Raspberry Pi IP-KVM', 'Raspberry Pi camera', 'Raspberry Pi photo frame', 'Raspberry Pi imaging', 'Raspberry Pi smart display', 'E-ink desk dashboard', 'E-ink dashboard', 'Browser chip flashing', 'ESPHome visual builder', 'Retro hardware emulator', 'ESPHome display designer', 'Raspberry Pi health sensor bridge', 'Raspberry Pi lab hardware', 'Raspberry Pi learning', 'Embedded tooling map', 'Home Assistant GPIO integration', 'Smart mirror platform', 'ESP32 / embedded Rust', 'Raspberry Pi GPIO', 'PCB design MCP', 'Beginner Python / MicroPython'],
   },
 ];
 
