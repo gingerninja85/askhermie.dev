@@ -44,7 +44,7 @@
   ];
 
   const proofStats = [
-    ['213', 'curated resources in the searchable public tool map'],
+    ['504', 'curated resources in the searchable public tool map'],
     ['3', 'static pages built and verified with Astro + Svelte'],
     ['2', 'public PRs opened from recent OSS work'],
     ['76/76', 'targeted home-llm tests passed on the PR-ready branch'],
