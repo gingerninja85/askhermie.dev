@@ -5813,6 +5813,39 @@ const resources: Resource[] = [
     safetyNote: 'Machine-readable docs can expose more than the visible site. Inspect generated llms.txt, search indexes, and bundles for private paths or secrets before deployment.',
     url: 'https://github.com/docmd-io/docmd',
   },
+  {
+    name: 'MicroPico',
+    category: 'Pico / MicroPython IDE',
+    difficulty: 'Beginner',
+    use: 'VS Code extension for writing, running, transferring, and debugging MicroPython projects on Raspberry Pi Pico boards, with experimental ESP32 support.',
+    firstStep: 'Install the extension in VS Code, flash official MicroPython firmware to a spare Pico, then run the built-in project initializer.',
+    exampleUse: 'Build a first Pico W sensor script with autocomplete, upload it to the board, and watch serial output without juggling separate terminal tools.',
+    command: '# In VS Code, install extension: paulober.pico-w-go\n# Then use Command Palette: MicroPico: Initialize MicroPico Project',
+    safetyNote: 'Only run code on boards you own. Disconnect relays, motors, heaters, or high-current circuits while learning MicroPython basics.',
+    url: 'https://github.com/paulober/MicroPico',
+  },
+  {
+    name: 'observability-mcp',
+    category: 'Agent observability gateway',
+    difficulty: 'Intermediate',
+    use: 'Read-only MCP gateway that normalizes observability data from backends such as Prometheus and Loki so agents can inspect incidents with less context overload.',
+    firstStep: 'Start the local web UI, connect one toy Prometheus or Loki source, and inspect the tools before giving an agent access.',
+    exampleUse: 'Let an agent ask one read-only question about error rates, topology, and logs during a lab incident instead of hand-writing several backend-specific queries.',
+    command: 'npx @thotischner/observability-mcp\n# UI: http://localhost:3000',
+    safetyNote: 'Observability data can include hostnames, URLs, user IDs, and log secrets. Keep it private, use read-only credentials, and start with lab data.',
+    url: 'https://github.com/ThoTischner/observability-mcp',
+  },
+  {
+    name: 'Buoy',
+    category: 'Lightweight homelab dashboard',
+    difficulty: 'Beginner',
+    use: 'Small per-node homelab dashboard that shows system vitals, Docker-discovered services, static bookmarks, and optional fleet peers.',
+    firstStep: 'Run demo mode first so you can see the interface without mounting the Docker socket or exposing host metrics.',
+    exampleUse: 'Put a lightweight dashboard on a Raspberry Pi or small server to see CPU, disk, Docker services, and tailnet links from one private page.',
+    command: 'docker run --rm -p 8090:8090 ghcr.io/gfargo/buoy:latest --demo',
+    safetyNote: 'The real deployment can read host and Docker metadata. Keep it on a trusted LAN/VPN, avoid public exposure, and mount the Docker socket read-only when possible.',
+    url: 'https://github.com/gfargo/buoy',
+  },
 
 ];
 
@@ -5825,7 +5858,7 @@ const groupMeta = [
   {
     name: 'Hermes + AI agents',
     blurb: 'Start here if you want tools that pair directly with Hermes, local AI, MCP, browser automation, or automation glue.',
-    categories: ['AI agent core', 'Automation', 'Local AI', 'Local AI UI', 'Local AI / MCP', 'AI observability / MCP', 'MCP server framework', 'AI agent memory / MCP', 'AI agent knowledge management', 'AI browser automation', 'AI agent integrations', 'AI agent context control', 'Data-agent context', 'AI codebase context', 'AI agent security', 'Agent safety / AI security', 'AI notes / MCP', 'AI agent terminal context', 'AI agent framework', 'AI observability', 'LLM observability', 'MCP observability', 'AI workflow automation', 'AI agent run inspection', 'AI agent governance', 'AI agent sandboxing', 'AI coding agent', 'AI agent cost tracking', 'AI agent merge gate', 'AI agent memory', 'AI workflow language', 'AI agent token analytics', 'AI agent provenance', 'AI agent debugging', 'AI agent filesystem', 'Local AI orchestration', 'Durable TypeScript workflows', 'AI document tooling', 'AI supply-chain scanning', 'AI evals and observability', 'Agent evaluation / .NET', 'AI agent regression testing', 'RAG orchestration', 'Offline developer docs', 'LLM observability tutorial', 'AI codebase maps', 'API agent integration', 'AI media tooling', 'AI code intelligence', 'AI agent loop design', 'Office MCP automation', 'AI agent orchestrator', 'Go AI agent framework', 'AI gateway', 'AI agent gateway', 'MCP gateway', 'MCP registry', 'MCP platform', 'MCP testing', 'MCP education', 'MCP learning', 'MCP bridge', 'Local agent tool gateway', 'AI agent capability manager', 'AI data catalog', 'Mobile app automation', 'Financial data MCP', 'Web data crawler', 'Self-hosted media AI', 'Edge AI deployment'],
+    categories: ['AI agent core', 'Automation', 'Local AI', 'Local AI UI', 'Local AI / MCP', 'AI observability / MCP', 'MCP server framework', 'AI agent memory / MCP', 'AI agent knowledge management', 'AI browser automation', 'AI agent integrations', 'AI agent context control', 'Data-agent context', 'AI codebase context', 'AI agent security', 'Agent safety / AI security', 'AI notes / MCP', 'AI agent terminal context', 'AI agent framework', 'AI observability', 'LLM observability', 'MCP observability', 'Agent observability gateway', 'AI workflow automation', 'AI agent run inspection', 'AI agent governance', 'AI agent sandboxing', 'AI coding agent', 'AI agent cost tracking', 'AI agent merge gate', 'AI agent memory', 'AI workflow language', 'AI agent token analytics', 'AI agent provenance', 'AI agent debugging', 'AI agent filesystem', 'Local AI orchestration', 'Durable TypeScript workflows', 'AI document tooling', 'AI supply-chain scanning', 'AI evals and observability', 'Agent evaluation / .NET', 'AI agent regression testing', 'RAG orchestration', 'Offline developer docs', 'LLM observability tutorial', 'AI codebase maps', 'API agent integration', 'AI media tooling', 'AI code intelligence', 'AI agent loop design', 'Office MCP automation', 'AI agent orchestrator', 'Go AI agent framework', 'AI gateway', 'AI agent gateway', 'MCP gateway', 'MCP registry', 'MCP platform', 'MCP testing', 'MCP education', 'MCP learning', 'MCP bridge', 'Local agent tool gateway', 'AI agent capability manager', 'AI data catalog', 'Mobile app automation', 'Financial data MCP', 'Web data crawler', 'Self-hosted media AI', 'Edge AI deployment'],
   },
   {
     name: 'Build + publish websites',
@@ -5835,7 +5868,7 @@ const groupMeta = [
   {
     name: 'CLI + systems engineering',
     blurb: 'Everyday tools for Python, terminals, automation, homelabs, monitoring, and keeping machines understandable.',
-    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Developer utilities', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'System metrics exporter', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes diagnostics', 'Kubernetes UI', 'Build automation', 'Build performance', 'Performance testing', 'Structured diff tooling', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management', 'Homelab network CLI', 'Homelab network security', 'Homelab DNS automation', 'Local media automation', 'Raspberry Pi service dashboard', 'Raspberry Pi NAS management', 'Homelab forensic timeline', 'Homelab change detection', 'Self-hosted knowledge', 'Self-hosted RSS', 'Self-hosted automation', 'Home inventory', 'API development', 'Durable workflow engine'],
+    categories: ['Python tooling', 'Python CLI apps', 'Python type checking', 'Command help', 'Developer utilities', 'Sysadmin reference', 'Homelab', 'Monitoring', 'Automation / sysadmin', 'Low-code automation', 'Workflow orchestration', 'Observability', 'Observability pipeline', 'Distributed tracing', 'Observability lab', 'Observability collector', 'Homelab monitoring', 'Lightweight homelab dashboard', 'Service monitoring', 'Logs / metrics / traces', 'Metrics storage', 'System metrics exporter', 'Database DevOps', 'Dev environment management', 'Command runner', 'Shell productivity', 'System monitoring', 'Container logs', 'Homelab dashboard', 'Kubernetes operations', 'Kubernetes diagnostics', 'Kubernetes UI', 'Build automation', 'Build performance', 'Performance testing', 'Structured diff tooling', 'Observability platform', 'Internet monitoring', 'Homelab mapping', 'Infrastructure monitoring', 'Homelab start page', 'Network visualization', 'Observability tutorial', 'Container desktop', 'Docker TUI', 'Docker maintenance', 'UPS orchestration', 'Container update monitoring', 'Observability workshop', 'Edge observability', 'Raspberry Pi monitoring', 'Uptime monitoring', 'Raspberry Pi terminal monitoring', 'Generator monitoring', 'Environmental sensing', 'Home Assistant audio bridge', 'Cloud-free smart-home hub', 'LAN power control', 'Uptime history', 'Self-hosted Git', 'Network management', 'Homelab network CLI', 'Homelab network security', 'Homelab DNS automation', 'Local media automation', 'Raspberry Pi service dashboard', 'Raspberry Pi NAS management', 'Homelab forensic timeline', 'Homelab change detection', 'Self-hosted knowledge', 'Self-hosted RSS', 'Self-hosted automation', 'Home inventory', 'API development', 'Durable workflow engine'],
   },
   {
     name: 'Cybersecurity learning',
@@ -5850,7 +5883,7 @@ const groupMeta = [
   {
     name: 'IoT + hardware labs',
     blurb: 'ESP32, Raspberry Pi, microcontrollers, smart-home firmware, lighting, LoRa, and maker learning.',
-    categories: ['ESP32 development', 'ESP32 / MicroPython', 'ESP32 / project discovery', 'Microcontrollers', 'Maker learning', 'ESP32 projects', 'ESP32 / smart-home firmware', 'ESP32 lighting', 'ESP32 desk project', 'ESP32 / Arduino debugging', 'Wireless sensing lab', 'LoRa / mesh radio', 'Microcontroller C/C++', 'Local IoT firmware', 'Embedded development', 'Embedded Rust learning', 'Microcontroller Go', 'Arduino tooling', 'Hardware signal analysis', 'Hardware protocol lab', 'ESP32 live reload', 'Board emulator', 'ESP browser flashing', 'Offline learning server', 'IoT payload decoding', 'IoT / MQTT tooling', 'Home automation', 'ESP firmware flashing', 'Raspberry Pi hardware racks', 'Raspberry Pi IP-KVM', 'Raspberry Pi camera', 'Raspberry Pi photo frame', 'Raspberry Pi imaging', 'Raspberry Pi smart display', 'E-ink desk dashboard', 'E-ink dashboard', 'Browser chip flashing', 'ESPHome visual builder', 'Retro hardware emulator', 'ESPHome display designer', 'Raspberry Pi health sensor bridge', 'Raspberry Pi lab hardware', 'Raspberry Pi learning', 'Embedded tooling map', 'Home Assistant GPIO integration', 'Smart mirror platform', 'ESP32 / embedded Rust', 'Raspberry Pi GPIO', 'PCB design MCP', 'Beginner Python / MicroPython', 'Circuit design', 'Microcontroller simulator', 'IoT / MQTT broker'],
+    categories: ['ESP32 development', 'ESP32 / MicroPython', 'Pico / MicroPython IDE', 'ESP32 / project discovery', 'Microcontrollers', 'Maker learning', 'ESP32 projects', 'ESP32 / smart-home firmware', 'ESP32 lighting', 'ESP32 desk project', 'ESP32 / Arduino debugging', 'Wireless sensing lab', 'LoRa / mesh radio', 'Microcontroller C/C++', 'Local IoT firmware', 'Embedded development', 'Embedded Rust learning', 'Microcontroller Go', 'Arduino tooling', 'Hardware signal analysis', 'Hardware protocol lab', 'ESP32 live reload', 'Board emulator', 'ESP browser flashing', 'Offline learning server', 'IoT payload decoding', 'IoT / MQTT tooling', 'Home automation', 'ESP firmware flashing', 'Raspberry Pi hardware racks', 'Raspberry Pi IP-KVM', 'Raspberry Pi camera', 'Raspberry Pi photo frame', 'Raspberry Pi imaging', 'Raspberry Pi smart display', 'E-ink desk dashboard', 'E-ink dashboard', 'Browser chip flashing', 'ESPHome visual builder', 'Retro hardware emulator', 'ESPHome display designer', 'Raspberry Pi health sensor bridge', 'Raspberry Pi lab hardware', 'Raspberry Pi learning', 'Embedded tooling map', 'Home Assistant GPIO integration', 'Smart mirror platform', 'ESP32 / embedded Rust', 'Raspberry Pi GPIO', 'PCB design MCP', 'Beginner Python / MicroPython', 'Circuit design', 'Microcontroller simulator', 'IoT / MQTT broker'],
   },
 ];
 
