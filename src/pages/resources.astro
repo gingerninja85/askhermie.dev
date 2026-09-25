@@ -6265,6 +6265,63 @@ const resources: Resource[] = [
     url: 'https://github.com/espressif/esp-brookesia',
   },
 
+  {
+    name: 'Gemini CLI',
+    category: 'AI coding agent',
+    difficulty: 'Intermediate',
+    use: 'Open-source terminal AI agent from Google for repo work, shell commands, web fetching, and MCP-backed extensions.',
+    firstStep: 'Install it, authenticate with your Google account or configured provider, then test it in a disposable repo before letting it edit important files.',
+    exampleUse: 'Ask it to explain a failing test in a throwaway clone, then compare its proposed patch against Hermie or Codex before committing anything.',
+    command: 'npm install -g @google/gemini-cli\ngemini --help',
+    safetyNote: 'Terminal agents can read files, run commands, and use tools. Keep secrets out of test repos, review diffs, and do not grant broad MCP permissions casually.',
+    url: 'https://github.com/google-gemini/gemini-cli',
+  },
+  {
+    name: 'AgentTeams',
+    category: 'AI agent orchestrator',
+    difficulty: 'Advanced',
+    use: 'Collaborative multi-agent workspace that coordinates agents through transparent Matrix rooms with human-in-the-loop task tracking.',
+    firstStep: 'Read the architecture and deployment docs, then run it only in a sandbox workspace with test accounts and non-sensitive repos.',
+    exampleUse: 'Prototype a research workflow where one agent gathers sources, another drafts notes, and a human reviews each step in the shared room.',
+    command: '# Start with the official docs and a sandbox deployment:\n# https://github.com/agentscope-ai/AgentTeams',
+    safetyNote: 'Multi-agent systems can spread mistakes quickly and may touch chat, files, and tools. Use test credentials, narrow permissions, and explicit human checkpoints.',
+    url: 'https://github.com/agentscope-ai/AgentTeams',
+  },
+  {
+    name: 'ESP32 RF Lab',
+    category: 'Wireless sensing lab',
+    difficulty: 'Intermediate',
+    use: 'ESP32 toolkit for measuring Wi-Fi RSSI, ping quality, thermal data, antenna performance, and RF link stability with a desktop dashboard.',
+    firstStep: 'Clone the repo, read the measurement model, and run the PC-side simulated transport before flashing a spare ESP32 board.',
+    exampleUse: 'Compare two ESP32 antenna placements in your own workshop by logging RSSI and packet-loss changes while the board stays on your network.',
+    command: 'git clone https://github.com/Vivek-live-now/ESP32-RF-Lab.git ~/labs/esp32-rf-lab\n# Review README.md before flashing firmware to a board you own.',
+    safetyNote: 'Use only your own ESP32 boards and networks. RF measurements are fine; scanning or stressing networks you do not own is not.',
+    url: 'https://github.com/Vivek-live-now/ESP32-RF-Lab',
+  },
+  {
+    name: 'Gitleaks',
+    category: 'Defensive security',
+    difficulty: 'Beginner',
+    use: 'Secret scanner for Git repositories and files that finds committed API keys, passwords, and tokens before they leak.',
+    firstStep: 'Run it against a local repo, inspect every finding, then rotate any real secret that appears in history.',
+    exampleUse: 'Check a project before publishing it to GitHub so old test tokens or accidentally committed .env values do not go public.',
+    command: 'docker run --rm -v "$PWD:/path" zricethezav/gitleaks:latest detect --source=/path --verbose',
+    safetyNote: 'Scanner output can contain actual secrets. Do not paste findings into chats, issues, or public logs; rotate exposed credentials instead of just deleting them.',
+    url: 'https://github.com/gitleaks/gitleaks',
+  },
+  {
+    name: 'OSV-Scanner',
+    category: 'Vulnerability scanning',
+    difficulty: 'Beginner',
+    use: 'Google-supported dependency vulnerability scanner that checks lockfiles, manifests, SBOMs, directories, and container contents against OSV data.',
+    firstStep: 'Run it on one local project directory and read the advisory links before changing dependencies.',
+    exampleUse: 'Scan a Node, Python, or Go project before deployment to catch vulnerable packages already listed in the lockfile.',
+    command: 'docker run --rm -v "$PWD:/src" ghcr.io/google/osv-scanner:latest scan source -r /src',
+    safetyNote: 'Vulnerability results can reveal private dependency stacks and project structure. Keep reports private unless you intentionally publish a sanitized advisory.',
+    url: 'https://github.com/google/osv-scanner',
+  },
+
+
 ];
 
 const slugify = (value: string) => value
