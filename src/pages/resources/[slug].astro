@@ -1,0 +1,32 @@
+---
+import Registry from '../../layouts/Registry.astro';
+import Command from '../../components/Command.astro';
+import { resourceEntries } from '../../data/resources';
+
+export function getStaticPaths() {
+  return resourceEntries.map(resource => ({ params: { slug: resource.slug }, props: { resource } }));
+}
+
+const { resource } = Astro.props;
+---
+<Registry title={`${resource.name} · AskHermie`} description={resource.use} path={resource.href}>
+  <div class="frame detail">
+    <a class="back mono" href={`/resources/#resource-${resource.slug}`}>← Browse resources</a>
+    <header class="detail-heading">
+      <span class="badge">{resource.category} · {resource.difficulty}</span>
+      <h1>{resource.name}</h1>
+      <p>{resource.use}</p>
+    </header>
+    <div class="detail-grid">
+      <div class="detail-body">
+        <section><h2>First step</h2><p>{resource.firstStep}</p></section>
+        <section><h2>Example use</h2><p>{resource.exampleUse}</p></section>
+        {resource.safetyNote && <section><h2>Safety note</h2><p>{resource.safetyNote}</p></section>}
+        {resource.command && <section><h2>Setup command</h2><Command command={resource.command} /></section>}
+      </div>
+      <aside class="metadata" aria-label="Resource information">
+        <a href={resource.url}>Open upstream resource ↗</a>
+      </aside>
+    </div>
+  </div>
+</Registry>
