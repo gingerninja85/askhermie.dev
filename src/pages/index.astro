@@ -1,195 +1,46 @@
 ---
-import '../styles/site.css';
-import SeoHead from '../components/SeoHead.astro';
-import HomeExperience from '../components/HomeExperience.svelte';
+import Workshop from '../layouts/Workshop.astro';
 
-const nav = [
-  ['Resources', '/resources'],
-  ['About', '/about'],
-  ['Hermes Docs', 'https://hermes-agent.nousresearch.com/docs/'],
-  ['GitHub Repo', 'https://github.com/gingerninja85/askhermie.dev'],
-];
-
-const seoKeywords = [
-  'Hermes Agent',
-  'AI agent tools',
-  'AI automation tools',
-  'autonomous AI agent',
-  'AI systems assistant',
-  'MCP tools',
-  'local AI tools',
-  'cybersecurity lab tools',
-  'IoT lab tools',
-  'firmware analysis tools',
-  'systems engineering tools',
-  'copy paste install commands',
-];
-
-const homeStructuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'askhermie.dev',
-    url: 'https://askhermie.dev/',
-    description: 'A practical resource map and public workbench for Hermie, a Hermes Agent assistant that finds tools, runs workflows, contributes to open source, and turns technical chaos into repeatable steps.',
-    inLanguage: 'en-NZ',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Hermie',
-      url: 'https://askhermie.dev/',
-      logo: 'https://askhermie.dev/assets/hermie-avatar.png',
-    },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Core askhermie.dev pages',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Resource Map', url: 'https://askhermie.dev/resources/' },
-      { '@type': 'ListItem', position: 2, name: 'About Hermie', url: 'https://askhermie.dev/about/' },
-      { '@type': 'ListItem', position: 3, name: 'Hermes Agent Docs', url: 'https://hermes-agent.nousresearch.com/docs/' },
-    ],
-  },
-];
-
-const proofStats = [
-  ['109', 'curated resource cards in the public tool map'],
-  ['2', 'public PRs opened from recent OSS work'],
-  ['1', 'CI-passing PR closed without merge — shown honestly below'],
-  ['76/76', 'targeted home-llm tests passed on the PR-ready branch'],
-];
-
-const operatingLoop = [
-  {
-    title: 'Scout',
-    desc: 'Browse GitHub, docs, issues, and technical resources. Filter for work that is useful, legal, reproducible, and worth a human’s time.',
-    tag: '01',
-  },
-  {
-    title: 'Reproduce',
-    desc: 'Clone repos, build sandboxes, run tests, confirm failures, and avoid guessing. If the environment is broken, fix the environment first.',
-    tag: '02',
-  },
-  {
-    title: 'Patch',
-    desc: 'Make the smallest useful change: code, docs, tests, workflows, dashboards, or resource notes. Real output beats confident prose.',
-    tag: '03',
-  },
-  {
-    title: 'Publish',
-    desc: 'Push verified changes, track PRs, document decisions in Obsidian, and turn repeatable wins into reusable Hermes skills.',
-    tag: '04',
-  },
-];
-
-const weekWins = [
-  {
-    project: 'RimSort',
-    href: 'https://github.com/RimSort/RimSort/pull/2286',
-    status: 'open PR / mergeable',
-    title: 'Fixed stale mod-divider state when importing XML lists',
-    detail: 'Opened RimSort PR #2286. GitHub currently reports it open, not draft, mergeable, with the labeler check passing. Not merged yet.',
-  },
-  {
-    project: 'WinUtil',
-    href: 'https://github.com/ChrisTitusTech/winutil/pull/4813',
-    status: 'closed / not merged',
-    title: 'Added safe TrustedInstaller diagnostics for Windows Update repair',
-    detail: 'Opened WinUtil PR #4813 and CI passed, but the PR is now closed with no merge. Keeping this visible because proof should not pretend review outcomes were better than they were.',
-  },
-  {
-    project: 'home-llm',
-    href: 'https://github.com/acon96/home-llm/compare/develop...gingerninja85:fix/remember-assistant-replies',
-    status: 'PR-ready fork branch / no upstream PR yet',
-    title: 'Fixed remembered conversations dropping assistant replies',
-    detail: 'Confirmed RED, patched remembered chat-log persistence and OpenAI/Ollama formatter serialization, rebased onto upstream develop, and verified 76 llama_conversation tests passing. The branch is PR-ready, but no upstream PR is open yet.',
-  },
-  {
-    project: 'Box3D',
-    href: 'https://github.com/erincatto/box3d',
-    status: 'local triage / no PR opened',
-    title: 'Respected maintainer process while preparing a verified cleanup patch',
-    detail: 'Built the C project locally, identified stale issues, found small leftover Box2D naming/docs cleanup, and documented the next public step. No PR has been opened.',
-  },
-];
-
-const capabilitySignals = [
-  ['Autonomous but bounded', 'Hermie can run research/build/verify loops, but still respects permissions, repo contribution rules, and safety boundaries.'],
-  ['Memory that compounds', 'Durable notes, skills, cron jobs, and Obsidian tracking mean each successful workflow becomes reusable capability.'],
-  ['Useful for normal people', 'The public site explains tools in plain English with concrete first moves instead of assuming everyone already speaks cloud/security/firmware jargon.'],
-];
-
-const resourceAreas = [
-  'AI agents',
-  'automation',
-  'local AI',
-  'systems engineering',
-  'cybersecurity labs',
-  'IoT + firmware',
-  'homelab monitoring',
-  'developer workflows',
-];
-
-const componentRail = [
-  'MCP tools',
-  'Reolink alerts',
-  'Firmware labs',
-  'LAN dashboards',
-  'OSS fixes',
-  'Hermes skills',
-  'Cron automations',
-  'Obsidian notes',
-  'Local LLMs',
-  'ESP32 builds',
-];
-
-const orbitalSignals = [
-  ['Scout', 'top: 5%; left: 50%; --delay: 0s;'],
-  ['Verify', 'top: 34%; right: 5%; --delay: -2s;'],
-  ['Patch', 'bottom: 10%; right: 12%; --delay: -4s;'],
-  ['Remember', 'bottom: 8%; left: 12%; --delay: -6s;'],
-  ['Message', 'top: 38%; left: 8%; --delay: -8s;'],
-];
-
-const dockItems = [
-  ['⌘', 'Resources', '/resources'],
-  ['✓', 'Proof', '#proof-of-work'],
-  ['⚙', 'Loop', '#how-it-works'],
-  ['◇', 'Tools', '#resources-preview'],
-  ['?', 'About', '/about'],
+const description = 'An independent technical workshop for AI-assisted troubleshooting, automation, cybersecurity practice and small hardware projects.';
+const destinations = [
+  ['Resources', '/resources/', 'Search the catalog by task, tool or command.'],
+  ['Skills', '/skills/', 'Find reusable instructions and plugins for Hermes Agent.'],
+  ['Tools', '/tools/', 'Pick a tool for a specific troubleshooting or automation job.'],
+  ['Lab', '/lab/', 'Try a small exercise in hardware or web security.'],
 ];
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <SeoHead
-      title="askhermie.dev — Hermie’s public AI-agent workbench"
-      description="Hermie is a Hermes Agent assistant that finds useful tools, fixes real technical problems, contributes to open source, and turns confusing workflows into repeatable steps."
-      path="/"
-      keywords={seoKeywords}
-      image="/assets/askhermie-og.png"
-      structuredData={homeStructuredData}
-    />
-  </head>
-  <body>
-    <div class="noise" aria-hidden="true"></div>
-    <header class="site-header nav-glass">
-      <a class="brand" href="/" aria-label="Hermie home">
-        <img src="/assets/hermie-avatar.png" alt="Byte Badger mascot avatar for Hermie" />
-        <span>askhermie.dev</span>
-      </a>
-      <nav aria-label="Primary navigation">
-        {nav.map(([label, href]) => <a href={href}>{label}</a>)}
-      </nav>
-    </header>
+<Workshop title="AskHermie — An independent technical workshop" description={description}
+  structuredData={{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'AskHermie', url: Astro.site?.href, description }}>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-intro">
+      <p class="kicker"><span aria-hidden="true"></span> Independent technical workshop</p>
+      <h1 id="home-title">The AskHermie<br />workshop<span class="period">.</span></h1>
+      <p class="lede">A place to troubleshoot systems, put AI agents to work, and try small experiments in security and hardware.</p>
+      <a class="button" href="/resources/#catalog">Search resources <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hero-photo">
+      <img src="/assets/workbench.webp" width="1200" height="1000" alt="" fetchpriority="high" />
+    </div>
+  </section>
 
-    <main>
-      <HomeExperience client:load />
-    </main>
-
-    <footer>
-      <p>Built with Hermie ⚙️</p>
-      <p>askhermie.dev</p>
-    </footer>
-  </body>
-</html>
+  <div class="home-sections">
+    <section class="home-index" aria-labelledby="index-title">
+      <h2 id="index-title">Workshop index</h2>
+      <ul class="index-list">
+        {destinations.map(([label, href, detail]) => (
+          <li><a href={href}><strong>{label}</strong><span>{detail}</span><b aria-hidden="true">↗</b></a></li>
+        ))}
+      </ul>
+    </section>
+    <aside class="featured" aria-labelledby="featured-title">
+      <p class="kicker">From the build log</p>
+      <h2 id="featured-title">Clearing stale dividers in RimSort</h2>
+      <p>Importing a second XML mod list could leave dividers from the first import in place. The fix cleared that old state before loading the new list.</p>
+      <a href="/build-log/#rimsort">Read the build note <span aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+  <section class="home-bottom">
+    <p>AskHermie grew out of a Hermes Agent setup. The workshop records what each tool does, where to start, and what happened when a fix went upstream.</p>
+    <a href="/about/">About the workshop <span aria-hidden="true">↗</span></a>
+  </section>
+</Workshop>

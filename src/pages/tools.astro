@@ -1,0 +1,24 @@
+---
+import Workshop from '../layouts/Workshop.astro';
+const tools = [
+  ['Find a noisy container', 'Dozzle', 'Open the container’s logs and reproduce the failure once. Look at the first error around that timestamp.', 'dozzle'],
+  ['See which hosts are up', 'Uptime Kuma', 'Monitor one service you control and confirm what happens when you deliberately take it offline.', 'uptime-kuma'],
+  ['Make a server setup repeatable', 'Ansible', 'Put one package or service in a playbook and run it against a disposable host twice.', 'ansible'],
+  ['Inspect messages from a sensor', 'MQTT Explorer', 'Connect to your test broker and watch a single topic while the device publishes.', 'mqtt-explorer'],
+];
+const description = 'Task-based starting points for troubleshooting containers, monitoring services, automating setup and inspecting MQTT messages.';
+---
+<Workshop title="Tools — AskHermie" description={description}>
+  <header class="page-intro">
+    <h1>Tools<span class="period">.</span></h1>
+    <p class="lede">Start with the job at hand. These picks lead to the catalog entry and its upstream documentation.</p>
+  </header>
+  <div class="work-list">
+    {tools.map(([task, tool, firstStep, id]) => (
+      <article class="work-row">
+        <p class="kicker">{tool}</p>
+        <div><h2>{task}</h2><p>{firstStep}</p><a href={`/resources/#resource-${id}`}>Open the {tool} entry ↗</a></div>
+      </article>
+    ))}
+  </div>
+</Workshop>

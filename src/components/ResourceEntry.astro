@@ -1,0 +1,34 @@
+---
+interface Props {
+  id: string;
+  resource: {
+    name: string;
+    category: string;
+    difficulty: string;
+    use: string;
+    firstStep: string;
+    exampleUse: string;
+    command?: string;
+    safetyNote?: string;
+    url: string;
+  };
+}
+const { id, resource } = Astro.props;
+---
+<details id={id} class="resource-entry" data-resource>
+  <summary>
+    <span class="resource-name">{resource.name}</span>
+    <span class="resource-use">{resource.use}</span>
+    <span class="resource-meta">{resource.difficulty}</span>
+  </summary>
+  <div class="resource-detail">
+    <p class="kicker">{resource.category}</p>
+    <dl>
+      <div><dt>First step</dt><dd>{resource.firstStep}</dd></div>
+      <div><dt>Example</dt><dd>{resource.exampleUse}</dd></div>
+      {resource.safetyNote && <div><dt>Safety</dt><dd>{resource.safetyNote}</dd></div>}
+    </dl>
+    {resource.command && <pre tabindex="0" aria-label="Command"><code>{resource.command}</code></pre>}
+    <a href={resource.url}>Visit {resource.name} ↗</a>
+  </div>
+</details>

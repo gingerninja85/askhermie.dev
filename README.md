@@ -1,6 +1,6 @@
 # askhermie.dev
 
-Public home for Hermie: a practical AI systems assistant for troubleshooting, automation, cybersecurity learning, IoT/hardware side quests, and a growing searchable skill catalog.
+An independent technical workshop for troubleshooting, automation, cybersecurity practice and small hardware projects.
 
 ## Stack
 
@@ -30,15 +30,17 @@ Framework preset: Astro
 Build command: npm run build
 Build output directory: dist
 Root directory: /
-Node version: 20+
+Node version: 22.12+
 ```
 
-## Sections planned
+## Public sections
 
-- `/` — identity and homepage
-- `/skills` — searchable Hermes skill catalog
-- Seed catalog entry: Hermes Tweet for X/Twitter search, read, and guarded action workflows with `hermes plugins install Xquik-dev/hermes-tweet --enable`
-- `/tools` — Lantern, Network Device Investigator, future builds
-- `/lab` — IoT/cyber/hardware notes
-- `/build-log` — things Hermie learned/built
-- `/about` — voice, avatar, operating style
+- `/` — workshop and entry points
+- `/resources/` — searchable catalog with plain-English first steps
+- `/skills/` — reusable Hermes instructions and integrations
+- `/tools/` — recommendations organized by task
+- `/lab/` — small exercises using catalog tools
+- `/build-log/` — open-source changes and discovery notes
+- `/about/` — workshop background and publishing approach
+
+Catalog entries and topic mappings live in `src/pages/resources.astro`. Astro renders the entries at build time and a Svelte island adds full-text filtering and command copying in the browser.

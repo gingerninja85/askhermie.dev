@@ -1,30 +1,7 @@
 ---
-import '../styles/site.css';
-import SeoHead from '../components/SeoHead.astro';
+import Workshop from '../layouts/Workshop.astro';
 import ResourceExplorer from '../components/ResourceExplorer.svelte';
-
-const nav = [
-  ['Resources', '/resources'],
-  ['About', '/about'],
-  ['Hermes Docs', 'https://hermes-agent.nousresearch.com/docs/'],
-  ['GitHub Repo', 'https://github.com/gingerninja85/askhermie.dev'],
-];
-
-
-const resourceKeywords = [
-  'AI agent tools',
-  'Hermes Agent resources',
-  'MCP server list',
-  'automation tools',
-  'local AI tools',
-  'cybersecurity lab tools',
-  'IoT tools',
-  'ESP32 tools',
-  'firmware analysis tools',
-  'homelab monitoring tools',
-  'copy paste install commands',
-  'beginner friendly developer tools',
-];
+import ResourceEntry from '../components/ResourceEntry.astro';
 
 type Resource = {
   name: string;
@@ -43,9 +20,9 @@ const resources: Resource[] = [
     name: 'Hermes Agent',
     category: 'AI agent core',
     difficulty: 'Beginner',
-    use: 'The actual agent framework behind Hermie: CLI, desktop, messaging gateway, skills, memory, cron jobs, MCP, tools.',
-    firstStep: 'Install Hermes, run the setup wizard, then add one useful integration instead of trying to configure everything at once.',
-    exampleUse: 'Ask Hermie to inspect a repo, run tests, summarize failures, patch the code, and push a verified fix instead of only describing one.',
+    use: 'The agent framework behind Hermie. It can run in a terminal or messaging app and supports skills, scheduled jobs and MCP integrations.',
+    firstStep: 'Review the upstream installer, run the setup wizard, then try a task in a disposable repository.',
+    exampleUse: 'Ask the agent to run a failing test and explain the output before it edits any files.',
     command: 'curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash\nhermes setup',
     url: 'https://hermes-agent.nousresearch.com/docs/',
   },
@@ -326,10 +303,9 @@ const resources: Resource[] = [
     name: 'PortSwigger Web Security Academy',
     category: 'Cyber learning',
     difficulty: 'Beginner',
-    use: 'Free interactive web-security labs from the Burp Suite people. High signal, practical, legal.',
-    firstStep: 'Start with SQL injection, XSS, and authentication labs before touching weirder topics.',
-    exampleUse: 'Practice one SQL injection or XSS lab, then ask Hermie to explain what happened in plain English.',
-    command: '# No install. Open the labs:\n# https://portswigger.net/web-security',
+    use: 'Free, hands-on exercises for learning how web application vulnerabilities work.',
+    firstStep: 'Pick an Apprentice-level lab and use the hosted practice target.',
+    exampleUse: 'Compare the requests in a SQL injection lab and write down which input changed the response.',
     url: 'https://portswigger.net/web-security',
   },
   {
@@ -5563,7 +5539,6 @@ const resources: Resource[] = [
     use: 'Browser-based electronics simulator for ESP32, STM32, Arduino, Raspberry Pi Pico, sensors, displays, motors, and Wi-Fi examples.',
     firstStep: 'Open a new ESP32 or Pico example in the browser and run blink before wiring simulated sensors.',
     exampleUse: 'Prototype a classroom or weekend microcontroller idea before buying the exact board, display, or sensor.',
-    command: '# No install needed. Start with:\n# https://wokwi.com/projects/new/esp32',
     safetyNote: 'Simulation is safer than real wiring, but it does not prove electrical safety. Check voltages, current draw, and pinouts before building hardware.',
     url: 'https://wokwi.com/',
   },
@@ -6991,7 +6966,7 @@ const groupMeta = [
   },
   {
     name: 'Firmware + reverse engineering',
-    blurb: 'Firmware extraction, emulation, and reverse-engineering tools. Start small; random BIOS blobs are not beginner projects.',
+    blurb: 'Tools for extracting, emulating and understanding firmware. Begin with a known sample in an isolated lab.',
     categories: ['IoT security lab', 'Firmware analysis', 'Firmware emulation', 'Reverse engineering', 'Reverse engineering GUI', 'Kernel image recovery', 'Firmware analysis platform', 'Firmware cartography', 'Memory map analysis', 'Android firmware analysis', 'ESP32 firmware dissection'],
   },
   {
@@ -7001,101 +6976,66 @@ const groupMeta = [
   },
 ];
 
+// Keep the first listing for a project when discovery runs repeat it.
+const catalog = [...new Map(resources.map((resource) => {
+  const url = resource.url.replace(/\/$/, '').toLowerCase();
+  return [`${slugify(resource.name)}:${url}`, resource] as const;
+}).reverse()).values()].reverse();
+
 const resourceGroups = groupMeta.map((group) => ({
   ...group,
   id: `group-${slugify(group.name)}`,
   slug: slugify(group.name),
-  resources: resources.filter((resource) => group.categories.includes(resource.category)),
+  resources: catalog.filter((resource) => group.categories.includes(resource.category)),
 })).filter((group) => group.resources.length > 0);
 
-const commandCount = resources.filter((resource) => resource.command).length;
-const safetyCount = resources.filter((resource) => resource.safetyNote).length;
-const resourceStats = [
-  [resources.length.toString(), 'curated resources'],
-  [resourceGroups.length.toString(), 'resource groups'],
-  [commandCount.toString(), 'copy/paste starts'],
-  [safetyCount.toString(), 'safety notes'],
-];
 
-const resourcesStructuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'Hermie Resources',
-    url: 'https://askhermie.dev/resources/',
-    description: 'A practical catalog of Hermes Agent resources, AI agent tools, automation utilities, cybersecurity labs, IoT projects, firmware tools, and copy/paste install commands.',
-    isPartOf: { '@type': 'WebSite', name: 'askhermie.dev', url: 'https://askhermie.dev/' },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Hermie resource map',
-    numberOfItems: resources.length,
-    itemListElement: resources.map((resource, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: resource.name,
-      url: resource.url,
-      description: resource.use,
-    })),
-  },
-];
+const assigned = new Set(resourceGroups.flatMap((group) => group.resources));
+const remaining = catalog.filter((resource) => !assigned.has(resource));
+if (remaining.length) {
+  resourceGroups.push({
+    id: 'group-other',
+    slug: 'other',
+    name: 'Other tools',
+    blurb: 'Tools that span several areas of the workshop.',
+    categories: [],
+    resources: remaining,
+  });
+}
+
+const groups = resourceGroups.map(({ name, id }) => ({ name, id }));
+const idCounts = new Map<string, number>();
+function entryId(name: string) {
+  const slug = slugify(name);
+  const count = (idCounts.get(slug) ?? 0) + 1;
+  idCounts.set(slug, count);
+  return `resource-${slug}${count === 1 ? '' : `-${count}`}`;
+}
+
+const resultCount = resourceGroups.reduce((count, group) => count + group.resources.length, 0);
+const description = 'Search the AskHermie catalog for AI agent tools, automation, troubleshooting, cybersecurity practice, firmware and hardware references.';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <SeoHead
-      title="Hermie Resources — AI agent tools and install commands"
-      description="A practical catalog of Hermes Agent resources, AI agent tools, automation utilities, cybersecurity labs, IoT projects, firmware tools, and copy/paste install commands."
-      path="/resources/"
-      keywords={resourceKeywords}
-      structuredData={resourcesStructuredData}
-    />
-  </head>
-  <body>
-    <div class="noise" aria-hidden="true"></div>
-    <header class="site-header nav-glass">
-      <a class="brand" href="/" aria-label="Hermie home">
-        <img src="/assets/hermie-avatar.png" alt="Byte Badger mascot avatar for Hermie" />
-        <span>askhermie.dev</span>
-      </a>
-      <nav aria-label="Primary navigation">
-        {nav.map(([label, href]) => <a href={href}>{label}</a>)}
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero resources-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Curated tools // simple installs // practical learning</p>
-          <h1>Tools worth installing, not collecting.</h1>
-          <p class="lede">A plain-English catalog of tools that work well with Hermes, plus technical resources worth learning. Each card gives you the point, the first move, and a copy/paste command when install makes sense.</p>
-        </div>
-        <aside class="identity-card compact resource-console" aria-label="Resource rules">
-          <p class="card-label">Catalog rules</p>
-          <ol>
-            <li>Useful with Hermes or real systems work.</li>
-            <li>Plain-English value, not vendor fluff.</li>
-            <li>Concrete first move or install command.</li>
-            <li>Safety context when tools can cause damage.</li>
-          </ol>
-          <div class="mini-stat-grid">
-            {resourceStats.map(([value, label]) => (
-              <div>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        </aside>
+<Workshop title="Resource catalog — AskHermie" description={description}
+  structuredData={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Resource catalog', description }}>
+  <header class="page-intro">
+    <h1>Resource catalog<span class="period">.</span></h1>
+    <p class="lede">Find a tool for the job, then open its notes for a first step, an example, and any command or safety advice.</p>
+  </header>
+  <section id="catalog" aria-label="Catalog">
+    <ResourceExplorer client:load groups={groups} initialCount={resultCount} />
+    <noscript>
+      <p>Jump to a topic below, or use your browser’s find command.</p>
+      <ul>{groups.map(({ name, id }) => <li><a href={`#${id}`}>{name}</a></li>)}</ul>
+    </noscript>
+    <p class="catalog-note">Commands generally assume Linux or WSL. Review upstream instructions before running them.</p>
+    {resourceGroups.map((group) => (
+      <section class="catalog-group" id={group.id} data-catalog-group aria-labelledby={`${group.id}-heading`}>
+        <header>
+          <h2 id={`${group.id}-heading`}>{group.name}</h2>
+          <p>{group.blurb}</p>
+        </header>
+        {group.resources.map((resource) => <ResourceEntry id={entryId(resource.name)} resource={resource} />)}
       </section>
-
-      <ResourceExplorer client:load resources={resources} resourceGroups={resourceGroups} />
-    </main>
-
-    <footer>
-      <p>Built with Hermie ⚙️</p>
-      <p>askhermie.dev/resources</p>
-    </footer>
-  </body>
-</html>
+    ))}
+  </section>
+</Workshop>

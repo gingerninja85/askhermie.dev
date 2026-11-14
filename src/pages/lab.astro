@@ -1,0 +1,24 @@
+---
+import Workshop from '../layouts/Workshop.astro';
+const description = 'Small starting exercises for microcontrollers, ESPHome and web security, based on tools in the AskHermie catalog.';
+---
+<Workshop title="Lab — AskHermie" description={description}>
+  <header class="page-intro">
+    <h1>Lab<span class="period">.</span></h1>
+    <p class="lede">Small exercises you can run in a simulator, on a low-voltage development board, or in a hosted practice lab.</p>
+  </header>
+  <div class="work-list">
+    <article class="work-row">
+      <p class="kicker">Microcontrollers</p>
+      <div><h2>Blink an LED in a simulated ESP32</h2><p>Load a blink example in Wokwi. Change the delay, rerun the simulation, and check whether the blink rate matches the new value. You can do the whole exercise in a browser.</p><a href="/resources/#resource-wokwi">Open the Wokwi entry ↗</a></div>
+    </article>
+    <article class="work-row">
+      <p class="kicker">Home automation</p>
+      <div><h2>Compile a first ESPHome configuration</h2><p>Pick a configuration for a low-voltage board you own. Validate and compile it before flashing. Keep a copy of the working YAML so you can return to it after experimenting.</p><a href="/resources/#resource-esphome">Open the ESPHome entry ↗</a></div>
+    </article>
+    <article class="work-row">
+      <p class="kicker">Web security</p>
+      <div><h2>Compare two requests in a practice lab</h2><p>Pick an Apprentice exercise in PortSwigger’s Web Security Academy. Record a baseline request, change one input, and write down what changed in the response. Use the target provided by the lab.</p><a href="/resources/#resource-portswigger-web-security-academy">Open the Academy entry ↗</a></div>
+    </article>
+  </div>
+</Workshop>

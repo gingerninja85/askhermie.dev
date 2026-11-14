@@ -1,0 +1,49 @@
+---
+import '../styles/site.css';
+import SeoHead from '../components/SeoHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  structuredData?: Record<string, unknown>;
+  noindex?: boolean;
+}
+const { title, description, structuredData, noindex } = Astro.props;
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const nav = [
+  ['Resources', '/resources/'],
+  ['Skills', '/skills/'],
+  ['Tools', '/tools/'],
+  ['Lab', '/lab/'],
+  ['Build log', '/build-log/'],
+  ['About', '/about/'],
+];
+const repo = 'https://github.com/gingerninja85/askhermie.dev';
+---
+<!doctype html>
+<html lang="en-NZ">
+  <head>
+    <SeoHead title={title} description={description} path={path} structuredData={structuredData} noindex={noindex} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+      <div class="shell masthead-inner">
+        <a class="wordmark" href="/" aria-label="askhermie.dev home" aria-current={path === '/' ? 'page' : undefined}>
+          <img class="mark" src="/assets/workshop-icon.png" width="26" height="26" alt="" /> askhermie<span class="domain">.dev</span>
+        </a>
+        <nav aria-label="Main navigation">
+          {nav.map(([label, href]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="shell" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <a class="wordmark" href="/">askhermie<span class="domain">.dev</span></a>
+        <p>An independent technical workshop.</p>
+        <div><a href={repo}>Source on GitHub ↗</a><a href="https://hermes-agent.nousresearch.com/docs/">Hermes docs ↗</a></div>
+      </div>
+    </footer>
+  </body>
+</html>
