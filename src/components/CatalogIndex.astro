@@ -37,7 +37,7 @@ const availableTypes = new Set(entries.map((entry: { kind: string }) => entry.ki
         </div>
       </div>
       <div class="catalog-heading">
-        <h2>Skill directory</h2>
+        <h2 tabindex="-1">Skill directory</h2>
         <p id="results" class="mono" role="status">{entries.length} entries</p>
       </div>
       <div id="skill-list" class="cards">
@@ -54,6 +54,11 @@ const availableTypes = new Set(entries.map((entry: { kind: string }) => entry.ki
           </article>
         ))}
       </div>
+      <nav id="pagination" class="pagination" aria-label="Catalog pagination" hidden>
+        <button id="previous-page" type="button" aria-controls="skill-list">Previous</button>
+        <span id="page-number" class="mono"></span>
+        <button id="next-page" type="button" aria-controls="skill-list">Next</button>
+      </nav>
       <div class="empty" hidden>
         <h3>No matching entries</h3>
         <p>Try a shorter search or clear the filters.</p>
@@ -68,47 +73,94 @@ const availableTypes = new Set(entries.map((entry: { kind: string }) => entry.ki
   const empty = document.querySelector<HTMLElement>('.empty')!;
   const cards = [...document.querySelectorAll<HTMLElement>('[data-skill]')];
   const category = document.querySelector<HTMLSelectElement>('#topic')!;
-  const params = new URLSearchParams(location.search);
+  const pageSize = 50;
+  const pagination = document.querySelector<HTMLElement>('#pagination')!;
+  const previous = document.querySelector<HTMLButtonElement>('#previous-page')!;
+  const next = document.querySelector<HTMLButtonElement>('#next-page')!;
+  const pageNumber = document.querySelector<HTMLElement>('#page-number')!;
+  let page = 1;
   const normalize = (value: string) => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
   const searchable = cards.map(card => normalize(card.dataset.search ?? ''));
 
-  function update() {
+  function update(pushHistory = false) {
     const topic = category.value;
     const query = normalize(search.value);
     const terms = query ? query.split(' ') : [];
-    let matches = 0;
-    cards.forEach((card, index) => {
-      const visible = (!topic || card.dataset.topic === topic)
-        && (!kind.value || card.dataset.kind === kind.value)
-        && terms.every(term => searchable[index].includes(term));
-      card.hidden = !visible;
-      if (visible) matches++;
-    });
-    results.textContent = `${matches} ${matches === 1 ? 'entry' : 'entries'}`;
-    empty.hidden = matches > 0;
-    for (const [key, value] of Object.entries({ q: search.value.trim(), topic, type: kind.value })) {
-      if (value) params.set(key, value);
-      else params.delete(key);
+    const matches = cards.filter((card, index) =>
+      (!topic || card.dataset.topic === topic)
+      && (!kind.value || card.dataset.kind === kind.value)
+      && terms.every(term => searchable[index].includes(term))
+    );
+    const pageCount = Math.max(1, Math.ceil(matches.length / pageSize));
+    page = Math.min(Math.max(page, 1), pageCount);
+    const start = (page - 1) * pageSize;
+    const shown = new Set(matches.slice(start, start + pageSize));
+    for (const card of cards) card.hidden = !shown.has(card);
+    results.textContent = matches.length
+      ? `${start + 1}–${start + shown.size} of ${matches.length} ${matches.length === 1 ? 'entry' : 'entries'}`
+      : '0 entries';
+    empty.hidden = matches.length > 0;
+    pagination.hidden = pageCount === 1;
+    pageNumber.textContent = `Page ${page} of ${pageCount}`;
+    previous.disabled = page === 1;
+    next.disabled = page === pageCount;
+
+    const url = new URL(location.href);
+    for (const [key, value] of Object.entries({
+      q: search.value.trim(), topic, type: kind.value, page: page > 1 ? String(page) : '',
+    })) {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
     }
-    const queryString = params.toString();
-    history.replaceState(history.state, '', location.pathname + (queryString ? '?' + queryString : '') + location.hash);
+    if (pushHistory) url.hash = 'catalog';
+    if (url.href !== location.href) {
+      if (pushHistory) history.pushState(history.state, '', url);
+      else history.replaceState(history.state, '', url);
+    }
   }
 
-  search.value = params.get('q') ?? '';
-  category.value = params.get('topic') ?? '';
-  if (category.selectedIndex < 0) category.selectedIndex = 0;
-  kind.value = params.get('type') ?? '';
-  if (kind.selectedIndex < 0) kind.selectedIndex = 0;
+  function restore() {
+    const params = new URLSearchParams(location.search);
+    search.value = params.get('q') ?? '';
+    category.value = params.get('topic') ?? '';
+    if (category.selectedIndex < 0) category.selectedIndex = 0;
+    kind.value = params.get('type') ?? '';
+    if (kind.selectedIndex < 0) kind.selectedIndex = 0;
+    const requestedPage = Number(params.get('page'));
+    const anchorIndex = cards.findIndex(card => card.id && `#${card.id}` === location.hash);
+    page = Number.isSafeInteger(requestedPage) && requestedPage > 0
+      ? requestedPage
+      : Math.floor(Math.max(0, anchorIndex) / pageSize) + 1;
+    update();
+    if (anchorIndex >= 0) cards[anchorIndex].scrollIntoView();
+  }
+
+  function resetPage() {
+    page = 1;
+    update();
+  }
+
+  function goToPage(offset: number) {
+    page += offset;
+    update(true);
+    const heading = document.querySelector<HTMLElement>('.catalog-heading h2');
+    heading?.focus();
+    heading?.scrollIntoView({ block: 'start' });
+  }
+
   document.querySelector<HTMLElement>('.search-tools')!.hidden = false;
   document.querySelector<HTMLElement>('.filters')!.hidden = false;
-  search.addEventListener('input', update);
-  kind.addEventListener('change', update);
-  category.addEventListener('change', update);
+  search.addEventListener('input', resetPage);
+  kind.addEventListener('change', resetPage);
+  category.addEventListener('change', resetPage);
+  previous.addEventListener('click', () => goToPage(-1));
+  next.addEventListener('click', () => goToPage(1));
+  window.addEventListener('popstate', restore);
   document.querySelector('#reset')!.addEventListener('click', () => {
     search.value = '';
     kind.value = '';
     category.value = '';
-    update();
+    resetPage();
     search.focus();
   });
   document.addEventListener('keydown', event => {
@@ -119,5 +171,5 @@ const availableTypes = new Set(entries.map((entry: { kind: string }) => entry.ki
       search.focus();
     }
   });
-  update();
+  restore();
 </script>
