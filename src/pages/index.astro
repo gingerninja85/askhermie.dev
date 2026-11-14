@@ -2,41 +2,21 @@
 import Registry from '../layouts/Registry.astro';
 import { kinds, skills, topics } from '../data/skills';
 
-const symbols = { Development: '⌘', Research: '◎', Automation: '↻', Design: '◇', Writing: '¶', Data: '▥' };
-const example = skills.find(skill => skill.slug === 'rss-feeds')!;
-const suggested = ['Docker', 'RSS', 'Diagrams'];
 ---
 <Registry title="Find skills for Hermes Agent · AskHermie" description="Search and install Hermes Agent skills. Browse official optional skills, third-party skills, and plugins that bundle a skill.">
   <div class="frame">
-    <section class="intro" aria-labelledby="headline">
-      <div class="intro-copy">
-        <p class="eyebrow mono"><span></span> Hermes Agent skills catalog</p>
-        <h1 id="headline">Find skills for<br class="hero-break" /> <em>Hermes Agent</em>.</h1>
-        <p class="intro-description">Search by name or task. See what each skill does, what it needs, and how to install it.</p>
-        <div class="search-tools" hidden>
-          <div class="search-box" role="search">
-            <span class="magnifier" aria-hidden="true"></span>
-            <label class="sr-only" for="search">Search by skill name or task</label>
-            <input id="search" type="search" placeholder="Search by skill name or task" autocomplete="off" aria-controls="skill-list" />
-            <kbd aria-hidden="true">/</kbd>
-          </div>
-          <div class="suggestions"><span>Try</span>{suggested.map(term => <button data-query={term} type="button">{term}</button>)}</div>
+    <section id="catalog" class="catalog" aria-labelledby="headline">
+      <header class="intro">
+        <h1 id="headline">Hermes Agent skills</h1>
+        <p class="intro-description">Find a skill, check what it needs, and install it in Hermes.</p>
+      </header>
+      <div class="search-tools" hidden>
+        <div class="search-box" role="search">
+          <span class="magnifier" aria-hidden="true"></span>
+          <label class="sr-only" for="search">Search by skill name or task</label>
+          <input id="search" type="search" placeholder="Search by skill name or task" autocomplete="off" aria-controls="skill-list" />
+          <kbd aria-hidden="true">/</kbd>
         </div>
-      </div>
-      <aside class="terminal" aria-label="Example skill installation">
-        <div class="terminal-top mono"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span> Terminal</div>
-        <div class="terminal-body">
-          <p class="terminal-label mono">Install an official skill</p>
-          <div class="terminal-command mono"><span aria-hidden="true">$</span><code>{example.command}</code></div>
-          <a href="/skills/rss-feeds/">View RSS Feeds setup <span aria-hidden="true">↗</span></a>
-        </div>
-      </aside>
-    </section>
-
-    <section id="catalog" class="catalog" aria-labelledby="catalog-title">
-      <div class="catalog-heading">
-        <h2 id="catalog-title">Browse skills</h2>
-        <p id="results" class="mono" role="status">{skills.length} entries</p>
       </div>
       <div class="filters" hidden>
         <div class="topics" aria-label="Skill category" role="group">
@@ -51,17 +31,21 @@ const suggested = ['Docker', 'RSS', 'Diagrams'];
           </select>
         </div>
       </div>
+      <div class="catalog-heading">
+        <h2>Skill directory</h2>
+        <p id="results" class="mono" role="status">{skills.length} entries</p>
+      </div>
       <div id="skill-list" class="cards">
         {skills.map(skill => (
           <article class="card" data-skill data-topic={skill.topic} data-kind={skill.kind}
             data-search={[skill.name, skill.slug, skill.description, skill.task, skill.topic, skill.publisher].join(' ')}>
-            <div class="card-top">
-              <span class="symbol" data-category={skill.topic} aria-hidden="true">{symbols[skill.topic]}</span>
-              <span class={`badge ${skill.kind}`}>{kinds[skill.kind]}</span>
-            </div>
             <h3><a href={`/skills/${skill.slug}/`}>{skill.name}</a></h3>
             <p>{skill.description}</p>
-            <div class="card-bottom mono"><span>{skill.topic}</span><span aria-hidden="true">↗</span></div>
+            <div class="card-meta">
+              <span class="category">{skill.topic}</span>
+              <span class={`badge ${skill.kind}`}>{kinds[skill.kind]}</span>
+            </div>
+            <span class="card-arrow" aria-hidden="true">→</span>
           </article>
         ))}
       </div>
@@ -120,15 +104,6 @@ const suggested = ['Docker', 'RSS', 'Diagrams'];
     button.addEventListener('click', () => {
       topic = button.dataset.topic ?? '';
       update();
-    });
-  }
-  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-query]')) {
-    button.addEventListener('click', () => {
-      search.value = button.dataset.query ?? '';
-      topic = '';
-      kind.value = '';
-      update();
-      search.focus();
     });
   }
   document.querySelector('#reset')!.addEventListener('click', () => {
