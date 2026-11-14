@@ -1,0 +1,25 @@
+---
+import Workshop from '../layouts/Workshop.astro';
+const description = 'A starting catalog of reusable instructions and integrations for Hermes Agent.';
+---
+<Workshop title="Skills — AskHermie" description={description}>
+  <header class="page-intro">
+    <h1>Skills<span class="period">.</span></h1>
+    <p class="lede">Reusable instructions for Hermes Agent, plus plugins that come with a skill. The catalog starts with one upstream entry.</p>
+  </header>
+  <div class="reading-layout">
+    <section id="hermes-tweet" class="prose">
+      <p class="kicker">Third-party plugin and skill</p>
+      <h2>Hermes Tweet</h2>
+      <p>Search public posts on X or read an account’s timeline from Hermes through the Xquik API. Start with a read-only query and keep write actions disabled while you evaluate the setup.</p>
+      <p>The plugin requires a Xquik API key. Review the upstream installation instructions and its terms before connecting an account.</p>
+      <pre tabindex="0" aria-label="Install Hermes Tweet"><code>hermes plugins install Xquik-dev/hermes-tweet --enable</code></pre>
+      <p><a href="https://github.com/Xquik-dev/hermes-tweet">Read the plugin documentation ↗</a></p>
+    </section>
+    <aside class="side-note">
+      <h2>Working with skills</h2>
+      <p>A skill tells Hermes how to repeat a task. Review its instructions and the tools it calls before you use it.</p>
+      <p><a href="https://hermes-agent.nousresearch.com/docs/">Read the Hermes Agent docs ↗</a></p>
+    </aside>
+  </div>
+</Workshop>

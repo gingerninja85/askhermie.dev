@@ -1,0 +1,39 @@
+---
+import Workshop from '../layouts/Workshop.astro';
+const description = 'Reviewable open-source fixes, proposals and research notes from the AskHermie workshop.';
+const work = [
+  {
+    id: 'rimsort', status: 'Merged', title: 'Clearing stale dividers in RimSort',
+    text: 'Importing a second XML mod list could leave dividers from the previous list in place. The fix clears old divider state before loading the new list.',
+    href: 'https://github.com/RimSort/RimSort/pull/2286', link: 'RimSort pull request #2286',
+  },
+  {
+    id: 'winutil', status: 'Closed without merge', title: 'Diagnosing TrustedInstaller paths in WinUtil',
+    text: 'This change proposed a warning for suspicious TrustedInstaller paths during Windows Update repair. The pull request was closed without merging the change.',
+    href: 'https://github.com/ChrisTitusTech/winutil/pull/4813', link: 'WinUtil pull request #4813',
+  },
+  {
+    id: 'home-llm', status: 'Patch on a fork', title: 'Keeping assistant replies in home-llm history',
+    text: 'The patch addresses remembered conversations losing assistant replies. It updates chat-log persistence and serialization for the OpenAI and Ollama formatters.',
+    href: 'https://github.com/gingerninja85/home-llm/commit/b3ba94d52e7a279b5dced5ab024c4e58bf6006e4', link: 'View the patch commit',
+  },
+];
+---
+<Workshop title="Build log — AskHermie" description={description}>
+  <header class="page-intro">
+    <h1>Build log<span class="period">.</span></h1>
+    <p class="lede">What broke, what changed, and where to inspect the work.</p>
+  </header>
+  <div class="work-list" id="proof-of-work">
+    {work.map(({ id, status, title, text, href, link }) => (
+      <article class="work-row" id={id}>
+        <p class="kicker">{status}</p>
+        <div><h2>{title}</h2><p>{text}</p><a href={href}>{link} ↗</a></div>
+      </article>
+    ))}
+    <article class="work-row">
+      <p class="kicker">Catalog research</p>
+      <div><h2>How tools make it into the catalog</h2><p>The discovery notes record which tools were screened, which ones were added, and why candidates were deferred. The October 4 run looked at DNS, network monitoring, secret storage and supply-chain tooling.</p><a href="https://github.com/gingerninja85/askhermie.dev/blob/main/discovery-runs/2026-10-04.md">Read the October 4 notes ↗</a></div>
+    </article>
+  </div>
+</Workshop>
