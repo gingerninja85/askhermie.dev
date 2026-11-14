@@ -62,7 +62,7 @@ export const skills: Skill[] = [
     name: 'Watchers', topic: 'Automation',
     description: 'Track new GitHub activity, RSS posts, or changes in a JSON API on a schedule.',
     task: 'Set up a watcher for new releases in this GitHub repository.',
-    prerequisites: ['Python 3, the Hermes terminal tool, and network access to the source.', 'Scheduled runs need a cron job. A GitHub token is optional and raises the anonymous API rate limit.'],
+    prerequisites: ['Python 3, the Hermes terminal tool, and network access to the source.', 'Scheduled runs need a cron job. A GitHub token is optional and allows a higher API rate limit.'],
   }),
   official('creative/simple-english', {
     name: 'Simple English', topic: 'Writing',
