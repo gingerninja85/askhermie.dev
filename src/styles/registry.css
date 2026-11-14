@@ -176,7 +176,7 @@ blockquote { margin: 0; background: var(--card); border-left: 3px solid var(--ac
   .intro-description { font-size: 1rem; }
   .terminal { display: none; }
   h1 { font-size: clamp(2.85rem, 10vw, 4rem); }
-  .cards, .detail-grid { grid-template-columns: 1fr; }
+  .cards, .detail-grid { grid-template-columns: minmax(0, 1fr); }
   .detail-grid { gap: 0; }
   .bottom { align-items: flex-start; flex-direction: column; }
   kbd { display: none; }

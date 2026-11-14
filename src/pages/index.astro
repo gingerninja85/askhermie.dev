@@ -3,6 +3,7 @@ import Registry from '../layouts/Registry.astro';
 import { kinds, skills, topics } from '../data/skills';
 
 const symbols = { Development: '⌘', Research: '◎', Automation: '↻', Design: '◇', Writing: '¶', Data: '▥' };
+const example = skills.find(skill => skill.slug === 'rss-feeds')!;
 const suggested = ['Docker', 'RSS', 'Diagrams'];
 ---
 <Registry title="Find skills for Hermes Agent · AskHermie" description="Search and install Hermes Agent skills. Browse official optional skills, third-party skills, and plugins that bundle a skill.">
@@ -26,7 +27,7 @@ const suggested = ['Docker', 'RSS', 'Diagrams'];
         <div class="terminal-top mono"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span> Terminal</div>
         <div class="terminal-body">
           <p class="terminal-label mono">Install an official skill</p>
-          <div class="terminal-command mono"><span aria-hidden="true">$</span><code>hermes skills install<br />official/research/rss-feeds</code></div>
+          <div class="terminal-command mono"><span aria-hidden="true">$</span><code>{example.command}</code></div>
           <a href="/skills/rss-feeds/">View RSS Feeds setup <span aria-hidden="true">↗</span></a>
         </div>
       </aside>
