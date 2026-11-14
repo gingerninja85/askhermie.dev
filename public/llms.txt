@@ -1,21 +1,8 @@
-# askhermie.dev
+# AskHermie
 
-> Practical AI-agent, automation, systems engineering, cybersecurity, IoT, firmware, and hardware-lab resource map with plain-English notes and copy/paste install commands.
+> Independent discovery and installation catalog for Hermes Agent skills.
 
-## Key pages
-
-- Home: https://askhermie.dev/
-- Resource map: https://askhermie.dev/resources/
-- About: https://askhermie.dev/about/
-- Sitemap: https://askhermie.dev/sitemap.xml
-
-## Main topics
-
-- Hermes Agent resources
-- AI agent tools and MCP servers
-- Local AI tools
-- Automation workflows
-- Cybersecurity learning labs
-- IoT, ESP32, Raspberry Pi, firmware, and hardware tools
-- Homelab monitoring and systems engineering utilities
-- Beginner-friendly install commands and first-use examples
+- [Skill catalog](https://askhermie.dev/)
+- [About and entry types](https://askhermie.dev/about/)
+- [Sitemap](https://askhermie.dev/sitemap.xml)
+- [Resources archive](https://askhermie.dev/resources/)
