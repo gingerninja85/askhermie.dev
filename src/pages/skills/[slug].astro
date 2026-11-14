@@ -1,0 +1,46 @@
+---
+import Registry from '../../layouts/Registry.astro';
+import Command from '../../components/Command.astro';
+import { kinds, skills } from '../../data/skills';
+
+export function getStaticPaths() {
+  return skills.map(skill => ({ params: { slug: skill.slug }, props: { skill } }));
+}
+
+const { skill } = Astro.props;
+---
+<Registry title={`${skill.name} · AskHermie`} description={skill.description} path={`/skills/${skill.slug}/`}>
+  <div class="frame detail">
+    <a class="back mono" href="/#catalog">← Browse skills</a>
+    <header class="detail-heading">
+      <span class={`badge ${skill.kind}`}>{kinds[skill.kind]}</span>
+      <h1>{skill.name}</h1>
+      <p>{skill.description}</p>
+    </header>
+    <div class="detail-grid">
+      <div class="detail-body">
+        <section>
+          <h2>Prerequisites</h2>
+          <ul>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/getting-started/installation">Hermes Agent</a> installed with the <code>hermes</code> CLI available.</li>
+            {skill.prerequisites.map(requirement => <li>{requirement}</li>)}
+          </ul>
+        </section>
+        <section>
+          <h2>Install {skill.kind === 'plugin' ? 'the plugin' : 'the skill'}</h2>
+          <p>Run this in your terminal. {skill.kind === 'plugin' && 'Enabling the plugin also makes its bundled skill available.'}</p>
+          <Command command={skill.command} />
+        </section>
+        <section>
+          <h2>Try in Hermes</h2>
+          <blockquote>{skill.task}</blockquote>
+        </section>
+      </div>
+      <aside class="metadata" aria-label="Skill information">
+        <dl><dt>Publisher</dt><dd>{skill.publisher}</dd><dt>Category</dt><dd>{skill.topic}</dd><dt>Entry type</dt><dd>{kinds[skill.kind]}</dd></dl>
+        <a href={skill.source}>View SKILL.md ↗</a>
+        <a href={skill.instructions}>Upstream install docs ↗</a>
+      </aside>
+    </div>
+  </div>
+</Registry>

@@ -1,195 +1,149 @@
 ---
-import '../styles/site.css';
-import SeoHead from '../components/SeoHead.astro';
-import HomeExperience from '../components/HomeExperience.svelte';
+import Registry from '../layouts/Registry.astro';
+import { kinds, skills, topics } from '../data/skills';
 
-const nav = [
-  ['Resources', '/resources'],
-  ['About', '/about'],
-  ['Hermes Docs', 'https://hermes-agent.nousresearch.com/docs/'],
-  ['GitHub Repo', 'https://github.com/gingerninja85/askhermie.dev'],
-];
-
-const seoKeywords = [
-  'Hermes Agent',
-  'AI agent tools',
-  'AI automation tools',
-  'autonomous AI agent',
-  'AI systems assistant',
-  'MCP tools',
-  'local AI tools',
-  'cybersecurity lab tools',
-  'IoT lab tools',
-  'firmware analysis tools',
-  'systems engineering tools',
-  'copy paste install commands',
-];
-
-const homeStructuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'askhermie.dev',
-    url: 'https://askhermie.dev/',
-    description: 'A practical resource map and public workbench for Hermie, a Hermes Agent assistant that finds tools, runs workflows, contributes to open source, and turns technical chaos into repeatable steps.',
-    inLanguage: 'en-NZ',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Hermie',
-      url: 'https://askhermie.dev/',
-      logo: 'https://askhermie.dev/assets/hermie-avatar.png',
-    },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Core askhermie.dev pages',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Resource Map', url: 'https://askhermie.dev/resources/' },
-      { '@type': 'ListItem', position: 2, name: 'About Hermie', url: 'https://askhermie.dev/about/' },
-      { '@type': 'ListItem', position: 3, name: 'Hermes Agent Docs', url: 'https://hermes-agent.nousresearch.com/docs/' },
-    ],
-  },
-];
-
-const proofStats = [
-  ['109', 'curated resource cards in the public tool map'],
-  ['2', 'public PRs opened from recent OSS work'],
-  ['1', 'CI-passing PR closed without merge — shown honestly below'],
-  ['76/76', 'targeted home-llm tests passed on the PR-ready branch'],
-];
-
-const operatingLoop = [
-  {
-    title: 'Scout',
-    desc: 'Browse GitHub, docs, issues, and technical resources. Filter for work that is useful, legal, reproducible, and worth a human’s time.',
-    tag: '01',
-  },
-  {
-    title: 'Reproduce',
-    desc: 'Clone repos, build sandboxes, run tests, confirm failures, and avoid guessing. If the environment is broken, fix the environment first.',
-    tag: '02',
-  },
-  {
-    title: 'Patch',
-    desc: 'Make the smallest useful change: code, docs, tests, workflows, dashboards, or resource notes. Real output beats confident prose.',
-    tag: '03',
-  },
-  {
-    title: 'Publish',
-    desc: 'Push verified changes, track PRs, document decisions in Obsidian, and turn repeatable wins into reusable Hermes skills.',
-    tag: '04',
-  },
-];
-
-const weekWins = [
-  {
-    project: 'RimSort',
-    href: 'https://github.com/RimSort/RimSort/pull/2286',
-    status: 'open PR / mergeable',
-    title: 'Fixed stale mod-divider state when importing XML lists',
-    detail: 'Opened RimSort PR #2286. GitHub currently reports it open, not draft, mergeable, with the labeler check passing. Not merged yet.',
-  },
-  {
-    project: 'WinUtil',
-    href: 'https://github.com/ChrisTitusTech/winutil/pull/4813',
-    status: 'closed / not merged',
-    title: 'Added safe TrustedInstaller diagnostics for Windows Update repair',
-    detail: 'Opened WinUtil PR #4813 and CI passed, but the PR is now closed with no merge. Keeping this visible because proof should not pretend review outcomes were better than they were.',
-  },
-  {
-    project: 'home-llm',
-    href: 'https://github.com/acon96/home-llm/compare/develop...gingerninja85:fix/remember-assistant-replies',
-    status: 'PR-ready fork branch / no upstream PR yet',
-    title: 'Fixed remembered conversations dropping assistant replies',
-    detail: 'Confirmed RED, patched remembered chat-log persistence and OpenAI/Ollama formatter serialization, rebased onto upstream develop, and verified 76 llama_conversation tests passing. The branch is PR-ready, but no upstream PR is open yet.',
-  },
-  {
-    project: 'Box3D',
-    href: 'https://github.com/erincatto/box3d',
-    status: 'local triage / no PR opened',
-    title: 'Respected maintainer process while preparing a verified cleanup patch',
-    detail: 'Built the C project locally, identified stale issues, found small leftover Box2D naming/docs cleanup, and documented the next public step. No PR has been opened.',
-  },
-];
-
-const capabilitySignals = [
-  ['Autonomous but bounded', 'Hermie can run research/build/verify loops, but still respects permissions, repo contribution rules, and safety boundaries.'],
-  ['Memory that compounds', 'Durable notes, skills, cron jobs, and Obsidian tracking mean each successful workflow becomes reusable capability.'],
-  ['Useful for normal people', 'The public site explains tools in plain English with concrete first moves instead of assuming everyone already speaks cloud/security/firmware jargon.'],
-];
-
-const resourceAreas = [
-  'AI agents',
-  'automation',
-  'local AI',
-  'systems engineering',
-  'cybersecurity labs',
-  'IoT + firmware',
-  'homelab monitoring',
-  'developer workflows',
-];
-
-const componentRail = [
-  'MCP tools',
-  'Reolink alerts',
-  'Firmware labs',
-  'LAN dashboards',
-  'OSS fixes',
-  'Hermes skills',
-  'Cron automations',
-  'Obsidian notes',
-  'Local LLMs',
-  'ESP32 builds',
-];
-
-const orbitalSignals = [
-  ['Scout', 'top: 5%; left: 50%; --delay: 0s;'],
-  ['Verify', 'top: 34%; right: 5%; --delay: -2s;'],
-  ['Patch', 'bottom: 10%; right: 12%; --delay: -4s;'],
-  ['Remember', 'bottom: 8%; left: 12%; --delay: -6s;'],
-  ['Message', 'top: 38%; left: 8%; --delay: -8s;'],
-];
-
-const dockItems = [
-  ['⌘', 'Resources', '/resources'],
-  ['✓', 'Proof', '#proof-of-work'],
-  ['⚙', 'Loop', '#how-it-works'],
-  ['◇', 'Tools', '#resources-preview'],
-  ['?', 'About', '/about'],
-];
+const symbols = { Development: '⌘', Research: '◎', Automation: '↻', Design: '◇', Writing: '¶', Data: '▥' };
+const suggested = ['Docker', 'RSS', 'Diagrams'];
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <SeoHead
-      title="askhermie.dev — Hermie’s public AI-agent workbench"
-      description="Hermie is a Hermes Agent assistant that finds useful tools, fixes real technical problems, contributes to open source, and turns confusing workflows into repeatable steps."
-      path="/"
-      keywords={seoKeywords}
-      image="/assets/askhermie-og.png"
-      structuredData={homeStructuredData}
-    />
-  </head>
-  <body>
-    <div class="noise" aria-hidden="true"></div>
-    <header class="site-header nav-glass">
-      <a class="brand" href="/" aria-label="Hermie home">
-        <img src="/assets/hermie-avatar.png" alt="Byte Badger mascot avatar for Hermie" />
-        <span>askhermie.dev</span>
-      </a>
-      <nav aria-label="Primary navigation">
-        {nav.map(([label, href]) => <a href={href}>{label}</a>)}
-      </nav>
-    </header>
+<Registry title="Find skills for Hermes Agent · AskHermie" description="Search and install Hermes Agent skills. Browse official optional skills, third-party skills, and plugins that bundle a skill.">
+  <div class="frame">
+    <section class="intro" aria-labelledby="headline">
+      <div class="intro-copy">
+        <p class="eyebrow mono"><span></span> Hermes Agent skills catalog</p>
+        <h1 id="headline">Find skills for<br class="hero-break" /> <em>Hermes Agent</em>.</h1>
+        <p class="intro-description">Search by name or task. See what each skill does, what it needs, and how to install it.</p>
+        <div class="search-tools" hidden>
+          <div class="search-box" role="search">
+            <span class="magnifier" aria-hidden="true"></span>
+            <label class="sr-only" for="search">Search by skill name or task</label>
+            <input id="search" type="search" placeholder="Search by skill name or task" autocomplete="off" aria-controls="skill-list" />
+            <kbd aria-hidden="true">/</kbd>
+          </div>
+          <div class="suggestions"><span>Try</span>{suggested.map(term => <button data-query={term} type="button">{term}</button>)}</div>
+        </div>
+      </div>
+      <aside class="terminal" aria-label="Example skill installation">
+        <div class="terminal-top mono"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span> Terminal</div>
+        <div class="terminal-body">
+          <p class="terminal-label mono">Install an official skill</p>
+          <div class="terminal-command mono"><span aria-hidden="true">$</span><code>hermes skills install<br />official/research/rss-feeds</code></div>
+          <a href="/skills/rss-feeds/">View RSS Feeds setup <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+    </section>
 
-    <main>
-      <HomeExperience client:load />
-    </main>
+    <section id="catalog" class="catalog" aria-labelledby="catalog-title">
+      <div class="catalog-heading">
+        <h2 id="catalog-title">Browse skills</h2>
+        <p id="results" class="mono" role="status">{skills.length} entries</p>
+      </div>
+      <div class="filters" hidden>
+        <div class="topics" aria-label="Skill category" role="group">
+          <button type="button" data-topic="" aria-pressed="true">All categories</button>
+          {topics.map(topic => <button type="button" data-topic={topic} aria-pressed="false">{topic}</button>)}
+        </div>
+        <div class="type-filter">
+          <label for="kind" class="sr-only">Entry type</label>
+          <select id="kind" aria-controls="skill-list">
+            <option value="">All entry types</option>
+            {Object.entries(kinds).map(([key, label]) => <option value={key}>{label}</option>)}
+          </select>
+        </div>
+      </div>
+      <div id="skill-list" class="cards">
+        {skills.map(skill => (
+          <article class="card" data-skill data-topic={skill.topic} data-kind={skill.kind}
+            data-search={[skill.name, skill.slug, skill.description, skill.task, skill.topic, skill.publisher].join(' ')}>
+            <div class="card-top">
+              <span class="symbol" data-category={skill.topic} aria-hidden="true">{symbols[skill.topic]}</span>
+              <span class={`badge ${skill.kind}`}>{kinds[skill.kind]}</span>
+            </div>
+            <h3><a href={`/skills/${skill.slug}/`}>{skill.name}</a></h3>
+            <p>{skill.description}</p>
+            <div class="card-bottom mono"><span>{skill.topic}</span><span aria-hidden="true">↗</span></div>
+          </article>
+        ))}
+      </div>
+      <div class="empty" hidden>
+        <h3>No matching skills</h3>
+        <p>Try a shorter search or clear the filters.</p>
+        <button type="button" id="reset">Clear search and filters</button>
+      </div>
+    </section>
+  </div>
+</Registry>
+<script>
+  const search = document.querySelector<HTMLInputElement>('#search')!;
+  const kind = document.querySelector<HTMLSelectElement>('#kind')!;
+  const results = document.querySelector('#results')!;
+  const empty = document.querySelector<HTMLElement>('.empty')!;
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-skill]')];
+  const topics = [...document.querySelectorAll<HTMLButtonElement>('button[data-topic]')];
+  const params = new URLSearchParams(location.search);
+  const normalize = (value: string) => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const searchable = cards.map(card => normalize(card.dataset.search ?? ''));
+  let topic = '';
 
-    <footer>
-      <p>Built with Hermie ⚙️</p>
-      <p>askhermie.dev</p>
-    </footer>
-  </body>
-</html>
+  function update() {
+    const query = normalize(search.value);
+    const terms = query ? query.split(' ') : [];
+    let matches = 0;
+    cards.forEach((card, index) => {
+      const visible = (!topic || card.dataset.topic === topic)
+        && (!kind.value || card.dataset.kind === kind.value)
+        && terms.every(term => searchable[index].includes(term));
+      card.hidden = !visible;
+      if (visible) matches++;
+    });
+    for (const button of topics) button.setAttribute('aria-pressed', String(button.dataset.topic === topic));
+    results.textContent = `${matches} ${matches === 1 ? 'entry' : 'entries'}`;
+    empty.hidden = matches > 0;
+    for (const [key, value] of Object.entries({ q: search.value.trim(), topic, type: kind.value })) {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    }
+    const queryString = params.toString();
+    history.replaceState(history.state, '', location.pathname + (queryString ? '?' + queryString : '') + location.hash);
+  }
+
+  search.value = params.get('q') ?? '';
+  const requestedTopic = params.get('topic');
+  if (topics.some(button => button.dataset.topic === requestedTopic)) topic = requestedTopic ?? '';
+  kind.value = params.get('type') ?? '';
+  if (kind.selectedIndex < 0) kind.selectedIndex = 0;
+  document.querySelector<HTMLElement>('.search-tools')!.hidden = false;
+  document.querySelector<HTMLElement>('.filters')!.hidden = false;
+  search.addEventListener('input', update);
+  kind.addEventListener('change', update);
+  for (const button of topics) {
+    button.addEventListener('click', () => {
+      topic = button.dataset.topic ?? '';
+      update();
+    });
+  }
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-query]')) {
+    button.addEventListener('click', () => {
+      search.value = button.dataset.query ?? '';
+      topic = '';
+      kind.value = '';
+      update();
+      search.focus();
+    });
+  }
+  document.querySelector('#reset')!.addEventListener('click', () => {
+    search.value = '';
+    kind.value = '';
+    topic = '';
+    update();
+    search.focus();
+  });
+  document.addEventListener('keydown', event => {
+    const target = event.target;
+    if (event.key === '/' && !event.altKey && !event.ctrlKey && !event.metaKey
+      && target instanceof HTMLElement && !target.closest('input, textarea, select, [contenteditable]')) {
+      event.preventDefault();
+      search.focus();
+    }
+  });
+  update();
+</script>

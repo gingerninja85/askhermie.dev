@@ -1,0 +1,24 @@
+---
+const { command } = Astro.props;
+---
+<div class="command">
+  <pre tabindex="0" aria-label="Install command"><code>{command}</code></pre>
+  <button type="button" data-copy hidden>Copy</button>
+</div>
+<p class="copy-feedback" role="status"></p>
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      const command = button.parentElement?.querySelector('code');
+      const feedback = button.parentElement?.nextElementSibling;
+      if (!command || !feedback) return;
+      try {
+        await navigator.clipboard.writeText(command.textContent ?? '');
+        feedback.textContent = 'Command copied.';
+      } catch {
+        feedback.textContent = 'Select the command to copy it manually.';
+      }
+    });
+  }
+</script>
