@@ -1,19 +1,19 @@
+import officialEntries from './official-skills.json';
+
 export const kinds = {
   official: 'Official skill',
   community: 'Third-party skill',
   plugin: 'Plugin with skill',
 } as const;
 
-export const topics = ['Development', 'Research', 'Automation', 'Design', 'Writing', 'Data'] as const;
-
 export type Skill = {
   slug: string;
   name: string;
-  topic: typeof topics[number];
+  topic: string;
   kind: keyof typeof kinds;
   publisher: string;
   description: string;
-  task: string;
+  task?: string;
   prerequisites: string[];
   command: string;
   source: string;
@@ -24,7 +24,7 @@ const upstream = 'https://github.com/NousResearch/hermes-agent/blob/1831ce1cfeb5
 export const officialCatalog = `${upstream}/website/docs/reference/optional-skills-catalog.md`;
 export const skillsGuide = `${upstream}/website/docs/user-guide/features/skills.md`;
 
-function official(path: string, entry: Omit<Skill, 'slug' | 'kind' | 'publisher' | 'command' | 'source' | 'instructions'>): Skill {
+function official(path: string, entry: Omit<Skill, 'slug' | 'kind' | 'publisher' | 'command' | 'source' | 'instructions'>, instructions = officialCatalog): Skill {
   return {
     ...entry,
     slug: path.split('/').at(-1)!,
@@ -32,14 +32,14 @@ function official(path: string, entry: Omit<Skill, 'slug' | 'kind' | 'publisher'
     publisher: 'Nous Research',
     command: `hermes skills install official/${path}`,
     source: `${upstream}/optional-skills/${path}/SKILL.md`,
-    instructions: officialCatalog,
+    instructions,
   };
 }
 
 const brandCommit = '1780c5e5a552fd4d1c9d6a7b0cab26b0c2bef064';
 const tweetRepo = 'https://github.com/Xquik-dev/hermes-tweet/blob/61f49449b8c7a6cd93d0aeadbed84f2add7e48d4';
 
-export const skills: Skill[] = [
+const featuredSkills: Skill[] = [
   official('devops/docker-management', {
     name: 'Docker Management', topic: 'Development',
     description: 'Inspect containers, debug logs, and manage images and Compose stacks.',
@@ -120,4 +120,53 @@ export const skills: Skill[] = [
     source: `${tweetRepo}/hermes_tweet/skills/hermes-tweet/SKILL.md`,
     instructions: `${tweetRepo}/README.md#install-the-hermes-twitter-plugin`,
   },
+  {
+    slug: 'network-device-investigator', name: 'Network Device Investigator', topic: 'Networking',
+    kind: 'community', publisher: 'gingerninja85',
+    description: 'Identify devices on your network using MAC addresses, DHCP names, open ports, and service fingerprints.',
+    task: 'Identify this unknown device on my LAN from its DHCP hostname, MAC vendor, and open ports.',
+    prerequisites: ['Git and access to a network you own or are authorized to assess. Existing router or scan output can be used as evidence.'],
+    command: 'mkdir -p ~/.hermes/skills/networking && git clone https://github.com/gingerninja85/network-device-investigator.git ~/.hermes/skills/networking/network-device-investigator',
+    source: 'https://github.com/gingerninja85/network-device-investigator/blob/a6b820964031f30815f6271ed4f0e81440a8673a/SKILL.md',
+    instructions: 'https://github.com/gingerninja85/network-device-investigator/blob/a6b820964031f30815f6271ed4f0e81440a8673a/README.md#installation',
+  },
 ];
+
+const categoryNames: Record<string, string> = {
+  'autonomous-ai-agents': 'AI Agents',
+  blockchain: 'Blockchain',
+  communication: 'Writing',
+  creative: 'Design',
+  'data-science': 'Data',
+  devops: 'Development',
+  dogfood: 'Hermes Development',
+  email: 'Email',
+  finance: 'Finance',
+  gaming: 'Gaming',
+  health: 'Health',
+  mcp: 'Development',
+  media: 'Media',
+  mlops: 'Machine Learning',
+  payments: 'Payments',
+  productivity: 'Productivity',
+  research: 'Research',
+  security: 'Security',
+  'smart-home': 'Smart Home',
+  'social-media': 'Social Media',
+  'software-development': 'Development',
+  'web-development': 'Development',
+};
+
+const featuredSlugs = new Set(featuredSkills.map(skill => skill.slug));
+const additionalSkills = officialEntries
+  .filter(({ path }) => !featuredSlugs.has(path.split('/').at(-1)!))
+  .map(({ path, description, docs }) => official(path, {
+    name: path.split('/').at(-1)!.replace(/-/g, ' ').replace(/\b[a-z]/g, letter => letter.toUpperCase()),
+    topic: categoryNames[path.split('/')[0]!],
+    description,
+    prerequisites: [],
+  }, `${upstream}/website/docs/${docs}`))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+export const skills = [...featuredSkills, ...additionalSkills];
+export const topics = [...new Set(skills.map(skill => skill.topic))].sort();

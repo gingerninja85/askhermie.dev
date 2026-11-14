@@ -19,9 +19,12 @@ import { kinds, skills, topics } from '../data/skills';
         </div>
       </div>
       <div class="filters" hidden>
-        <div class="topics" aria-label="Skill category" role="group">
-          <button type="button" data-topic="" aria-pressed="true">All categories</button>
-          {topics.map(topic => <button type="button" data-topic={topic} aria-pressed="false">{topic}</button>)}
+        <div class="type-filter">
+          <label for="topic" class="sr-only">Skill category</label>
+          <select id="topic" aria-controls="skill-list">
+            <option value="">All categories</option>
+            {topics.map(topic => <option value={topic}>{topic}</option>)}
+          </select>
         </div>
         <div class="type-filter">
           <label for="kind" class="sr-only">Entry type</label>
@@ -63,13 +66,13 @@ import { kinds, skills, topics } from '../data/skills';
   const results = document.querySelector('#results')!;
   const empty = document.querySelector<HTMLElement>('.empty')!;
   const cards = [...document.querySelectorAll<HTMLElement>('[data-skill]')];
-  const topics = [...document.querySelectorAll<HTMLButtonElement>('button[data-topic]')];
+  const category = document.querySelector<HTMLSelectElement>('#topic')!;
   const params = new URLSearchParams(location.search);
   const normalize = (value: string) => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
   const searchable = cards.map(card => normalize(card.dataset.search ?? ''));
-  let topic = '';
 
   function update() {
+    const topic = category.value;
     const query = normalize(search.value);
     const terms = query ? query.split(' ') : [];
     let matches = 0;
@@ -80,7 +83,6 @@ import { kinds, skills, topics } from '../data/skills';
       card.hidden = !visible;
       if (visible) matches++;
     });
-    for (const button of topics) button.setAttribute('aria-pressed', String(button.dataset.topic === topic));
     results.textContent = `${matches} ${matches === 1 ? 'entry' : 'entries'}`;
     empty.hidden = matches > 0;
     for (const [key, value] of Object.entries({ q: search.value.trim(), topic, type: kind.value })) {
@@ -92,24 +94,19 @@ import { kinds, skills, topics } from '../data/skills';
   }
 
   search.value = params.get('q') ?? '';
-  const requestedTopic = params.get('topic');
-  if (topics.some(button => button.dataset.topic === requestedTopic)) topic = requestedTopic ?? '';
+  category.value = params.get('topic') ?? '';
+  if (category.selectedIndex < 0) category.selectedIndex = 0;
   kind.value = params.get('type') ?? '';
   if (kind.selectedIndex < 0) kind.selectedIndex = 0;
   document.querySelector<HTMLElement>('.search-tools')!.hidden = false;
   document.querySelector<HTMLElement>('.filters')!.hidden = false;
   search.addEventListener('input', update);
   kind.addEventListener('change', update);
-  for (const button of topics) {
-    button.addEventListener('click', () => {
-      topic = button.dataset.topic ?? '';
-      update();
-    });
-  }
+  category.addEventListener('change', update);
   document.querySelector('#reset')!.addEventListener('click', () => {
     search.value = '';
     kind.value = '';
-    topic = '';
+    category.value = '';
     update();
     search.focus();
   });

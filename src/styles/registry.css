@@ -58,14 +58,12 @@ h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -.04e
 .magnifier::after { content: ''; position: absolute; background: var(--accent); width: 6px; height: 1.7px; transform: rotate(45deg); top: 11px; left: 9px; }
 kbd { font-size: .76rem; padding: .13rem .42rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); }
 
-.filters { display: flex; justify-content: space-between; gap: .75rem; flex-wrap: wrap; margin: .8rem 0 1.75rem; }
-.topics { display: flex; flex-wrap: wrap; gap: .4rem; }
-.topics button, .type-filter select, .empty button {
+.filters { display: flex; gap: .75rem; flex-wrap: wrap; margin: .8rem 0 1.75rem; }
+.type-filter select, .empty button {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   min-height: 38px; padding: .35rem .72rem; font-size: .9rem;
 }
-.topics button:hover, .type-filter select:hover, .empty button:hover { border-color: var(--accent); }
-.topics button[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.type-filter select:hover, .empty button:hover { border-color: var(--accent); }
 
 .catalog-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .catalog-heading h2 { margin: 0; font-size: 1.05rem; }

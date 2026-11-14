@@ -1,0 +1,707 @@
+[
+  {
+    "path": "autonomous-ai-agents/agent-merge-conflict-arbiter",
+    "description": "Neutral arbiter for merge conflicts between two agents.",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-agent-merge-conflict-arbiter.md"
+  },
+  {
+    "path": "autonomous-ai-agents/antigravity-cli",
+    "description": "Operate the Antigravity CLI (agy): plugins, auth, sandbox.",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-antigravity-cli.md"
+  },
+  {
+    "path": "autonomous-ai-agents/blackbox",
+    "description": "Delegate coding tasks to the Blackbox AI multi-model CLI.",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-blackbox.md"
+  },
+  {
+    "path": "autonomous-ai-agents/dynamic-workflow",
+    "description": "Plan-in-code fan-outs, adversarial verification, waves.",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-dynamic-workflow.md"
+  },
+  {
+    "path": "autonomous-ai-agents/grok",
+    "description": "Delegate coding to xAI Grok Build CLI (features, PRs).",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-grok.md"
+  },
+  {
+    "path": "autonomous-ai-agents/opencode",
+    "description": "Delegate coding to OpenCode CLI (features, PR review).",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-opencode.md"
+  },
+  {
+    "path": "autonomous-ai-agents/openhands",
+    "description": "Delegate coding to OpenHands CLI (model-agnostic, LiteLLM).",
+    "docs": "user-guide/skills/optional/autonomous-ai-agents/autonomous-ai-agents-openhands.md"
+  },
+  {
+    "path": "blockchain/evm",
+    "description": "Read-only EVM client: wallets, tokens, gas across 8 chains.",
+    "docs": "user-guide/skills/optional/blockchain/blockchain-evm.md"
+  },
+  {
+    "path": "blockchain/hyperliquid",
+    "description": "Hyperliquid market data, account history, trade review.",
+    "docs": "user-guide/skills/optional/blockchain/blockchain-hyperliquid.md"
+  },
+  {
+    "path": "blockchain/solana",
+    "description": "Query Solana wallets, tokens, txs, and NFTs in USD.",
+    "docs": "user-guide/skills/optional/blockchain/blockchain-solana.md"
+  },
+  {
+    "path": "communication/one-three-one-rule",
+    "description": "1-3-1 decision briefs: problem, three options, one pick.",
+    "docs": "user-guide/skills/optional/communication/communication-one-three-one-rule.md"
+  },
+  {
+    "path": "creative/ai-presenter-video",
+    "description": "Make a verified AI presenter video from script + image.",
+    "docs": "user-guide/skills/optional/creative/creative-ai-presenter-video.md"
+  },
+  {
+    "path": "creative/anatomy",
+    "description": "Explain an idea as an interactive isometric machine figure.",
+    "docs": "user-guide/skills/optional/creative/creative-anatomy.md"
+  },
+  {
+    "path": "creative/archify",
+    "description": "Validated interactive HTML diagrams, upstream-maintained.",
+    "docs": "user-guide/skills/optional/creative/creative-archify.md"
+  },
+  {
+    "path": "creative/ascii-art",
+    "description": "ASCII art: pyfiglet, cowsay, boxes, image-to-ascii.",
+    "docs": "user-guide/skills/optional/creative/creative-ascii-art.md"
+  },
+  {
+    "path": "creative/auteur",
+    "description": "Design and build cinematic, award-level web pages.",
+    "docs": "user-guide/skills/optional/creative/creative-auteur.md"
+  },
+  {
+    "path": "creative/baoyu-article-illustrator",
+    "description": "Article illustrations: type × style × palette consistency.",
+    "docs": "user-guide/skills/optional/creative/creative-baoyu-article-illustrator.md"
+  },
+  {
+    "path": "creative/baoyu-comic",
+    "description": "Knowledge comics (知识漫画): educational, biography, tutorial.",
+    "docs": "user-guide/skills/optional/creative/creative-baoyu-comic.md"
+  },
+  {
+    "path": "creative/brag",
+    "description": "Project launch video via Hyperframes, upstream-maintained.",
+    "docs": "user-guide/skills/optional/creative/creative-brag.md"
+  },
+  {
+    "path": "creative/brag-slim",
+    "description": "Launch video from a project or URL, upstream-maintained.",
+    "docs": "user-guide/skills/optional/creative/creative-brag-slim.md"
+  },
+  {
+    "path": "creative/comfyui",
+    "description": "Generate images, video, and audio via diffusion workflows.",
+    "docs": "user-guide/skills/optional/creative/creative-comfyui.md"
+  },
+  {
+    "path": "creative/concept-diagrams",
+    "description": "Generate flat, minimal educational SVG visuals as HTML.",
+    "docs": "user-guide/skills/optional/creative/creative-concept-diagrams.md"
+  },
+  {
+    "path": "creative/creative-ideation",
+    "description": "Generate ideas via named methods from creative practice.",
+    "docs": "user-guide/skills/optional/creative/creative-creative-ideation.md"
+  },
+  {
+    "path": "creative/design-md",
+    "description": "Author/validate/export Google's DESIGN.md token spec files.",
+    "docs": "user-guide/skills/optional/creative/creative-design-md.md"
+  },
+  {
+    "path": "creative/draw-your-font",
+    "description": "Turn a handwriting photo into an installable TTF font.",
+    "docs": "user-guide/skills/optional/creative/creative-draw-your-font.md"
+  },
+  {
+    "path": "creative/dream-loop",
+    "description": "Build stunning 3D scenes via a concept-art fidelity loop.",
+    "docs": "user-guide/skills/optional/creative/creative-dream-loop.md"
+  },
+  {
+    "path": "creative/excalidraw",
+    "description": "Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).",
+    "docs": "user-guide/skills/optional/creative/creative-excalidraw.md"
+  },
+  {
+    "path": "creative/heartmula",
+    "description": "HeartMuLa: Suno-like song generation from lyrics + tags.",
+    "docs": "user-guide/skills/optional/creative/creative-heartmula.md"
+  },
+  {
+    "path": "creative/hyperframes",
+    "description": "Render MP4/WebM videos from HTML compositions.",
+    "docs": "user-guide/skills/optional/creative/creative-hyperframes.md"
+  },
+  {
+    "path": "creative/impeccable",
+    "description": "Frontend design guidance, upstream-maintained (impeccable).",
+    "docs": "user-guide/skills/optional/creative/creative-impeccable.md"
+  },
+  {
+    "path": "creative/ip-as-logo",
+    "description": "Design minimal cute IP mascot marks readable at 32px.",
+    "docs": "user-guide/skills/optional/creative/creative-ip-as-logo.md"
+  },
+  {
+    "path": "creative/kanban-video-orchestrator",
+    "description": "Plan and run multi-agent video production pipelines.",
+    "docs": "user-guide/skills/optional/creative/creative-kanban-video-orchestrator.md"
+  },
+  {
+    "path": "creative/meme-generation",
+    "description": "Create meme PNGs from templates with Pillow text overlay.",
+    "docs": "user-guide/skills/optional/creative/creative-meme-generation.md"
+  },
+  {
+    "path": "creative/mono-color",
+    "description": "Generate one- or two-ink editorial print poster images.",
+    "docs": "user-guide/skills/optional/creative/creative-mono-color.md"
+  },
+  {
+    "path": "creative/pixel-art",
+    "description": "Pixel art w/ era palettes (NES, Game Boy, PICO-8).",
+    "docs": "user-guide/skills/optional/creative/creative-pixel-art.md"
+  },
+  {
+    "path": "creative/pretext",
+    "description": "Build creative browser demos with DOM-free text layout.",
+    "docs": "user-guide/skills/optional/creative/creative-pretext.md"
+  },
+  {
+    "path": "creative/simple-english",
+    "description": "Rewrite text to ASD-STE100 Simplified Technical English.",
+    "docs": "user-guide/skills/optional/creative/creative-simple-english.md"
+  },
+  {
+    "path": "creative/sketch",
+    "description": "Throwaway HTML mockups: 2-3 design variants to compare.",
+    "docs": "user-guide/skills/optional/creative/creative-sketch.md"
+  },
+  {
+    "path": "creative/social-media-content-calendar",
+    "description": "Plan multi-platform social campaigns: briefs to posting.",
+    "docs": "user-guide/skills/optional/creative/creative-social-media-content-calendar.md"
+  },
+  {
+    "path": "creative/system-atlas",
+    "description": "Build explorable isometric architecture atlases as HTML.",
+    "docs": "user-guide/skills/optional/creative/creative-system-atlas.md"
+  },
+  {
+    "path": "creative/tldraw-offline",
+    "description": "Drive and script tldraw offline canvases with an agent.",
+    "docs": "user-guide/skills/optional/creative/creative-tldraw-offline.md"
+  },
+  {
+    "path": "creative/unreal-mcp",
+    "description": "Automate Unreal Engine editor scenes, actors, and renders.",
+    "docs": "user-guide/skills/optional/creative/creative-unreal-mcp.md"
+  },
+  {
+    "path": "data-science/jupyter-notebook",
+    "description": "Iterative Python via live Jupyter kernel (hamelnb).",
+    "docs": "user-guide/skills/optional/data-science/data-science-jupyter-notebook.md"
+  },
+  {
+    "path": "devops/actual-setup",
+    "description": "Set up Actual Computer (actual.inc) inference in Hermes.",
+    "docs": "user-guide/skills/optional/devops/devops-actual-setup.md"
+  },
+  {
+    "path": "devops/docker-management",
+    "description": "Manage Docker containers, images, volumes, and Compose.",
+    "docs": "user-guide/skills/optional/devops/devops-docker-management.md"
+  },
+  {
+    "path": "devops/hermes-s6-container-supervision",
+    "description": "Modify or debug s6 services in the Hermes Docker image.",
+    "docs": "user-guide/skills/optional/devops/devops-hermes-s6-container-supervision.md"
+  },
+  {
+    "path": "devops/inference-sh-cli",
+    "description": "Run 150+ AI apps (image, video, LLM) via inference.sh CLI.",
+    "docs": "user-guide/skills/optional/devops/devops-inference-sh-cli.md"
+  },
+  {
+    "path": "devops/pinggy-tunnel",
+    "description": "Zero-install localhost tunnels over SSH via Pinggy.",
+    "docs": "user-guide/skills/optional/devops/devops-pinggy-tunnel.md"
+  },
+  {
+    "path": "devops/setup-wizard-generator",
+    "description": "Generate a bash wizard guiding a human through manual setup.",
+    "docs": "user-guide/skills/optional/devops/devops-setup-wizard-generator.md"
+  },
+  {
+    "path": "devops/watchers",
+    "description": "Poll RSS, JSON APIs, and GitHub with watermark dedup.",
+    "docs": "user-guide/skills/optional/devops/devops-watchers.md"
+  },
+  {
+    "path": "dogfood/adversarial-ux-test",
+    "description": "Roleplay a hostile user to find and triage UX pain points.",
+    "docs": "user-guide/skills/optional/dogfood/dogfood-adversarial-ux-test.md"
+  },
+  {
+    "path": "email/agentmail",
+    "description": "Use when an agent needs AgentMail CLI email inboxes.",
+    "docs": "user-guide/skills/optional/email/email-agentmail.md"
+  },
+  {
+    "path": "finance/3-statement-model",
+    "description": "Build integrated IS/BS/CF financial workbooks in Excel.",
+    "docs": "user-guide/skills/optional/finance/finance-3-statement-model.md"
+  },
+  {
+    "path": "finance/comps-analysis",
+    "description": "Build comparable-company valuation workbooks in Excel.",
+    "docs": "user-guide/skills/optional/finance/finance-comps-analysis.md"
+  },
+  {
+    "path": "finance/dcf-model",
+    "description": "Build discounted cash flow valuation workbooks in Excel.",
+    "docs": "user-guide/skills/optional/finance/finance-dcf-model.md"
+  },
+  {
+    "path": "finance/excel-author",
+    "description": "Build auditable financial workbooks headless via openpyxl.",
+    "docs": "user-guide/skills/optional/finance/finance-excel-author.md"
+  },
+  {
+    "path": "finance/lbo-model",
+    "description": "Build leveraged buyout workbooks with IRR/MOIC in Excel.",
+    "docs": "user-guide/skills/optional/finance/finance-lbo-model.md"
+  },
+  {
+    "path": "finance/merger-model",
+    "description": "Build M&A accretion/dilution workbooks in Excel.",
+    "docs": "user-guide/skills/optional/finance/finance-merger-model.md"
+  },
+  {
+    "path": "finance/polymarket",
+    "description": "Query Polymarket: markets, prices, orderbooks, history.",
+    "docs": "user-guide/skills/optional/finance/finance-polymarket.md"
+  },
+  {
+    "path": "finance/pptx-author",
+    "description": "Build PowerPoint decks headless with python-pptx.",
+    "docs": "user-guide/skills/optional/finance/finance-pptx-author.md"
+  },
+  {
+    "path": "finance/stocks",
+    "description": "Stock quotes, history, search, compare, crypto via Yahoo.",
+    "docs": "user-guide/skills/optional/finance/finance-stocks.md"
+  },
+  {
+    "path": "gaming/minecraft-modpack-server",
+    "description": "Host modded Minecraft servers (CurseForge, Modrinth).",
+    "docs": "user-guide/skills/optional/gaming/gaming-minecraft-modpack-server.md"
+  },
+  {
+    "path": "gaming/pokemon-player",
+    "description": "Play Pokemon via headless emulator + RAM reads.",
+    "docs": "user-guide/skills/optional/gaming/gaming-pokemon-player.md"
+  },
+  {
+    "path": "health/fitness-nutrition",
+    "description": "Workout planning, macros, and body metrics via wger/USDA.",
+    "docs": "user-guide/skills/optional/health/health-fitness-nutrition.md"
+  },
+  {
+    "path": "health/neuroskill-bci",
+    "description": "Use live BCI cognitive and mood state from NeuroSkill.",
+    "docs": "user-guide/skills/optional/health/health-neuroskill-bci.md"
+  },
+  {
+    "path": "mcp/fastmcp",
+    "description": "Build, test, and deploy Python MCP servers.",
+    "docs": "user-guide/skills/optional/mcp/mcp-fastmcp.md"
+  },
+  {
+    "path": "mcp/mcp-oauth-remote-gateway",
+    "description": "Manual OAuth for remote MCP servers on headless gateways.",
+    "docs": "user-guide/skills/optional/mcp/mcp-mcp-oauth-remote-gateway.md"
+  },
+  {
+    "path": "mcp/mcporter",
+    "description": "List, auth, and call MCP servers/tools from the terminal.",
+    "docs": "user-guide/skills/optional/mcp/mcp-mcporter.md"
+  },
+  {
+    "path": "media/gif-search",
+    "description": "Search/download GIFs from Tenor via curl + jq.",
+    "docs": "user-guide/skills/optional/media/media-gif-search.md"
+  },
+  {
+    "path": "media/songsee",
+    "description": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
+    "docs": "user-guide/skills/optional/media/media-songsee.md"
+  },
+  {
+    "path": "mlops/accelerate",
+    "description": "Run PyTorch training across GPUs with minimal changes.",
+    "docs": "user-guide/skills/optional/mlops/mlops-accelerate.md"
+  },
+  {
+    "path": "mlops/training/axolotl",
+    "description": "Axolotl: YAML LLM fine-tuning (LoRA, DPO, GRPO).",
+    "docs": "user-guide/skills/optional/mlops/mlops-training-axolotl.md"
+  },
+  {
+    "path": "mlops/chroma",
+    "description": "Embedding database for RAG and semantic search.",
+    "docs": "user-guide/skills/optional/mlops/mlops-chroma.md"
+  },
+  {
+    "path": "mlops/research/dspy",
+    "description": "DSPy: declarative LM programs, auto-optimize prompts, RAG.",
+    "docs": "user-guide/skills/optional/mlops/mlops-research-dspy.md"
+  },
+  {
+    "path": "mlops/evaluation/evaluating-llms-harness",
+    "description": "lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).",
+    "docs": "user-guide/skills/optional/mlops/mlops-evaluation-evaluating-llms-harness.md"
+  },
+  {
+    "path": "mlops/faiss",
+    "description": "Fast vector similarity search at billion scale.",
+    "docs": "user-guide/skills/optional/mlops/mlops-faiss.md"
+  },
+  {
+    "path": "mlops/flash-attention",
+    "description": "Speed up long-sequence transformer training and inference.",
+    "docs": "user-guide/skills/optional/mlops/mlops-flash-attention.md"
+  },
+  {
+    "path": "mlops/lambda-labs",
+    "description": "On-demand GPU cloud instances for ML training.",
+    "docs": "user-guide/skills/optional/mlops/mlops-lambda-labs.md"
+  },
+  {
+    "path": "mlops/inference/llama-cpp",
+    "description": "llama.cpp local GGUF inference + HF Hub model discovery.",
+    "docs": "user-guide/skills/optional/mlops/mlops-inference-llama-cpp.md"
+  },
+  {
+    "path": "mlops/modal",
+    "description": "Serverless GPU cloud for ML jobs and model APIs.",
+    "docs": "user-guide/skills/optional/mlops/mlops-modal.md"
+  },
+  {
+    "path": "mlops/nemo-curator",
+    "description": "Curate LLM training data: dedupe, filter, PII redaction.",
+    "docs": "user-guide/skills/optional/mlops/mlops-nemo-curator.md"
+  },
+  {
+    "path": "mlops/obliteratus",
+    "description": "OBLITERATUS: abliterate LLM refusals (diff-in-means).",
+    "docs": "user-guide/skills/optional/mlops/mlops-obliteratus.md"
+  },
+  {
+    "path": "mlops/peft",
+    "description": "Fine-tune large LLMs with LoRA on limited GPU memory.",
+    "docs": "user-guide/skills/optional/mlops/mlops-peft.md"
+  },
+  {
+    "path": "mlops/pytorch-fsdp",
+    "description": "Fully sharded data-parallel training for large models.",
+    "docs": "user-guide/skills/optional/mlops/mlops-pytorch-fsdp.md"
+  },
+  {
+    "path": "mlops/pytorch-lightning",
+    "description": "Clean training loops with built-in distributed support.",
+    "docs": "user-guide/skills/optional/mlops/mlops-pytorch-lightning.md"
+  },
+  {
+    "path": "mlops/saelens",
+    "description": "Train sparse autoencoders to interpret model features.",
+    "docs": "user-guide/skills/optional/mlops/mlops-saelens.md"
+  },
+  {
+    "path": "mlops/models/segment-anything-model",
+    "description": "SAM: zero-shot image segmentation via points, boxes, masks.",
+    "docs": "user-guide/skills/optional/mlops/mlops-models-segment-anything-model.md"
+  },
+  {
+    "path": "mlops/inference/serving-llms-vllm",
+    "description": "vLLM: high-throughput LLM serving, OpenAI API, quantization.",
+    "docs": "user-guide/skills/optional/mlops/mlops-inference-serving-llms-vllm.md"
+  },
+  {
+    "path": "mlops/simpo",
+    "description": "Reference-free preference alignment, simpler than DPO.",
+    "docs": "user-guide/skills/optional/mlops/mlops-simpo.md"
+  },
+  {
+    "path": "mlops/slime",
+    "description": "RL post-training for LLMs with Megatron and SGLang.",
+    "docs": "user-guide/skills/optional/mlops/mlops-slime.md"
+  },
+  {
+    "path": "mlops/tensorrt-llm",
+    "description": "High-throughput LLM inference on NVIDIA GPUs.",
+    "docs": "user-guide/skills/optional/mlops/mlops-tensorrt-llm.md"
+  },
+  {
+    "path": "mlops/torchtitan",
+    "description": "Pretrain LLMs at scale with PyTorch 4D parallelism.",
+    "docs": "user-guide/skills/optional/mlops/mlops-torchtitan.md"
+  },
+  {
+    "path": "mlops/training/unsloth",
+    "description": "Unsloth: 2-5x faster LoRA/QLoRA fine-tuning, less VRAM.",
+    "docs": "user-guide/skills/optional/mlops/mlops-training-unsloth.md"
+  },
+  {
+    "path": "payments/stripe-link-cli",
+    "description": "Agent payments via Stripe Link — cards, SPT, approvals.",
+    "docs": "user-guide/skills/optional/payments/payments-stripe-link-cli.md"
+  },
+  {
+    "path": "payments/stripe-projects",
+    "description": "Provision SaaS services + sync creds via Stripe Projects.",
+    "docs": "user-guide/skills/optional/payments/payments-stripe-projects.md"
+  },
+  {
+    "path": "productivity/box",
+    "description": "Box manages cloud files, sharing, search, and metadata.",
+    "docs": "user-guide/skills/optional/productivity/productivity-box.md"
+  },
+  {
+    "path": "productivity/canvas",
+    "description": "Fetch Canvas LMS courses and assignments via API token.",
+    "docs": "user-guide/skills/optional/productivity/productivity-canvas.md"
+  },
+  {
+    "path": "productivity/decision-questionnaire",
+    "description": "Turn an unanswerable decision into a questionnaire doc.",
+    "docs": "user-guide/skills/optional/productivity/productivity-decision-questionnaire.md"
+  },
+  {
+    "path": "productivity/here-now",
+    "description": "Publish sites to {slug}.here.now and store files in Drives.",
+    "docs": "user-guide/skills/optional/productivity/productivity-here-now.md"
+  },
+  {
+    "path": "productivity/live-dashboard",
+    "description": "Build self-updating dashboards from live sources.",
+    "docs": "user-guide/skills/optional/productivity/productivity-live-dashboard.md"
+  },
+  {
+    "path": "productivity/memento-flashcards",
+    "description": "Spaced-repetition flashcards: create, review, quiz, export.",
+    "docs": "user-guide/skills/optional/productivity/productivity-memento-flashcards.md"
+  },
+  {
+    "path": "productivity/property-listings",
+    "description": "Present property and rental listings as desktop cards.",
+    "docs": "user-guide/skills/optional/productivity/productivity-property-listings.md"
+  },
+  {
+    "path": "productivity/shop",
+    "description": "Shop catalog search, checkout, order tracking, returns.",
+    "docs": "user-guide/skills/optional/productivity/productivity-shop.md"
+  },
+  {
+    "path": "productivity/siyuan",
+    "description": "Query and edit a SiYuan knowledge base via its API.",
+    "docs": "user-guide/skills/optional/productivity/productivity-siyuan.md"
+  },
+  {
+    "path": "productivity/telephony",
+    "description": "Provision Twilio numbers, SMS/MMS, and AI outbound calls.",
+    "docs": "user-guide/skills/optional/productivity/productivity-telephony.md"
+  },
+  {
+    "path": "research/bioinformatics",
+    "description": "Gateway to 400+ genomics and computational biology skills.",
+    "docs": "user-guide/skills/optional/research/research-bioinformatics.md"
+  },
+  {
+    "path": "research/blogwatcher",
+    "description": "Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.",
+    "docs": "user-guide/skills/optional/research/research-blogwatcher.md"
+  },
+  {
+    "path": "research/darwinian-evolver",
+    "description": "Evolve prompts/regex/SQL/code with Imbue's evolution loop.",
+    "docs": "user-guide/skills/optional/research/research-darwinian-evolver.md"
+  },
+  {
+    "path": "research/domain-intel",
+    "description": "Passive recon of subdomains, SSL certs, WHOIS, and DNS.",
+    "docs": "user-guide/skills/optional/research/research-domain-intel.md"
+  },
+  {
+    "path": "research/drug-discovery",
+    "description": "Drug discovery: ChEMBL search, drug-likeness, interactions.",
+    "docs": "user-guide/skills/optional/research/research-drug-discovery.md"
+  },
+  {
+    "path": "research/gitnexus-explorer",
+    "description": "Serve an interactive codebase knowledge graph web UI.",
+    "docs": "user-guide/skills/optional/research/research-gitnexus-explorer.md"
+  },
+  {
+    "path": "research/llm-wiki",
+    "description": "Karpathy's LLM Wiki: build/query interlinked markdown KB.",
+    "docs": "user-guide/skills/optional/research/research-llm-wiki.md"
+  },
+  {
+    "path": "research/osint-investigation",
+    "description": "Follow the money via public records and sanctions data.",
+    "docs": "user-guide/skills/optional/research/research-osint-investigation.md"
+  },
+  {
+    "path": "research/parallel-cli",
+    "description": "Agent-native web search, deep research, and enrichment.",
+    "docs": "user-guide/skills/optional/research/research-parallel-cli.md"
+  },
+  {
+    "path": "research/qmd",
+    "description": "Hybrid local search over notes, docs, and transcripts.",
+    "docs": "user-guide/skills/optional/research/research-qmd.md"
+  },
+  {
+    "path": "research/research-paper-writing",
+    "description": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
+    "docs": "user-guide/skills/optional/research/research-research-paper-writing.md"
+  },
+  {
+    "path": "research/rss-feeds",
+    "description": "Read RSS, Atom, JSON feeds; discover feeds behind a page.",
+    "docs": "user-guide/skills/optional/research/research-rss-feeds.md"
+  },
+  {
+    "path": "research/scrapling",
+    "description": "Scrape sites with stealth browsing and Cloudflare bypass.",
+    "docs": "user-guide/skills/optional/research/research-scrapling.md"
+  },
+  {
+    "path": "security/1password",
+    "description": "Set up op CLI, sign in, and read or inject secrets.",
+    "docs": "user-guide/skills/optional/security/security-1password.md"
+  },
+  {
+    "path": "security/godmode",
+    "description": "Jailbreak LLMs: Parseltongue, GODMODE, ULTRAPLINIAN.",
+    "docs": "user-guide/skills/optional/security/security-godmode.md"
+  },
+  {
+    "path": "security/oss-forensics",
+    "description": "GitHub supply-chain forensics: recovery, IOCs, reporting.",
+    "docs": "user-guide/skills/optional/security/security-oss-forensics.md"
+  },
+  {
+    "path": "security/sherlock",
+    "description": "Find accounts for a username across 400+ platforms.",
+    "docs": "user-guide/skills/optional/security/security-sherlock.md"
+  },
+  {
+    "path": "security/unbroker",
+    "description": "Remove your info from data-broker sites, by name or phone.",
+    "docs": "user-guide/skills/optional/security/security-unbroker.md"
+  },
+  {
+    "path": "security/web-pentest",
+    "description": "Authorized web pentest: recon, proof-based exploits, report.",
+    "docs": "user-guide/skills/optional/security/security-web-pentest.md"
+  },
+  {
+    "path": "smart-home/openhue",
+    "description": "Control Philips Hue lights, scenes, rooms via OpenHue CLI.",
+    "docs": "user-guide/skills/optional/smart-home/smart-home-openhue.md"
+  },
+  {
+    "path": "social-media/reddit-reading",
+    "description": "Read Reddit: subreddits, search, threads, users. No browser.",
+    "docs": "user-guide/skills/optional/social-media/social-media-reddit-reading.md"
+  },
+  {
+    "path": "software-development/ast-grep",
+    "description": "AST-aware structural code search and rewrite via ast-grep.",
+    "docs": "user-guide/skills/optional/software-development/software-development-ast-grep.md"
+  },
+  {
+    "path": "software-development/code-wiki",
+    "description": "Generate wiki docs + Mermaid diagrams for any codebase.",
+    "docs": "user-guide/skills/optional/software-development/software-development-code-wiki.md"
+  },
+  {
+    "path": "software-development/grill-me",
+    "description": "Adversarial plan interview before implementation.",
+    "docs": "user-guide/skills/optional/software-development/software-development-grill-me.md"
+  },
+  {
+    "path": "software-development/hermes-agent-skill-authoring",
+    "description": "Author in-repo SKILL.md files: frontmatter and structure.",
+    "docs": "user-guide/skills/optional/software-development/software-development-hermes-agent-skill-authoring.md"
+  },
+  {
+    "path": "software-development/inspecting-hermes-desktop-dom",
+    "description": "Read the live Hermes desktop DOM/CSS over CDP.",
+    "docs": "user-guide/skills/optional/software-development/software-development-inspecting-hermes-desktop-dom.md"
+  },
+  {
+    "path": "software-development/node-inspect-debugger",
+    "description": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI.",
+    "docs": "user-guide/skills/optional/software-development/software-development-node-inspect-debugger.md"
+  },
+  {
+    "path": "software-development/pr-lens",
+    "description": "Draw code changes as animated architecture/data-flow SVGs.",
+    "docs": "user-guide/skills/optional/software-development/software-development-pr-lens.md"
+  },
+  {
+    "path": "software-development/python-debugpy",
+    "description": "Debug Python: pdb REPL + debugpy remote (DAP).",
+    "docs": "user-guide/skills/optional/software-development/software-development-python-debugpy.md"
+  },
+  {
+    "path": "software-development/rest-graphql-debug",
+    "description": "Debug REST/GraphQL APIs: status codes, auth, schemas, repro.",
+    "docs": "user-guide/skills/optional/software-development/software-development-rest-graphql-debug.md"
+  },
+  {
+    "path": "software-development/subagent-driven-development",
+    "description": "Execute plans via delegate_task subagents (2-stage review).",
+    "docs": "user-guide/skills/optional/software-development/software-development-subagent-driven-development.md"
+  },
+  {
+    "path": "web-development/cloudflare-temporary-deploy",
+    "description": "Deploy a Worker live, no account, via wrangler --temporary.",
+    "docs": "user-guide/skills/optional/web-development/web-development-cloudflare-temporary-deploy.md"
+  },
+  {
+    "path": "web-development/har-derived-api-client",
+    "description": "Record a site's XHR into a HAR, derive an HTTP client.",
+    "docs": "user-guide/skills/optional/web-development/web-development-har-derived-api-client.md"
+  },
+  {
+    "path": "web-development/page-agent",
+    "description": "Embed an in-page natural-language GUI copilot in web apps.",
+    "docs": "user-guide/skills/optional/web-development/web-development-page-agent.md"
+  },
+  {
+    "path": "web-development/publish-site",
+    "description": "Versioned site deploys to GitHub/Cloudflare/Netlify Pages.",
+    "docs": "user-guide/skills/optional/web-development/web-development-publish-site.md"
+  },
+  {
+    "path": "web-development/scrollcraft",
+    "description": "Premium scroll-driven landing pages; scroll = timeline.",
+    "docs": "user-guide/skills/optional/web-development/web-development-scrollcraft.md"
+  }
+]

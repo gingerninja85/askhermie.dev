@@ -24,6 +24,7 @@ const { skill } = Astro.props;
           <ul>
             <li><a href="https://hermes-agent.nousresearch.com/docs/getting-started/installation">Hermes Agent</a> installed with the <code>hermes</code> CLI available.</li>
             {skill.prerequisites.map(requirement => <li>{requirement}</li>)}
+            {skill.prerequisites.length === 0 && <li>Check the <a href={skill.instructions}>upstream setup instructions</a> for any required tools, accounts, or configuration.</li>}
           </ul>
         </section>
         <section>
@@ -31,10 +32,10 @@ const { skill } = Astro.props;
           <p>Run this in your terminal. {skill.kind === 'plugin' && 'Enabling the plugin also makes its bundled skill available.'}</p>
           <Command command={skill.command} />
         </section>
-        <section>
+        {skill.task && <section>
           <h2>Try in Hermes</h2>
           <blockquote>{skill.task}</blockquote>
-        </section>
+        </section>}
       </div>
       <aside class="metadata" aria-label="Skill information">
         <dl><dt>Publisher</dt><dd>{skill.publisher}</dd><dt>Category</dt><dd>{skill.topic}</dd><dt>Entry type</dt><dd>{kinds[skill.kind]}</dd></dl>
